@@ -29,8 +29,22 @@ public class BackendManager : MonoBehaviour
         await Task.Run(() =>
         {
             //BackendLogin.Instance.CustomSignUp("user1", "1234");
+            
             BackendLogin.Instance.CustomLogin("user1", "1234");
-            BackendLogin.Instance.UpdateNickname("원하는 이름");
+            
+            //BackendLogin.Instance.UpdateNickname("원하는 이름");
+
+            BackendGameData.Instance.GameDataGet();
+
+            if (BackendGameData.userData == null)
+            {
+                BackendGameData.Instance.GameDataInsert();
+            }
+            
+            BackendGameData.Instance.HpUp();
+            
+            BackendGameData.Instance.GameDataUpdate();
+            
             Debug.Log("테스트를 종료합니다");
         });
     }
