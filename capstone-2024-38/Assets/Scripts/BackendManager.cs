@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class BackendManager : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    private InputField inputId;
+    private InputField inputPw;
+    private Text id;
+    private Text pw;
     void Start()
     {
         // 뒤끝 초기화
@@ -21,7 +27,12 @@ public class BackendManager : MonoBehaviour
             Debug.LogError("초기화 실패 : " + bro); // 실패일 경우 statusCode 400대 에러 발생
         }
 
-        Test();
+        //Test();
+    }
+
+    public void Login()
+    {
+        BackendLogin.Instance.CustomLogin();
     }
 
     async void Test()
@@ -30,7 +41,7 @@ public class BackendManager : MonoBehaviour
         {
             //BackendLogin.Instance.CustomSignUp("user1", "1234");
             
-            BackendLogin.Instance.CustomLogin("user1", "1234");
+            //BackendLogin.Instance.CustomLogin("user1", "1234");
             
             //BackendLogin.Instance.UpdateNickname("원하는 이름");
 

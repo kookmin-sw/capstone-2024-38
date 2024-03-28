@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
+using UnityEngine.UI;
+using TMPro;
 
-public class BackendLogin
+public class BackendLogin : MonoBehaviour 
 {
     private static BackendLogin _instance = null;
+
+    public TMP_InputField loginId;
+    public TMP_InputField loginPw;
+    public TMP_InputField signUpId;
+    public TMP_InputField signUpPw;
 
     public static BackendLogin Instance
     {
@@ -19,9 +26,12 @@ public class BackendLogin
         }
     }
 
-    public void CustomSignUp(string id, string pw)
+    public void CustomSignUp()
     {
         Debug.Log("회원가입을 요청합니다.");
+
+        string id = signUpId.text;
+        string pw = signUpPw.text;
 
         var bro = Backend.BMember.CustomSignUp(id, pw);
 
@@ -35,10 +45,13 @@ public class BackendLogin
         }
     }
 
-    public void CustomLogin(string id, string pw)
+    public void CustomLogin()
     {
         Debug.Log("로그인을 요청합니다.");
 
+        string id = loginId.text;
+        string pw = loginPw.text;
+        
         var bro = Backend.BMember.CustomLogin(id, pw);
 
         if (bro.IsSuccess())
