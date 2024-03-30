@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ShootingSystem : MonoBehaviour
+public class ShootingSystem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-
     MovementInput input;
 
     [SerializeField] ParticleSystem inkParticle;
     [SerializeField] Transform parentController;
     [SerializeField] Transform splatGunNozzle;
     [SerializeField] CinemachineFreeLook freeLookCamera;
+    [SerializeField] Image FireButton;
     CinemachineImpulseSource impulseSource;
 
     void Start()
@@ -24,22 +26,21 @@ public class ShootingSystem : MonoBehaviour
     void Update()
     {
         Vector3 angle = parentController.localEulerAngles;
-        input.blockRotationPlayer = Input.GetMouseButton(0);
-        bool pressing = Input.GetMouseButton(0);
+        input.blockRotationPlayer = IsPointerOverUIObject(FireButton); 
 
-        if (Input.GetMouseButton(0))
+        if (IsPointerOverUIObject(FireButton)) 
         {
             VisualPolish();
             input.RotateToCamera(transform);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (IsPointerOverUIObject(FireButton)) 
             inkParticle.Play();
-        else if (Input.GetMouseButtonUp(0))
+        else if (!IsPointerOverUIObject(FireButton))
             inkParticle.Stop();
 
         parentController.localEulerAngles
-            = new Vector3(Mathf.LerpAngle(parentController.localEulerAngles.x, pressing ? RemapCamera(freeLookCamera.m_YAxis.Value, 0, 1, -25, 25) : 0, .3f), angle.y, angle.z);
+            = new Vector3(Mathf.LerpAngle(parentController.localEulerAngles.x, (IsPointerOverUIObject(FireButton)) ? RemapCamera(freeLookCamera.m_YAxis.Value, 0, 1, -25, 25) : 0, .3f), angle.y, angle.z);
     }
 
     void VisualPolish()
@@ -52,7 +53,7 @@ public class ShootingSystem : MonoBehaviour
             parentController.DOLocalMove(localPos - new Vector3(0, 0, .2f), .03f)
                 .OnComplete(() => parentController.DOLocalMove(localPos, .1f).SetEase(Ease.OutSine));
 
-           impulseSource.GenerateImpulse();
+            impulseSource.GenerateImpulse();
         }
 
         if (!DOTween.IsTweening(splatGunNozzle))
@@ -65,5 +66,27 @@ public class ShootingSystem : MonoBehaviour
     float RemapCamera(float value, float from1, float to1, float from2, float to2)
     {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+    }
+
+    bool IsPointerOverUIObject(Image image)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject == image.gameObject)
+                return true;
+        }
+        return false;
     }
 }

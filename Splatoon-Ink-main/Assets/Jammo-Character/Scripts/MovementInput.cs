@@ -14,7 +14,8 @@ public class MovementInput : MonoBehaviour {
 	private Animator anim;
 	private Camera cam;
 	private CharacterController controller;
-	private bool isGrounded;
+    public FixedJoystick joystick;
+    private bool isGrounded;
 	private Vector3 desiredMoveDirection;
 	private float InputX;
 	private float InputZ;
@@ -60,10 +61,10 @@ public class MovementInput : MonoBehaviour {
     }
 
 	void PlayerMoveAndRotation() {
-		InputX = Input.GetAxis("Horizontal");
-		InputZ = Input.GetAxis("Vertical");
+        InputX = joystick.Horizontal;
+        InputZ = joystick.Vertical;
 
-		var camera = Camera.main;
+        var camera = Camera.main;
 		var forward = cam.transform.forward;
 		var right = cam.transform.right;
 
@@ -105,11 +106,11 @@ public class MovementInput : MonoBehaviour {
 
 	void InputMagnitude() {
 		//Calculate Input Vectors
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
+		InputX = joystick.Horizontal;
+        InputZ = joystick.Vertical;
 
-		//Calculate the Input Magnitude
-		Speed = new Vector2(InputX, InputZ).sqrMagnitude;
+        //Calculate the Input Magnitude
+        Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
 		//Change animation mode if rotation is blocked
 		anim.SetBool("shooting", blockRotationPlayer);
