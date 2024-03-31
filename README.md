@@ -1,8 +1,8 @@
 2024년 38조  https://kookmin-sw.github.io/capstone-2024-38/
 
-![header](https://capsule-render.vercel.app/api?type=Waving&height=200&text=thundevistan&fontColor=d5e6f5&color=timeGradient&animation=fadeIn)
+![header](https://capsule-render.vercel.app/api?type=Waving&height=200&text=Coloring the Battlefield&fontColor=d5e6f5&color=timeGradient&animation=fadeIn)
 
-### 1. 프로잭트 소개
+### 1. 프로젝트 소개
 Coloring the Battlefield
 
 
