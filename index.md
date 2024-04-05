@@ -1,37 +1,32 @@
-## Welcome to GitHub Pages
+2024년 38조  https://kookmin-sw.github.io/capstone-2024-38/
 
-You can use the [editor on GitHub](https://github.com/kookmin-sw/cap-template/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+![header](https://capsule-render.vercel.app/api?type=Waving&height=200&text=ColoringtheBattlefield&fontColor=d5e6f5&color=timeGradient&animation=fadeIn)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### 1. 프로젝트 소개
+Coloring the Battlefield
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+몰입감 넘치는 탈출 경험과 전략적 사고를 요구하는 즐거움을 제공하는 게임입니다.
+다양한 스킬, 탄막, AI, 퀘스트, 은신처 시스템 등을 통해 전략적인 플레이를 가능하게 합니다.
+잉크 시스템을 통해 색 연산 알고리즘 기반 퍼즐 요소를 도입했습니다.
+GIS로 제작된 맵으로 새로운 현실감을 제공합니다.
 
-```markdown
-Syntax highlighted code block
+### 2. 소개 영상
 
-# Header 1
-## Header 2
-### Header 3
+프로젝트 소개하는 영상을 추가하세요
 
-- Bulleted
-- List
+### 3. 팀 소개
 
-1. Numbered
-2. List
+팀을 소개하세요.
 
-**Bold** and _Italic_ and `Code` text
+팀원정보 및 담당이나 사진 및 SNS를 이용하여 소개하세요.
 
-[Link](url) and ![Image](src)
-```
+### 4. 사용법
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+소스코드제출시 설치법이나 사용법을 작성하세요.
 
-### Jekyll Themes
+### 5. 기타
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kookmin-sw/cap-template/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+추가적인 내용은 자유롭게 작성하세요.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
