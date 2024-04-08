@@ -4,5 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LoginScene.unity
+    guid: e80b335e91c9f4a2390119348e270ff9
+  - enabled: 1
+    path: Assets/Scenes/LobyScene.unity
+    guid: 7fe7b94bcadc01f4899dc655fcb6a932
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 4673306522385a94e9dff092c5bb6077,
+      type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: 243d783a406f4416ab2eb297c1afcecd, type: 2}

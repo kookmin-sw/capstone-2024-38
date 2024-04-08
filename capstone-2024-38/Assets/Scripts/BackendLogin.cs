@@ -4,6 +4,7 @@ using UnityEngine;
 using BackEnd;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BackendLogin : MonoBehaviour 
 {
@@ -13,6 +14,8 @@ public class BackendLogin : MonoBehaviour
     public TMP_InputField loginPw;
     public TMP_InputField signUpId;
     public TMP_InputField signUpPw;
+    public TMP_InputField nickName;
+    public GameObject nickNameWindow;
 
     public static BackendLogin Instance
     {
@@ -62,13 +65,23 @@ public class BackendLogin : MonoBehaviour
         {
             Debug.Log("로그인이 실패했습니다. : " + bro);
         }
+        
+        if (Backend.UserNickName == "")
+        {
+            nickNameWindow.SetActive(true);
+        }
+        else
+        {
+            SceneManager.LoadScene("LobyScene");
+        }
     }
 
-    public void UpdateNickname(string nickname)
+    public void CreateNickname()
     {
         Debug.Log("닉네임 변경을 요청합니다.");
-
-        var bro = Backend.BMember.UpdateNickname(nickname);
+        string name = nickName.text;
+        var bro = Backend.BMember.UpdateNickname(name);
+        SceneManager.LoadScene("LobyScene");
 
         if (bro.IsSuccess())
         {
