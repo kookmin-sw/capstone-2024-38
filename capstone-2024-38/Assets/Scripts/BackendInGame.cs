@@ -19,6 +19,18 @@ public partial class BackendMatchManager : MonoBehaviour
     
     // 게임 레디 상태일 때 호출됨
 
+    public void AccessInGameRoom(string roomToken)
+    {
+        Backend.Match.JoinGameRoom(roomToken);
+    }
+
+    public void GameSetUp()
+    {
+        Debug.Log("게임 시작 메시지 수신. 게임 설정 시작");
+        // 게임 시작 메시지가 오면 게임을 레디 상태로 변경
+        OnGameReady();
+    }
+
     public void OnGameReady()
     {
         if (isSetHost == false)
@@ -39,10 +51,35 @@ public partial class BackendMatchManager : MonoBehaviour
         }
     }
 
-    private void OnGameReconnect()
+    private void ReadyToLoadRoom()
     {
-        isHost = false;
-        localQueue = null;
+        /*if (BackendMatchManager.GetInstance().isSandBoxGame == true)
+        {
+            Debug.Log("샌드박스 모드 활성화. AI 정보 송신");
+            // 샌드박스 모드면 ai 정보 송신
+            foreach (var tmp in gameRecords)
+            {
+                if ((int)tmp.Key > (int)SessionId.Reserve)
+                {
+                    continue;
+                }
+                Debug.Log("ai정보 송신 : " + (int)tmp.Key);
+                SendDataToInGame(new Protocol.AIPlayerInfo(tmp.Value));
+            }
+        }*/
+        
+        Debug.Log("1초 후 룸 씬 전환 메시지 송신");
+        Invoke("SendChangeRoomScene", 1f);
+    }
+    
+    private void SendChangRoomScene()
+    {
+        
+    }
+
+    public void SendDataToInGame<T>(T msg)
+    {
+        
     }
 
     

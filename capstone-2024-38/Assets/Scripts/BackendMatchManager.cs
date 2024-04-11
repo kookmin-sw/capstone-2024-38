@@ -178,18 +178,57 @@ public partial class BackendMatchManager : MonoBehaviour
         Backend.Match.OnJoinMatchMakingServer += (args) =>
         {
             Debug.Log("OnJoinMatchMakingServer : " + args.ErrInfo);
-            //ProcessAccessMatchMakingServer(args.ErrInfo);
+            ProcessAccessMatchMakingServer(args.ErrInfo);
         };
 
         Backend.Match.OnMatchMakingRoomCreate += (args) =>
         {
             Debug.Log(string.Format("OnMatchMakingRoomJoin : {0} : {1}", args.ErrInfo, args.Reason));
         };
+
+        Backend.Match.OnMatchMakingResponse += (args) =>
+        {
+            Debug.Log("OnMatchMakingResponse : " + args.ErrInfo + " : " + args.Reason);
+            ProcessMatchMakingResponse(args);
+        };
     }
 
     private void GameHandler()
     {
-        
+        Backend.Match.OnSessionJoinInServer += (args) =>
+        {
+            Debug.Log("OnSessionJoinInServer : " + args.ErrInfo);
+            
+            if (isJoinGameRoom)
+            {
+                return;
+            }
+
+            if (inGameRoomToken == string.Empty)
+            {
+                Debug.LogError("인게임 서버 접속 성공했으나 룸 토큰이 없습니다.");
+                return;
+            }
+            
+            Debug.Log("인게임 서버 접속 성공");
+            isJoinGameRoom = true;
+            AccessInGameRoom(inGameRoomToken);
+        };
+
+        Backend.Match.OnSessionListInServer += (args) =>
+        {
+            Debug.Log("OnSessionListInServer : " + args.ErrInfo);
+        };
+
+        Backend.Match.OnMatchInGameAccess += (args) =>
+        {
+            Debug.Log("OnMatchInGameAccess : " + args.ErrInfo);
+        };
+
+        Backend.Match.OnMatchInGameStart += () =>
+        {
+            GameSetUp();
+        };
     }
 
     private void ExceptionHandler()

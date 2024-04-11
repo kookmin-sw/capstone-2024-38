@@ -251,9 +251,9 @@ public partial class BackendMatchManager : MonoBehaviour
             return;
         }
 
-        //nowMatchType = info.matchType;
-        //nowModeType = info.matchModeType;
-        //numOfClient = int.Parse(info.headCount);
+        nowMatchType = info.matchType;
+        nowModeType = info.matchModeType;
+        numOfClient = int.Parse(info.headCount);
     }
 
     public void ProcessReconnect()
