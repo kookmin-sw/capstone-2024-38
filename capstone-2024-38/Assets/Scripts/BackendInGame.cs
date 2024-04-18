@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using BackEnd.Tcp;
+using UnityEngine.SceneManagement;
 
 public partial class BackendMatchManager : MonoBehaviour
 {
@@ -18,10 +19,16 @@ public partial class BackendMatchManager : MonoBehaviour
     private string NUM_INGAME_SESSION = "인게임 내 세션 갯수 : {0}";
     
     // 게임 레디 상태일 때 호출됨
-
     public void AccessInGameRoom(string roomToken)
     {
         Backend.Match.JoinGameRoom(roomToken);
+    }
+    
+    // 인 게임 서버 접속 종료
+    public void LeaveInGameRoom()
+    {
+        isConnectInGameServer = false;
+        Backend.Match.LeaveGameServer();
     }
 
     public void GameSetUp()
@@ -49,6 +56,7 @@ public partial class BackendMatchManager : MonoBehaviour
             // 0.5초 후 ReadyToLoadRoom 함수 호출
             Invoke("ReadyToLoadRoom", 0.5f);
         }
+        SceneManager.LoadScene("InGameScene");
     }
 
     private void ReadyToLoadRoom()
@@ -74,12 +82,20 @@ public partial class BackendMatchManager : MonoBehaviour
     
     private void SendChangRoomScene()
     {
-        
+        Debug.Log("룸 씬 전환 메시지 송신");
+        SendDataToInGame(new Protocol.LoadRoomSceneMessage());
+    }
+
+    private void SendChangeGameScene()
+    {
+        Debug.Log("게임 씬 전환 메시지 송신");
+        SendDataToInGame(new Protocol.LoadGameSceneMessage());
     }
 
     public void SendDataToInGame<T>(T msg)
     {
-        
+        var byteArray = DataParser.DataToJsonData<T>(msg);
+        Backend.Match.SendDataToInGameRoom(byteArray);
     }
 
     
