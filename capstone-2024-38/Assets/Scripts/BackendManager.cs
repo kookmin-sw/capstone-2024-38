@@ -29,11 +29,7 @@ public class BackendManager : MonoBehaviour
 
         //Test();
     }
-
-    public void Login()
-    {
-        BackendLogin.Instance.CustomLogin();
-    }
+    
 
     async void Test()
     {
@@ -52,7 +48,6 @@ public class BackendManager : MonoBehaviour
                 BackendGameData.Instance.GameDataInsert();
             }
             
-            BackendGameData.Instance.HpUp();
             
             BackendGameData.Instance.GameDataUpdate();
             

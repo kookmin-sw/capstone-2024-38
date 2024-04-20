@@ -81,6 +81,8 @@ public class BackendLogin : MonoBehaviour
         Debug.Log("닉네임 변경을 요청합니다.");
         string name = nickName.text;
         var bro = Backend.BMember.UpdateNickname(name);
+        BackendGameData.Instance.GameDataInsert();
+        BackendRank.Instance.RankInsert(0);
         SceneManager.LoadScene("LobyScene");
 
         if (bro.IsSuccess())

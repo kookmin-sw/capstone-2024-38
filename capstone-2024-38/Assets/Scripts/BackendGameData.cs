@@ -8,8 +8,8 @@ using BackEnd;
 
 public class UserData
 {
-    public int hp;
-    public int ink;
+    public int level;
+    public int rankPoint;
 }
 
 public class BackendGameData : MonoBehaviour
@@ -41,11 +41,12 @@ public class BackendGameData : MonoBehaviour
         }
         
         Debug.Log("데이터를 초기화합니다.");
-        userData.hp = 100;
-        userData.ink = 10;
+        userData.level = 1;
+        userData.rankPoint = 0;
 
         Param param = new Param();
-        param.Add("hp", userData.hp);
+        param.Add("level", userData.level);
+        param.Add("rankPoint", userData.rankPoint);
         
         Debug.Log("게임정보 데이터 삽입을 요청합니다.");
         var bro = Backend.GameData.Insert("USER_DATA", param);
@@ -81,7 +82,8 @@ public class BackendGameData : MonoBehaviour
                 gameDataRowInDate = gameDataJson[0]["inDate"].ToString();
 				userData = new UserData();
 
-                userData.hp = int.Parse(gameDataJson[0]["hp"].ToString());
+                userData.level = int.Parse(gameDataJson[0]["level"].ToString());
+                userData.rankPoint = int.Parse(gameDataJson[0]["rankPoint"].ToString());
 
                 Debug.Log(userData.ToString());
             }
@@ -92,10 +94,10 @@ public class BackendGameData : MonoBehaviour
         }
     }
 
-    public void HpUp()
+    public void LevelUp()
     {
-        Debug.Log("체력을 10 증가시킵니다.");
-        userData.hp += 10;
+        Debug.Log("레벨을 1 증가시킵니다.");
+        userData.level += 1;
     }
 
     public void GameDataUpdate()
@@ -106,7 +108,8 @@ public class BackendGameData : MonoBehaviour
         }
 
         Param param = new Param();
-        param.Add("hp", userData.hp);
+        param.Add("level", userData.level);
+        param.Add("rankPoint", userData.rankPoint);
 
         BackendReturnObject bro = null;
 
