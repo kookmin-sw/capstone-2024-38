@@ -10,6 +10,7 @@ public class UserData
 {
     public int level;
     public int rankPoint;
+    public Dictionary<string, int> inventory = new Dictionary<string, int>();
 }
 
 public class BackendGameData : MonoBehaviour
