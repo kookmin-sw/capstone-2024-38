@@ -48,12 +48,15 @@ public class Post
 
 public class BackendPost : MonoBehaviour
 {
-    public GameObject postPrefab;
-    public GameObject postList;
-    public TMP_Text senderText;
-    public TMP_Text itemName;
-    public TMP_Text itemCount;
-    public TMP_Text inDate;
+    void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(_instance);
+        }
+        _instance = this;
+    }
+    
     private static BackendPost _instance = null;
 
     public static BackendPost Instance {
@@ -65,8 +68,10 @@ public class BackendPost : MonoBehaviour
             return _instance;
         }
     }
+    public delegate void OnPostListCompleted();
+    public event OnPostListCompleted PostListCompleted;
 
-    private List<Post> _postList = new List<Post>();
+    public List<Post> _postList = new List<Post>();
 
     public void SavePostToLocal(LitJson.JsonData item)
     {
@@ -171,26 +176,17 @@ public class BackendPost : MonoBehaviour
                     }
                 }
             }
-
             _postList.Add(post);
         }
-        Debug.Log(_postList[0].author);
-        for (int i = 0; i < _postList.Count; i++)
-        {
-            GameObject newPost = Instantiate(postPrefab, null, false);
-            newPost.transform.parent = postList.transform;
-            Transform senderTransform = newPost.transform.Find("Sender");
-            Transform contentTransform = newPost.transform.Find("Item Content");
-            Transform inDateTransform = newPost.transform.Find("Post InDate");
-            TMP_Text senderText = senderTransform.GetComponent<TMP_Text>();
-            TMP_Text contentText = contentTransform.GetComponent<TMP_Text>();
-            TMP_Text inDateText = inDateTransform.GetComponent<TMP_Text>();
-            senderText.text = _postList[i].author;
-            contentText.text = _postList[i].content;
-            DateTime dateTime = DateTime.Parse(_postList[i].inDate, null, DateTimeStyles.RoundtripKind);
-            inDateText.text = dateTime.ToString("MM-dd");
-        }
+        //StartCoroutine(DisplayPostsAfterDelay(0.5f));
+        PostListCompleted?.Invoke();
     }
+    
+    /*private IEnumerator DisplayPostsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        UIManager.Instance.DisplayPosts();
+    }*/
 
     public void PostReceive(PostType postType, int index)
     {
@@ -265,8 +261,7 @@ public class BackendPost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //postPrefab = Resources.Load("Post");
-        PostListGet(PostType.Admin);
+
     }
 
     // Update is called once per frame
