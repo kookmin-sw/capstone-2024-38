@@ -4,10 +4,37 @@ using UnityEngine;
 using System.Text;
 using BackEnd;
 
+public class Rank
+{
+    public string rank;
+    public string nickname;
+    public string score;
+
+    public override string ToString()
+    {
+        string result = string.Empty;
+        result += $"title : {rank}\n";
+        result += $"content : {nickname}\n";
+        result += $"inDate : {score}\n";
+
+        return result;
+    }
+}
+
 public class BackendRank : MonoBehaviour
 {
+    void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(_instance);
+        }
+        _instance = this;
+    }
     
     private static BackendRank _instance = null;
+
+    public List<Rank> rankList = new List<Rank>();
 
     public static BackendRank Instance 
     {
@@ -21,6 +48,9 @@ public class BackendRank : MonoBehaviour
             return _instance;
         }
     }
+    
+    public delegate void OnRankListCompleted();
+    public event OnRankListCompleted RankListCompleted;
 
     public void RankInsert(int score)
     {
@@ -93,7 +123,7 @@ public class BackendRank : MonoBehaviour
         
         foreach(LitJson.JsonData jsonData in bro.FlattenRows()) 
         {
-            StringBuilder info = new StringBuilder();
+            /*StringBuilder info = new StringBuilder();
 
             info.AppendLine("순위 : " + jsonData["rank"].ToString());
             info.AppendLine("닉네임 : " + jsonData["nickname"].ToString());
@@ -101,8 +131,17 @@ public class BackendRank : MonoBehaviour
             info.AppendLine("gamerInDate : " + jsonData["gamerInDate"].ToString());
             info.AppendLine("정렬번호 : " + jsonData["index"].ToString());
             info.AppendLine();
-            Debug.Log(info);
+            Debug.Log(info);*/
+
+            Rank rank = new Rank();
+
+            rank.rank = jsonData["rank"].ToString();
+            rank.nickname = jsonData["nickname"].ToString();
+            rank.score = jsonData["score"].ToString();
+
+            rankList.Add(rank);
         }
+        RankListCompleted?.Invoke();
     }
     // Start is called before the first frame update
     void Start()
