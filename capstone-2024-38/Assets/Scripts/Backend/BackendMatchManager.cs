@@ -84,7 +84,7 @@ public partial class BackendMatchManager : MonoBehaviour
         instance = this;
     }
 
-    public static BackendMatchManager GetInstnace()
+    public static BackendMatchManager GetInstance()
     {
         if (!instance)
         {
@@ -108,6 +108,7 @@ public partial class BackendMatchManager : MonoBehaviour
     {
         MatchMakingHandler();
         GetMatchList();
+        GameHandler();
     }
 
     public bool IsHost()
@@ -172,6 +173,11 @@ public partial class BackendMatchManager : MonoBehaviour
         return true;
     }
     
+    public void SetHostSession(SessionId host)
+    {
+        hostSession = host;
+    }
+    
 
     private void MatchMakingHandler()
     {
@@ -218,16 +224,41 @@ public partial class BackendMatchManager : MonoBehaviour
         Backend.Match.OnSessionListInServer += (args) =>
         {
             Debug.Log("OnSessionListInServer : " + args.ErrInfo);
+            
+            ProcessMatchInGameSessionList(args);
         };
 
         Backend.Match.OnMatchInGameAccess += (args) =>
         {
             Debug.Log("OnMatchInGameAccess : " + args.ErrInfo);
+            
+            ProcessMatchInGameAccess(args);
         };
 
         Backend.Match.OnMatchInGameStart += () =>
         {
             GameSetUp();
+        };
+        
+        Backend.Match.OnMatchRelay += (args) =>
+        {
+            // 각 클라이언트들이 서버를 통해 주고받은 패킷들
+            // 서버는 단순 브로드캐스팅만 지원 (서버에서 어떠한 연산도 수행하지 않음)
+
+            // 게임 사전 설정
+            /*if (PrevGameMessage(args.BinaryUserData) == true)
+            {
+                // 게임 사전 설정을 진행하였으면 바로 리턴
+                return;
+            }*/
+
+            if (WorldManager.instance == null)
+            {
+                // 월드 매니저가 존재하지 않으면 바로 리턴
+                return;
+            }
+
+            WorldManager.instance.OnRecieve(args);
         };
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd.Tcp;
 
-public class Protocol : MonoBehaviour
+namespace Protocol
 {
     // 이벤트 타입
     public enum Type : sbyte
@@ -141,6 +141,34 @@ public class Protocol : MonoBehaviour
         public LoadGameSceneMessage() : base(Type.LoadGameScene)
         {
 
+        }
+    }
+    
+    public class GameSyncMessage : Message
+    {
+        public SessionId host;
+        public int count = 0;
+        public float[] xPos = null;
+        public float[] zPos = null;
+        public int[] hpValue = null;
+        public bool[] onlineInfo = null;
+
+        public GameSyncMessage(SessionId host, int count, float[] x, float[] z, int[] hp, bool[] online) : base(Type.GameSync)
+        {
+            this.host = host;
+            this.count = count;
+            this.xPos = new float[count];
+            this.zPos = new float[count];
+            this.hpValue = new int[count];
+            this.onlineInfo = new bool[count];
+
+            for (int i = 0; i < count; ++i)
+            {
+                xPos[i] = x[i];
+                zPos[i] = z[i];
+                hpValue[i] = hp[i];
+                onlineInfo[i] = online[i];
+            }
         }
     }
 }
