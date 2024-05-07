@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,73 @@ public class WorldManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+    }
+    
+    public bool InitializeGame()
+    {
+        if (!playerPool)
+        {
+            Debug.Log("Player Pool Not Exist!");
+            return false;
+        }
+        Debug.Log("게임 초기화 진행");
+        gameRecord = new Stack<SessionId>();
+        //GameManager.OnGameOver += OnGameOver;
+        //GameManager.OnGameResult += OnGameResult;
+        myPlayerIndex = SessionId.None;
+        //SetPlayerAttribute();
+        OnGameStart();
+        return true;
+    }
+    
+    public void SetPlayerAttribute()
+    {
+        // 시작점
+        statringPoints = new List<Vector4>();
+
+        int num = startPointObject.transform.childCount;
+        for (int i = 0; i < num; ++i)
+        {
+            var child = startPointObject.transform.GetChild(i);
+            Vector4 point = child.transform.position;
+            point.w = child.transform.rotation.eulerAngles.y;
+            statringPoints.Add(point);
+        }
+
+        //dieEvent += PlayerDieEvent;
+    }
+
+    void Start()
+    {
+        InitializeGame();
+        var matchInstance = BackendMatchManager.GetInstance();
+        if (matchInstance == null)
+        {
+            return;
+        }
+    }
+
+    public void OnGameStart()
+    {
+        if (BackendMatchManager.GetInstance().IsHost())
+        {
+            Debug.Log("플레이어 세션정보 확인");
+
+            if (BackendMatchManager.GetInstance().IsSessionListNull())
+            {
+                Debug.Log("Player Index Not Exist!");
+                // 호스트 기준 세션데이터가 없으면 게임을 바로 종료한다.
+                foreach (var session in BackendMatchManager.GetInstance().sessionIdList)
+                {
+                    // 세션 순서대로 스택에 추가
+                    gameRecord.Push(session);
+                }
+                //GameEndMessage gameEndMessage = new GameEndMessage(gameRecord);
+                //BackendMatchManager.GetInstance().SendDataToInGame<GameEndMessage>(gameEndMessage);
+                return;
+            }
+        }
+        SetPlayerInfo();
     }
     
     public void SetPlayerInfo()
