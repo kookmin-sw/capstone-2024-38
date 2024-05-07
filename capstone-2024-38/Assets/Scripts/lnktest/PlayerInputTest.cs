@@ -18,9 +18,31 @@ public class PlayerInputTest : MonoBehaviour
 
     GameObject chargingBullet; // 충전 중인 총알의 참조를 저장하는 변수
 
+    private int CurBullet = 0;
+    private int MaxBullet = 0;
+
+    private void Start()
+    {
+        MaxBullet = BulletList.Length;
+    }
+
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (CurBullet == MaxBullet)
+            {
+                CurBullet = 0;
+            }
+            else
+            {
+                CurBullet += 1;
+            }
+            Debug.Log("CurBullet = " + CurBullet);
+
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCharging();
@@ -40,7 +62,9 @@ public class PlayerInputTest : MonoBehaviour
     {
         isCharging = true;
         currentChargeTime = 0.0f;
-        chargingBullet = Instantiate(BulletList[0], bulletPoint.position, bulletPoint.rotation);
+
+        chargingBullet = Instantiate(BulletList[CurBullet], bulletPoint.position, bulletPoint.rotation);
+       
         chargingBullet.GetComponent<Rigidbody>().useGravity = false;
     }
 
@@ -62,4 +86,21 @@ public class PlayerInputTest : MonoBehaviour
         chargingBullet.GetComponent<Rigidbody>().useGravity = true;
     }
 
+    public Color GetBulletColor()
+    {
+        Color cl = Color.white;
+        if(CurBullet == 0)
+        {
+            cl = Color.red;
+        }
+        if(CurBullet == 1)
+        {
+            cl = Color.blue;
+        }
+        if(CurBullet == 2)
+        {
+            cl = Color.green;
+        }
+        return cl;
+    }
 }
