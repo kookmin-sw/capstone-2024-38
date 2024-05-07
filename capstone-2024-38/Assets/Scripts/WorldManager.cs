@@ -32,6 +32,59 @@ public class WorldManager : MonoBehaviour
         instance = this;
     }
     
+    public void SetPlayerInfo()
+    {
+        if (BackendMatchManager.GetInstance().sessionIdList == null)
+        {
+            // 현재 세션ID 리스트가 존재하지 않으면, 0.5초 후 다시 실행
+            Invoke("SetPlayerInfo", 0.5f);
+            return;
+        }
+        var gamers = BackendMatchManager.GetInstance().sessionIdList;
+        int size = gamers.Count;
+        if (size <= 0)
+        {
+            Debug.Log("No Player Exist!");
+            return;
+        }
+        if (size > MAXPLAYER)
+        {
+            Debug.Log("Player Pool Exceed!");
+            return;
+        }
+
+        players = new Dictionary<SessionId, Player>();
+        BackendMatchManager.GetInstance().SetPlayerSessionList(gamers);
+
+        int index = 0;
+        foreach (var sessionId in gamers)
+        {
+            GameObject player = Instantiate(playerPrefeb, new Vector3(statringPoints[index].x, statringPoints[index].y, statringPoints[index].z), Quaternion.identity, playerPool.transform);
+            players.Add(sessionId, player.GetComponent<Player>());
+
+            if (BackendMatchManager.GetInstance().IsMySessionId(sessionId))
+            {
+                myPlayerIndex = sessionId;
+                players[sessionId].Initialize(true, myPlayerIndex, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), statringPoints[index].w);
+            }
+            else
+            {
+                players[sessionId].Initialize(false, sessionId, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), statringPoints[index].w);
+            }
+            index += 1;
+        }
+        Debug.Log("Num Of Current Player : " + size);
+
+        // 스코어 보드 설정
+        alivePlayer = size;
+        //InGameUiManager.GetInstance().SetScoreBoard(alivePlayer);
+
+        if (BackendMatchManager.GetInstance().IsHost())
+        {
+            StartCoroutine("StartCount");
+        }
+    }
+    
     public void OnRecieve(MatchRelayEventArgs args)
     {
         if (args.BinaryUserData == null)
@@ -223,4 +276,5 @@ public class WorldManager : MonoBehaviour
         }
         BackendMatchManager.GetInstance().SetHostSession(syncMessage.host);
     }
+    
 }

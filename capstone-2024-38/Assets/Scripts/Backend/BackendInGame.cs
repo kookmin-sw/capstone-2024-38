@@ -137,6 +137,11 @@ public partial class BackendMatchManager : MonoBehaviour
         Invoke("SendChangeRoomScene", 1f);
     }
     
+    public void SetPlayerSessionList(List<SessionId> sessions)
+    {
+        sessionIdList = sessions;
+    }
+    
     private void SendChangRoomScene()
     {
         Debug.Log("룸 씬 전환 메시지 송신");

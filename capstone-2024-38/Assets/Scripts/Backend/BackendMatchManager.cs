@@ -116,7 +116,7 @@ public partial class BackendMatchManager : MonoBehaviour
         return isHost;
     }
 
-    public bool IsMySeesionId(SessionId session)
+    public bool IsMySessionId(SessionId session)
     {
         return Backend.Match.GetMySessionId() == session;
     }
