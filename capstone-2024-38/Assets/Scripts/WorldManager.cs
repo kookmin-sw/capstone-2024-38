@@ -16,12 +16,11 @@ public class WorldManager : MonoBehaviour
     public GameObject playerPool;
     public GameObject playerPrefeb;
     public int numOfPlayer = 0;
-    public GameObject particle;
     private const int MAXPLAYER = 4;
     public int alivePlayer { get; set; }
     private Dictionary<SessionId, Player> players;
     public GameObject startPointObject;
-    private List<Vector4> statringPoints;
+    private List<Vector4> startingPoints;
 
     private Stack<SessionId> gameRecord;
     public delegate void PlayerDie(SessionId index);
@@ -45,7 +44,7 @@ public class WorldManager : MonoBehaviour
         //GameManager.OnGameOver += OnGameOver;
         //GameManager.OnGameResult += OnGameResult;
         myPlayerIndex = SessionId.None;
-        //SetPlayerAttribute();
+        SetPlayerAttribute();
         OnGameStart();
         return true;
     }
@@ -53,7 +52,7 @@ public class WorldManager : MonoBehaviour
     public void SetPlayerAttribute()
     {
         // 시작점
-        statringPoints = new List<Vector4>();
+        startingPoints = new List<Vector4>();
 
         int num = startPointObject.transform.childCount;
         for (int i = 0; i < num; ++i)
@@ -61,7 +60,7 @@ public class WorldManager : MonoBehaviour
             var child = startPointObject.transform.GetChild(i);
             Vector4 point = child.transform.position;
             point.w = child.transform.rotation.eulerAngles.y;
-            statringPoints.Add(point);
+            startingPoints.Add(point);
         }
 
         //dieEvent += PlayerDieEvent;
@@ -69,6 +68,7 @@ public class WorldManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("SIUU");
         InitializeGame();
         var matchInstance = BackendMatchManager.GetInstance();
         if (matchInstance == null)
@@ -127,17 +127,17 @@ public class WorldManager : MonoBehaviour
         int index = 0;
         foreach (var sessionId in gamers)
         {
-            GameObject player = Instantiate(playerPrefeb, new Vector3(statringPoints[index].x, statringPoints[index].y, statringPoints[index].z), Quaternion.identity, playerPool.transform);
+            GameObject player = Instantiate(playerPrefeb, new Vector3(startingPoints[index].x, startingPoints[index].y, startingPoints[index].z), Quaternion.identity, playerPool.transform);
             players.Add(sessionId, player.GetComponent<Player>());
 
             if (BackendMatchManager.GetInstance().IsMySessionId(sessionId))
             {
                 myPlayerIndex = sessionId;
-                players[sessionId].Initialize(true, myPlayerIndex, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), statringPoints[index].w);
+                players[sessionId].Initialize(true, myPlayerIndex, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), startingPoints[index].w);
             }
             else
             {
-                players[sessionId].Initialize(false, sessionId, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), statringPoints[index].w);
+                players[sessionId].Initialize(false, sessionId, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), startingPoints[index].w);
             }
             index += 1;
         }
@@ -155,6 +155,7 @@ public class WorldManager : MonoBehaviour
     
     public void OnRecieve(MatchRelayEventArgs args)
     {
+        Debug.Log("SIUU");
         if (args.BinaryUserData == null)
         {
             Debug.LogWarning(string.Format("빈 데이터가 브로드캐스팅 되었습니다.\n{0} - {1}", args.From, args.ErrInfo));

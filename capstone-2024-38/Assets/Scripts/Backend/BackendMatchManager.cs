@@ -82,6 +82,7 @@ public partial class BackendMatchManager : MonoBehaviour
             Destroy(instance);
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public static BackendMatchManager GetInstance()
@@ -251,7 +252,7 @@ public partial class BackendMatchManager : MonoBehaviour
                 // 게임 사전 설정을 진행하였으면 바로 리턴
                 return;
             }*/
-
+            Debug.Log("SIU");
             if (WorldManager.instance == null)
             {
                 // 월드 매니저가 존재하지 않으면 바로 리턴
