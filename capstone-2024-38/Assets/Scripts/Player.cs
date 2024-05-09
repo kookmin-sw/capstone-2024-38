@@ -4,6 +4,8 @@ using UnityEngine;
 using Protocol;
 using BackEnd.Tcp;
 using BackEnd;
+using Cinemachine;
+
 public class Player : MonoBehaviour
 {
     private SessionId index = 0;
@@ -44,7 +46,10 @@ public class Player : MonoBehaviour
 
         if (this.isMe)
         {
-            //Camera.main.GetComponent<FollowCamera>().target = this.transform;
+            /*Cinemachine.CinemachineFreeLookcinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
+            cinemachineFreeLook.Follow = transform;*/
+            Cinemachine.CinemachineVirtualCamera cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            cinemachineVirtualCamera.Follow = transform;
         }
 
         this.isLive = true;

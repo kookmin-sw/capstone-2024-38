@@ -44,6 +44,7 @@ public class MovementInput : MonoBehaviour {
 		anim = this.GetComponent<Animator> ();
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
+		joystick = FindObjectOfType<FixedJoystick>();
 	}
 	
 	void Update () {
