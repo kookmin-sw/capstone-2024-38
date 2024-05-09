@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
             ChargingTime += Time.deltaTime;
             bullet.ScaleUp();
         }
+        
 
     }
 
@@ -66,4 +67,5 @@ public class Player : MonoBehaviour
             CurrPlayerHp = 100;
         }
     }
+
 }
