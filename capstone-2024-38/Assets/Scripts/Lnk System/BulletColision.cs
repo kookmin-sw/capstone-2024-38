@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class BulletColision : MonoBehaviour
 {
-    public Color paintColor = Color.blue;
+    Color paintColor = Color.blue;
 
-    public float strength = 1;
-    public float hardness = 1;
-    public float minRadius = 0.05f;
-    public float maxRadius = 0.2f;
+    float strength = 1;
+    float hardness = 1;
+    float minRadius = 0.05f;
+    float maxRadius = 0.2f;
+
     GameObject player;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = this.transform.parent.parent.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,14 +28,21 @@ public class BulletColision : MonoBehaviour
             {
                 Vector3 pos = other.ClosestPoint(transform.position);
                 float radius = 1;
-                PaintManager.instance.paint(p, pos, radius, hardness, strength, player.GetComponent<PlayerInputTest>().GetBulletColor());
+                PaintManager.instance.paint(p, pos, radius, hardness, strength, player.GetComponent<Bullet>().GetCurrBulletColor());
             }
             
             Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player");
+            if (other.gameObject == player)
+            {
+                Debug.Log("My Player");
+            }
+            else
+            {
+                Debug.Log("Other Player");
+            }
         }
     }
 }

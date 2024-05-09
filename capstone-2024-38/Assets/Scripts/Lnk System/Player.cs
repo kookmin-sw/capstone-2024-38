@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
     Bullet bullet;
+    Skill skill;
     Transform bulletPoint;
 
     bool isCharging;
+    float ChargingTime;
+
+    Dictionary<Skill.Passive_SKill, bool> passive_dict;
+    Dictionary<Skill.Active_Skill, bool> active_dict;
 
     int CurrPlayerHp;
 
@@ -20,6 +26,9 @@ public class Player : MonoBehaviour
     {
         bullet = this.GetComponent<Bullet>();
         bulletPoint = this.transform.Find("BulletPoint").transform;
+        ChargingTime = 0.0f;
+
+        skill = this.GetComponent<Skill>();
 
     }
 
@@ -28,17 +37,24 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             bullet.CreateBullet(bullet.GetRandomBulletpattern(), Bullet.LnkColor.Red, bulletPoint);
+            ChargingTime = 0.0f;
             isCharging = true;
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            skill.Shoot(bullet.GetCurrBullet(), bulletPoint);
             bullet.Shoot();
             isCharging = false;
         }
 
 
-        if (isCharging) bullet.ScaleUp();
+        if (isCharging)
+        {
+            ChargingTime += Time.deltaTime;
+            bullet.ScaleUp();
+        }
+
     }
 
     //Player Data Roding Server
@@ -49,6 +65,5 @@ public class Player : MonoBehaviour
             Debug.Log("Fail Roding Player");
             CurrPlayerHp = 100;
         }
-        
     }
 }

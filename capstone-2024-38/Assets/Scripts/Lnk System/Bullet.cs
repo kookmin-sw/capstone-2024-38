@@ -113,8 +113,7 @@ public class Bullet : MonoBehaviour
         switch (Currpattern)
         {
             case Bulletpattern.Capsule:
-                Debug.Log(Capsule);
-                CurrBullet = Instantiate(Capsule, pos.position, pos.rotation);
+                CurrBullet = Instantiate(Capsule, pos);
                 break;
 
             case Bulletpattern.Cube:
@@ -162,8 +161,7 @@ public class Bullet : MonoBehaviour
     // Shoot Bullet
     public void Shoot()
     {
-        // Must Remove this code!
-        Destroy(CurrBullet);
+        CurrBullet.GetComponent<Rigidbody>().useGravity = true;
         CurrBullet = null;
     }
 
@@ -172,6 +170,35 @@ public class Bullet : MonoBehaviour
     public GameObject GetCurrBullet()
     {
         return CurrBullet;
+    }
+
+    public Color GetCurrBulletColor()
+    {
+        Color tmp = Color.white;
+
+        switch (Currlnk)
+        {
+            case LnkColor.Black:
+                tmp = Color.black;
+                break;
+            case LnkColor.Blue:
+                tmp = Color.blue;
+                break;
+            case LnkColor.Green:
+                tmp = Color.green;
+                break;
+            case LnkColor.Red:
+                tmp = Color.red;
+                break;
+            case LnkColor.White:
+                tmp = Color.white;
+                break;
+            default:
+                Debug.Log("BulletCreate lnk fail");
+                break;
+        }
+
+        return tmp;
     }
 
     public Bulletpattern GetRandomBulletpattern()
