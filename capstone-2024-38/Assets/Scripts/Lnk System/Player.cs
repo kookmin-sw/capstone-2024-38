@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            skill.Shoot(bullet.GetCurrBullet(), bulletPoint);
+            skill.Shoot(bullet.GetCurrBullet(), bulletPoint, ChargingTime);
             bullet.Shoot();
             isCharging = false;
         }

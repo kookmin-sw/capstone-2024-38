@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8468616441938106310}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,11 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ed32b6777f2274abb04c6585d85b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintColor: {r: 0, g: 0, b: 1, a: 1}
-  strength: 1
-  hardness: 1
-  minRadius: 0.05
-  maxRadius: 0.2
 --- !u!54 &8468616441938106310
 Rigidbody:
   m_ObjectHideFlags: 0

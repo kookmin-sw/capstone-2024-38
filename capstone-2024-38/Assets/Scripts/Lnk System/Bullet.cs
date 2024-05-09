@@ -110,28 +110,49 @@ public class Bullet : MonoBehaviour
     {
         Currlnk = lnk;
         Currpattern = bp;
-        switch (Currpattern)
+
+        if (this.GetComponent<Skill>().GetPassiveSkill()[Skill.Passive_SKill.OnlyCube])
         {
-            case Bulletpattern.Capsule:
-                CurrBullet = Instantiate(Capsule, pos);
-                break;
-
-            case Bulletpattern.Cube:
-                CurrBullet = Instantiate(Cube, pos);
-                break;
-
-            case Bulletpattern.Cylinder:
-                CurrBullet = Instantiate(Cylinder, pos);
-                break;
-
-            case Bulletpattern.Sphere:
-                CurrBullet = Instantiate(Sphere, pos);
-                break;
-
-            default:
-                Debug.Log("BulletCreate pattern fail");
-                break;
+            CurrBullet = Instantiate(Cube, pos);
         }
+        else if (this.GetComponent<Skill>().GetPassiveSkill()[Skill.Passive_SKill.OnlyCapsule])
+        {
+            CurrBullet = Instantiate(Capsule, pos);
+        }
+        else if (this.GetComponent<Skill>().GetPassiveSkill()[Skill.Passive_SKill.OnlyCylinder])
+        {
+            CurrBullet = Instantiate(Cylinder, pos);
+        }
+        else if (this.GetComponent<Skill>().GetPassiveSkill()[Skill.Passive_SKill.OnlySphere])
+        {
+            CurrBullet = Instantiate(Sphere, pos);
+        }
+        else
+        {
+            switch (Currpattern)
+            {
+                case Bulletpattern.Capsule:
+                    CurrBullet = Instantiate(Capsule, pos);
+                    break;
+
+                case Bulletpattern.Cube:
+                    CurrBullet = Instantiate(Cube, pos);
+                    break;
+
+                case Bulletpattern.Cylinder:
+                    CurrBullet = Instantiate(Cylinder, pos);
+                    break;
+
+                case Bulletpattern.Sphere:
+                    CurrBullet = Instantiate(Sphere, pos);
+                    break;
+
+                default:
+                    Debug.Log("BulletCreate pattern fail");
+                    break;
+            }
+        }
+
 
         switch (Currlnk)
         {
