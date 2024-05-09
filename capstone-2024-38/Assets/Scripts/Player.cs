@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     private GameObject playerModelObject;
     private Rigidbody rigidBody;
     
+    public VirtualStick TESTONLY_vertualStick;
+    
     void Start()
     {
         if (BackendMatchManager.GetInstance() == null)
@@ -125,7 +127,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        //playerModelObject.transform.rotation = Quaternion.LookRotation(var);
+        playerModelObject.transform.rotation = Quaternion.LookRotation(var);
 
         // 이동
         var pos = gameObject.transform.position + playerModelObject.transform.forward * moveSpeed * Time.deltaTime;
@@ -183,6 +185,53 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        if (BackendMatchManager.GetInstance() == null)
+        {
+            // 매칭 인스턴스가 존재하지 않는 경우 (인게임 테스트 용도)
+            Vector3 tmp = new Vector3(TESTONLY_vertualStick.GetHorizontalValue(), 0, TESTONLY_vertualStick.GetVerticalValue());
+            tmp = Vector3.Normalize(tmp);
+            SetMoveVector(tmp);
+            //Move();
+
+
+            /*if (TESTONLY_attackStick.isInputEnable)
+            {
+                Vector3 tmp2 = new Vector3(TESTONLY_attackStick.GetHorizontalValue(), 0, TESTONLY_attackStick.GetVerticalValue());
+                if (!tmp2.Equals(Vector3.zero))
+                {
+                    tmp2 += GetPosition();
+                    //Attack(tmp2);
+                }
+            }*/
+        }
+
+        if (!isLive)
+        {
+            return;
+        }
+
+        if (isMove)
+        {
+            Move();
+        }
+
+        if (isRotate)
+        {
+            Rotate();
+        }
+        
+
+        if (transform.position.y < -10.0f)
+        {
+            //PlayerDie();
+            WorldManager.instance.dieEvent(index);
+        }
+
+        if (hp <= 0)
+        {
+            //PlayerDie();
+            WorldManager.instance.dieEvent(index);
+        }
         
     }
 }

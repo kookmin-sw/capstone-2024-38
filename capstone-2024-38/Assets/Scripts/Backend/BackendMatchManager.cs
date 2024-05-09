@@ -4,6 +4,7 @@ using UnityEngine;
 using BackEnd;
 using BackEnd.Tcp;
 using System.Linq;
+using Protocol;
 
 
 public partial class BackendMatchManager : MonoBehaviour
@@ -61,18 +62,6 @@ public partial class BackendMatchManager : MonoBehaviour
         public int numOfMatch = 0;
         public double winRate = 0;
     }
-    
-    public class KeyMessage
-    {
-        public Type type;
-
-        public KeyMessage(Type type)
-        {
-            this.type = type;
-        }
-    }
-
-    
     
     void Awake()
     {
@@ -174,6 +163,17 @@ public partial class BackendMatchManager : MonoBehaviour
         return true;
     }
     
+    public void AddMsgToLocalQueue(KeyMessage message)
+    {
+        // 로컬 큐에 메시지 추가
+        if (isHost == false || localQueue == null)
+        {
+            return;
+        }
+
+        localQueue.Enqueue(message);
+    }
+    
     public void SetHostSession(SessionId host)
     {
         hostSession = host;
@@ -252,7 +252,6 @@ public partial class BackendMatchManager : MonoBehaviour
                 // 게임 사전 설정을 진행하였으면 바로 리턴
                 return;
             }*/
-            Debug.Log("SIU");
             if (WorldManager.instance == null)
             {
                 // 월드 매니저가 존재하지 않으면 바로 리턴
@@ -266,6 +265,25 @@ public partial class BackendMatchManager : MonoBehaviour
     private void ExceptionHandler()
     {
         
+    }
+    
+    void Update()
+    {
+        if (isConnectInGameServer || isConnectMatchServer)
+        {
+            Backend.Match.Poll();
+
+            // 호스트의 경우 로컬 큐가 존재
+            // 큐에 있는 패킷을 로컬에서 처리
+            if (localQueue != null)
+            {
+                while (localQueue.Count > 0)
+                {
+                    var msg = localQueue.Dequeue();
+                    WorldManager.instance.OnRecieveForLocal(msg);
+                }
+            }
+        }
     }
 
     public void GetMatchList()
@@ -324,34 +342,5 @@ public partial class BackendMatchManager : MonoBehaviour
         }
         return result;
     }
-    void Update()
-    {
-        if (isConnectMatchServer || isConnectInGameServer)
-        {
-            Backend.Match.Poll();
-        }
-    }
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -8,7 +8,7 @@ using BackEnd.Tcp;
 
 public class WorldManager : MonoBehaviour
 {
-    static public WorldManager instance;
+    public static WorldManager instance;
     
     private SessionId myPlayerIndex = SessionId.None;
     
@@ -155,7 +155,6 @@ public class WorldManager : MonoBehaviour
     
     public void OnRecieve(MatchRelayEventArgs args)
     {
-        Debug.Log("SIUU");
         if (args.BinaryUserData == null)
         {
             Debug.LogWarning(string.Format("빈 데이터가 브로드캐스팅 되었습니다.\n{0} - {1}", args.From, args.ErrInfo));
@@ -346,4 +345,8 @@ public class WorldManager : MonoBehaviour
         BackendMatchManager.GetInstance().SetHostSession(syncMessage.host);
     }
     
+    public bool IsMyPlayerMove()
+    {
+        return players[myPlayerIndex].isMove;
+    }
 }

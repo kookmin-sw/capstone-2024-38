@@ -49,7 +49,34 @@ public class MovementInput : MonoBehaviour {
 		joystick = FindObjectOfType<FixedJoystick>();
 	}
     
-	
+	void MobileInput()
+	{
+		int keyCode = 0;
+
+
+		isMove = true;
+
+		keyCode |= KeyEventCode.MOVE;
+		//Vector3 moveVector = new Vector3(joystick.GetHorizontalValue(), 0, joystick.GetVerticalValue());
+		moveVector = Vector3.Normalize(moveVector);
+
+
+		if (keyCode <= 0)
+		{
+			return;
+		}
+
+		KeyMessage msg;
+		msg = new KeyMessage(keyCode, moveVector);
+		if (BackendMatchManager.GetInstance().IsHost())
+		{
+			BackendMatchManager.GetInstance().AddMsgToLocalQueue(msg);
+		}
+		else
+		{
+			BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
+		}
+	}
 	void Update () {
 
 		InputMagnitude ();
