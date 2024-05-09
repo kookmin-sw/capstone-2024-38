@@ -1,7 +1,7 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Protocol;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
@@ -26,6 +26,8 @@ public class MovementInput : MonoBehaviour {
 	public float Speed;
 	public float allowPlayerRotation = 0.1f;
 
+	private bool isMove = false;
+
 
     [Header("Animation Smoothing")]
     [Range(0, 1f)]
@@ -46,6 +48,7 @@ public class MovementInput : MonoBehaviour {
 		controller = this.GetComponent<CharacterController> ();
 		joystick = FindObjectOfType<FixedJoystick>();
 	}
+    
 	
 	void Update () {
 
