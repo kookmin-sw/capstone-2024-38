@@ -20,7 +20,7 @@ public class Skill : MonoBehaviour
     {
         Throw4Way,
         guided,
-        Throw8Way
+        Shot3
     }
 
     Dictionary<Passive_SKill, bool> passive_dict;
@@ -41,7 +41,9 @@ public class Skill : MonoBehaviour
         }
         //skill test
         passive_dict[Passive_SKill.BulletSpeedUp] = false;
-        active_dict[Active_Skill.Throw4Way] = true;
+        active_dict[Active_Skill.Throw4Way] = false;
+        active_dict[Active_Skill.Shot3] = false;
+        active_dict[Active_Skill.guided] = true;
 
         if (passive_dict.TryGetValue(Passive_SKill.BulletSpeedUp, out bool value))
         {
@@ -74,11 +76,13 @@ public class Skill : MonoBehaviour
                 switch (active.Key)
                 {
                     case Active_Skill.guided:
+                        guided(bullet, tr);
                         break;
                     case Active_Skill.Throw4Way:
                         Throw4Way(bullet,tr);
                         break;
-                    case Active_Skill.Throw8Way:
+                    case Active_Skill.Shot3:
+                        shot3(bullet, tr);
                         break;
                 }
             }
@@ -87,11 +91,78 @@ public class Skill : MonoBehaviour
 
     public void Throw4Way(GameObject bullet, Transform tr)
     {
-        GameObject clonebullet = Instantiate(bullet, tr.position, Quaternion.identity);
 
-        clonebullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        GameObject clonebullet = Instantiate(bullet, tr);
 
+        clonebullet.GetComponent<Rigidbody>().velocity = transform.right * bulletSpeed;
         clonebullet.GetComponent<Rigidbody>().useGravity = true;
-        clonebullet.GetComponent<Rigidbody>().AddForce(Vector3.up * 2, ForceMode.Impulse);
+        clonebullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+
+        GameObject clonebullet2 = Instantiate(bullet, tr);
+
+        clonebullet2.GetComponent<Rigidbody>().velocity = -transform.right * bulletSpeed;
+        clonebullet2.GetComponent<Rigidbody>().useGravity = true;
+        clonebullet2.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+
+        GameObject clonebullet3 = Instantiate(bullet, tr);
+
+        clonebullet3.GetComponent<Rigidbody>().velocity = -transform.forward * bulletSpeed;
+        clonebullet3.GetComponent<Rigidbody>().useGravity = true;
+        clonebullet3.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+
+
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        bullet.GetComponent<Rigidbody>().useGravity = true;
+        bullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+    }
+
+    public void shot3(GameObject bullet, Transform tr)
+    {
+        for (int i = 2; i < 4; i++)
+        {
+            GameObject clonebullet = Instantiate(bullet, tr);
+
+            clonebullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed * i;
+            clonebullet.GetComponent<Rigidbody>().useGravity = true;
+            clonebullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+        }
+
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        bullet.GetComponent<Rigidbody>().useGravity = true;
+        bullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+    }
+
+    public void guided(GameObject bullet, Transform tr)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        float closestDistance = Mathf.Infinity;
+        Transform target = null;
+
+        foreach (GameObject player in players)
+        {
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance < closestDistance && player != this.gameObject)
+            {
+                closestDistance = distance;
+                target = player.transform;
+            }
+        }
+
+        if (target != null)
+        {
+            bullet.transform.LookAt(target);
+
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+            bullet.GetComponent<Rigidbody>().useGravity = true;
+            bullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+        }
+        else
+        {
+            bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+            bullet.GetComponent<Rigidbody>().useGravity = true;
+            bullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+        }
+
+        
     }
 }
