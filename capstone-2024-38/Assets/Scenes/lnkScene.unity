@@ -716,7 +716,8 @@ GameObject:
   - component: {fileID: 1248425909}
   - component: {fileID: 1248425908}
   - component: {fileID: 1248425907}
-  - component: {fileID: 1248425912}
+  - component: {fileID: 1248425913}
+  - component: {fileID: 1248425914}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -840,7 +841,7 @@ Transform:
   - {fileID: 189484611}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1248425912
+--- !u!114 &1248425913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -849,14 +850,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1248425906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03e5f3ab1234ffe4ba9ca0c5f0f7eeb4, type: 3}
+  m_Script: {fileID: 11500000, guid: a46c672e9697b254b904523c085809a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletList:
-  - {fileID: 1833898970184205696, guid: 81d89404b86d06f4f8bb9d1fd824ac8a, type: 3}
-  - {fileID: 5095219214856987426, guid: 68a22543f7af2e74da99e4edf60ae682, type: 3}
-  - {fileID: 7231340033334578737, guid: c26c311a9e6ea854f85788b4c31072c6, type: 3}
-  bulletPoint: {fileID: 189484611}
+--- !u!114 &1248425914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248425906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386d18d9d2e01d4499a95f490463b1e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1259607931
 GameObject:
   m_ObjectHideFlags: 0
