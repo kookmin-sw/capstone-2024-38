@@ -34,7 +34,7 @@ public class BulletColision : MonoBehaviour
                 float radius = 1;
                 PaintManager.instance.paint(p, pos, radius, hardness, strength, player.GetComponent<Bullet>().GetCurrBulletColor());
             }
-            Debug.Log("Floor Colision!");
+            Destroy(this);
         }
         else if (other.gameObject.CompareTag("Player"))
         {
