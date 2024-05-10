@@ -163,6 +163,48 @@ public partial class BackendMatchManager : MonoBehaviour
         return true;
     }
     
+    private void SetSubHost(SessionId hostSessionId)
+    {
+        Debug.Log("서브 호스트 세션 설정 진입");
+        // 누가 서브 호스트 세션인지 서버에서 보낸 정보값 확인
+        // 서버에서 보낸 SuperGamer 정보로 GameRecords의 SuperGamer 정보 갱신
+        foreach (var record in gameRecords)
+        {
+            if (record.Value.m_sessionId.Equals(hostSessionId))
+            {
+                record.Value.m_isSuperGamer = true;
+            }
+            else
+            {
+                record.Value.m_isSuperGamer = false;
+            }
+        }
+        // 내가 호스트 세션인지 확인
+        if (hostSessionId.Equals(Backend.Match.GetMySessionId()))
+        {
+            isHost = true;
+        }
+        else
+        {
+            isHost = false;
+        }
+
+        hostSession = hostSessionId;
+
+        Debug.Log("서브 호스트 여부 : " + isHost);
+        // 호스트 세션이면 로컬에서 처리하는 패킷이 있으므로 로컬 큐를 생성해준다
+        if (isHost)
+        {
+            localQueue = new Queue<KeyMessage>();
+        }
+        else
+        {
+            localQueue = null;
+        }
+
+        Debug.Log("서브 호스트 설정 완료");
+    }
+    
     public void AddMsgToLocalQueue(KeyMessage message)
     {
         // 로컬 큐에 메시지 추가
@@ -333,6 +375,7 @@ public partial class BackendMatchManager : MonoBehaviour
             Debug.Log(matchInfos[0].title);
         }
     }
+    
     public MatchInfo GetMatchInfo(string indate)
     {
         var result = matchInfos.FirstOrDefault(x => x.inDate == indate);

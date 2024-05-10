@@ -18,7 +18,7 @@ public class WorldManager : MonoBehaviour
     public int numOfPlayer = 0;
     private const int MAXPLAYER = 4;
     public int alivePlayer { get; set; }
-    private Dictionary<SessionId, Player> players;
+    public Dictionary<SessionId, Player> players;
     public GameObject startPointObject;
     private List<Vector4> startingPoints;
 
@@ -68,7 +68,6 @@ public class WorldManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("SIUU");
         InitializeGame();
         var matchInstance = BackendMatchManager.GetInstance();
         if (matchInstance == null)
@@ -120,10 +119,15 @@ public class WorldManager : MonoBehaviour
             Debug.Log("Player Pool Exceed!");
             return;
         }
+        
+        Debug.Log(size);
 
         players = new Dictionary<SessionId, Player>();
         BackendMatchManager.GetInstance().SetPlayerSessionList(gamers);
-
+        
+        Debug.Log(gamers[0]);
+        Debug.Log(gamers[1]);
+        Debug.Log(Backend.Match.GetMySessionId());
         int index = 0;
         foreach (var sessionId in gamers)
         {

@@ -49,9 +49,9 @@ public class Player : MonoBehaviour
         if (this.isMe)
         {
             /*Cinemachine.CinemachineFreeLookcinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
-            cinemachineFreeLook.Follow = transform;*/
+            cinemachineFreeLook.Follow = transform;
             Cinemachine.CinemachineVirtualCamera cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-            cinemachineVirtualCamera.Follow = transform;
+            cinemachineVirtualCamera.Follow = transform;*/
         }
 
         this.isLive = true;
