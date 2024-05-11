@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Player : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
     Bullet bullet;
     Skill skill;
