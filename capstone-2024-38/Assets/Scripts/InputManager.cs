@@ -10,7 +10,9 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        
+        GameManager.InGame += MobileInput;
+        GameManager.InGame += AttackInput;
+        GameManager.AfterInGame += SendNoMoveMessage;
     }
     
     void MobileInput()
@@ -61,6 +63,11 @@ public class InputManager : MonoBehaviour
             BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
         }
     }
+
+    void AttackInput()
+    {
+        
+    }
     
     void SendNoMoveMessage()
     {
@@ -84,10 +91,5 @@ public class InputManager : MonoBehaviour
             BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
         }
     }
-
-    private void Update()
-    {
-        MobileInput();
-        SendNoMoveMessage();
-    }
+    
 }

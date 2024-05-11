@@ -5760,7 +5760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPool: {fileID: 1593126852}
-  playerPrefeb: {fileID: 1232533456394983686, guid: 3f7dac234ed3c97499e5bd45f445e46a, type: 3}
+  playerPrefeb: {fileID: 6196337179355586747, guid: bdd6f2127bc25a64c8319233068338e2, type: 3}
   numOfPlayer: 4
   startPointObject: {fileID: 466446204}
 --- !u!4 &1994405149
@@ -5790,7 +5790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bc54b182f74414598dc97fff06712f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualStick: {fileID: 1035967214}
 --- !u!1001 &2020683122
 PrefabInstance:
   m_ObjectHideFlags: 0
