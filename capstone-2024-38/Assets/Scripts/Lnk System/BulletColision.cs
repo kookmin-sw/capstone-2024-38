@@ -44,9 +44,20 @@ public class BulletColision : MonoBehaviour
             }
             else
             {
+                
                 Debug.Log("Other Player");
+                Paintable p = other.transform.Find("ProtoBoyBase").GetComponent<Paintable>();
+
+                Debug.Log("플레이어 찾았다!");
+
+                if (p != null)
+                {
+                    Vector3 pos = other.ClosestPoint(transform.position);
+                    float radius = 1;
+                    PaintManager.instance.paint(p, pos, radius, hardness, strength, player.GetComponent<Bullet>().GetCurrBulletColor());
+                }
+                Destroy(this);
             }
-            Debug.Log("Player Colision!");
         }
         else if (player.GetComponent<Skill>().GetPassiveSkill()[Skill.Passive_SKill.bounce] && other.gameObject.CompareTag("Bullet") && !Isblunce)
         {

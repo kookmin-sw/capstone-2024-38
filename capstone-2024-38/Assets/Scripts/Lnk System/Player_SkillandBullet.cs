@@ -58,6 +58,11 @@ public class Player_SkillandBullet : MonoBehaviour
 
     }
 
+    public bool getCharging()
+    {
+        return isCharging;
+    }
+
     //Player Data Roding Server
     void RoadingPlayerState()
     {
