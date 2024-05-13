@@ -115,6 +115,36 @@ public partial class BackendMatchManager : MonoBehaviour
             Debug.Log(string.Format(NUM_INGAME_SESSION, sessionIdList.Count));
         }
     }
+    
+    public bool PrevGameMessage(byte[] BinaryUserData)
+    {
+        Protocol.Message msg = DataParser.ReadJsonData<Protocol.Message>(BinaryUserData);
+        if (msg == null)
+        {
+            return false;
+        }
+
+        // 게임 설정 사전 작업 패킷 검사 
+        switch (msg.type)
+        {
+            /*case Protocol.Type.AIPlayerInfo:
+                Protocol.AIPlayerInfo aiPlayerInfo = DataParser.ReadJsonData<Protocol.AIPlayerInfo>(BinaryUserData);
+                ProcessAIDate(aiPlayerInfo);
+                return true;*/
+            case Protocol.Type.LoadRoomScene:
+                GameManager.GetInstance().ChangeState(GameManager.GameState.InGame);
+                if (IsHost() == true)
+                {
+                    Debug.Log("5초 후 게임 씬 전환 메시지 송신");
+                    Invoke("SendChangeGameScene", 5f);
+                }
+                return true;
+            case Protocol.Type.LoadGameScene:
+                GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
+                return true;
+        }
+        return false;
+    }
 
     private void ReadyToLoadRoom()
     {

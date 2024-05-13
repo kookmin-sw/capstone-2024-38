@@ -1,10 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class LoginUI : MonoBehaviour
 {
     private static LoginUI instance;  
+    
+    public TMP_InputField loginId;
+    public TMP_InputField loginPw;
+    public TMP_InputField signUpId;
+    public TMP_InputField signUpPw;
+    public TMP_InputField nickName;
+    
+    public GameObject nickNameWindow;
+    public GameObject signUpWindow;
+    
+    public Michsky.MUIP.ButtonManager logInButton;
+    public Michsky.MUIP.ButtonManager signUpButton;
+    public Michsky.MUIP.ButtonManager signUpWindowButton;
+    public Michsky.MUIP.ButtonManager nicknameButton;
+    
     void Awake()
     {
         instance = this;
@@ -22,7 +39,12 @@ public class LoginUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        logInButton.onClick.AddListener(LoginButtonClicked);
+        signUpButton.onClick.AddListener(SignUpButtonClicked);
         
+        signUpWindowButton.onClick.AddListener(SignUpWindowButtonClicked);
+        
+        nicknameButton.onClick.AddListener(NicknameButtonClicked);
     }
 
     // Update is called once per frame
@@ -31,11 +53,24 @@ public class LoginUI : MonoBehaviour
         
     }
 
-    void ChangeLobbyScene()
+    void LoginButtonClicked()
     {
-        GameManager.GetInstance().ChangeState(GameManager.GameState.MatchLobby, (bool isDone) =>
-        {
-            
-        });  
+        BackendLogin.Instance.CustomLogin(loginId, loginPw);
+    }
+
+    void SignUpButtonClicked()
+    {
+        BackendLogin.Instance.CustomSignUp(signUpId, signUpPw);
+        signUpWindow.SetActive(false);
+    }
+
+    void SignUpWindowButtonClicked()
+    {
+        signUpWindow.SetActive(true);
+    }
+
+    void NicknameButtonClicked()
+    {
+        BackendLogin.Instance.CreateNickname(nickName);
     }
 }

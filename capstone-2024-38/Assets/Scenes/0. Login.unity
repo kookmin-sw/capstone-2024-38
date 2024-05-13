@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1597,6 +1597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270507421}
+  - component: {fileID: 270507422}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1619,6 +1620,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &270507422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270507420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2b16dd6d9b25f4b8520aef8f693599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginId: {fileID: 372484975}
+  loginPw: {fileID: 1034740506}
+  signUpId: {fileID: 673761881}
+  signUpPw: {fileID: 256845298}
+  nickName: {fileID: 66722574}
+  nickNameWindow: {fileID: 1447527904}
+  signUpWindow: {fileID: 1904658281}
+  logInButton: {fileID: 1065390777}
+  signUpButton: {fileID: 1927574084}
+  signUpWindowButton: {fileID: 601889799}
+  nicknameButton: {fileID: 217111252}
 --- !u!1 &280608729
 GameObject:
   m_ObjectHideFlags: 0
@@ -11761,11 +11785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffbd1873043e4011ad802d35b704d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loginId: {fileID: 372484975}
-  loginPw: {fileID: 1034740506}
-  signUpId: {fileID: 673761881}
-  signUpPw: {fileID: 256845298}
-  nickName: {fileID: 66722574}
   nickNameWindow: {fileID: 1447527904}
 --- !u!1 &1873178150
 GameObject:

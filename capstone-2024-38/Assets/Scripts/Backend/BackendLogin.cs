@@ -9,12 +9,7 @@ using UnityEngine.SceneManagement;
 public class BackendLogin : MonoBehaviour 
 {
     private static BackendLogin _instance = null;
-
-    public TMP_InputField loginId;
-    public TMP_InputField loginPw;
-    public TMP_InputField signUpId;
-    public TMP_InputField signUpPw;
-    public TMP_InputField nickName;
+    
     public GameObject nickNameWindow;
 
     public static BackendLogin Instance
@@ -28,8 +23,9 @@ public class BackendLogin : MonoBehaviour
             return _instance;
         }
     }
+    
 
-    public void CustomSignUp()
+    public void CustomSignUp(TMP_InputField signUpId, TMP_InputField signUpPw)
     {
         Debug.Log("회원가입을 요청합니다.");
 
@@ -48,12 +44,12 @@ public class BackendLogin : MonoBehaviour
         }
     }
 
-    public void CustomLogin()
+    public void CustomLogin(TMP_InputField logInId, TMP_InputField logInPw)
     {
         Debug.Log("로그인을 요청합니다.");
 
-        string id = loginId.text;
-        string pw = loginPw.text;
+        string id = logInId.text;
+        string pw = logInPw.text;
         
         var bro = Backend.BMember.CustomLogin(id, pw);
 
@@ -68,22 +64,24 @@ public class BackendLogin : MonoBehaviour
         
         if (Backend.UserNickName == "")
         {
-            nickNameWindow.SetActive(true);
+            LoginUI.GetInstance().nickNameWindow.SetActive(true);
         }
         else
         {
-            SceneManager.LoadScene("LobyScene");
+            GameManager.GetInstance().ChangeState(GameManager.GameState.MatchLobby);
+            //SceneManager.LoadScene("1. MatchLobby");
         }
     }
 
-    public void CreateNickname()
+    public void CreateNickname(TMP_InputField nickName)
     {
         Debug.Log("닉네임 변경을 요청합니다.");
         string name = nickName.text;
         var bro = Backend.BMember.UpdateNickname(name);
         BackendGameData.Instance.GameDataInsert();
         BackendRank.Instance.RankInsert(0);
-        SceneManager.LoadScene("LobyScene");
+        GameManager.GetInstance().ChangeState(GameManager.GameState.MatchLobby);
+        //SceneManager.LoadScene("1. MatchLobby");
 
         if (bro.IsSuccess())
         {

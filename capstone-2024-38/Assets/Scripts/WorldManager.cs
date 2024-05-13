@@ -78,6 +78,7 @@ public class WorldManager : MonoBehaviour
 
     public void OnGameStart()
     {
+        GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
         if (BackendMatchManager.GetInstance().IsHost())
         {
             Debug.Log("플레이어 세션정보 확인");
