@@ -34,6 +34,7 @@ public partial class BackendMatchManager : MonoBehaviour
     public void GameSetUp()
     {
         Debug.Log("게임 시작 메시지 수신. 게임 설정 시작");
+        Debug.Log(GameManager.GetInstance().GetGameState());
         if (GameManager.GetInstance().GetGameState() != GameManager.GameState.Ready)
         {
             isHost = false;
@@ -136,7 +137,7 @@ public partial class BackendMatchManager : MonoBehaviour
                 ProcessAIDate(aiPlayerInfo);
                 return true;*/
             case Protocol.Type.LoadRoomScene:
-                GameManager.GetInstance().ChangeState(GameManager.GameState.InGame);
+                GameManager.GetInstance().ChangeState(GameManager.GameState.Ready);
                 if (IsHost() == true)
                 {
                     Debug.Log("5초 후 게임 씬 전환 메시지 송신");
@@ -145,6 +146,7 @@ public partial class BackendMatchManager : MonoBehaviour
                 return true;
             case Protocol.Type.LoadGameScene:
                 GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
+                Debug.Log("SIUU");
                 return true;
         }
         return false;
@@ -176,7 +178,7 @@ public partial class BackendMatchManager : MonoBehaviour
         sessionIdList = sessions;
     }
     
-    private void SendChangRoomScene()
+    private void SendChangeRoomScene()
     {
         Debug.Log("룸 씬 전환 메시지 송신");
         SendDataToInGame(new Protocol.LoadRoomSceneMessage());

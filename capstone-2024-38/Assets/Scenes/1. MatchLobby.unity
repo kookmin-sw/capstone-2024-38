@@ -8758,7 +8758,7 @@ MonoBehaviour:
   rankButton: {fileID: 805501777}
   mailButton: {fileID: 833725386}
   settingButton: {fileID: 486677622}
-  createRoomButton: {fileID: 1671590244}
+  matchMakingButton: {fileID: 1671590244}
   rankWindow: {fileID: 621264725}
   mailWindow: {fileID: 792010439}
   settingWindow: {fileID: 0}

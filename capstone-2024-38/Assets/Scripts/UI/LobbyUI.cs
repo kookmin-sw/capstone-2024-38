@@ -8,7 +8,7 @@ public class LobbyUI : MonoBehaviour
     public Michsky.MUIP.ButtonManager rankButton;
     public Michsky.MUIP.ButtonManager mailButton;
     public Michsky.MUIP.ButtonManager settingButton;
-    public Michsky.MUIP.ButtonManager createRoomButton;
+    public Michsky.MUIP.ButtonManager matchMakingButton;
 
     public GameObject rankWindow;
     public GameObject mailWindow;
@@ -20,11 +20,13 @@ public class LobbyUI : MonoBehaviour
     {
         BackendMatchManager.GetInstance().JoinMatchServer();
         
+        Invoke("CreateRoomButtonClicked", 1f);
+        
         rankButton.onClick.AddListener(RankButtonClicked);
         mailButton.onClick.AddListener(MailButtonClicked);
         settingButton.onClick.AddListener(SettingButtonClicked);
         
-        createRoomButton.onClick.AddListener(CreateRoomButtonClicked);
+        matchMakingButton.onClick.AddListener(MatchMakingButtonClicked);
     }
 
     void RankButtonClicked()
@@ -45,6 +47,10 @@ public class LobbyUI : MonoBehaviour
     void CreateRoomButtonClicked()
     {
         BackendMatchManager.GetInstance().CreateMatchRoom();
-        GameManager.GetInstance().ChangeState(GameManager.GameState.Ready);
+    }
+
+    void MatchMakingButtonClicked()
+    {
+        BackendMatchManager.GetInstance().RequestMatchMaking();
     }
 }

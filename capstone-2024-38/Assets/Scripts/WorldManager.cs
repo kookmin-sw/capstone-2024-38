@@ -10,6 +10,8 @@ public class WorldManager : MonoBehaviour
 {
     public static WorldManager instance;
     
+    const int START_COUNT = 5;
+    
     private SessionId myPlayerIndex = SessionId.None;
     
     #region 플레이어
@@ -30,6 +32,16 @@ public class WorldManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+    }
+    
+    void Start()
+    {
+        InitializeGame();
+        var matchInstance = BackendMatchManager.GetInstance();
+        if (matchInstance == null)
+        {
+            return;
+        }
     }
     
     public bool InitializeGame()
@@ -65,40 +77,7 @@ public class WorldManager : MonoBehaviour
 
         //dieEvent += PlayerDieEvent;
     }
-
-    void Start()
-    {
-        InitializeGame();
-        var matchInstance = BackendMatchManager.GetInstance();
-        if (matchInstance == null)
-        {
-            return;
-        }
-    }
-
-    public void OnGameStart()
-    {
-        GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
-        if (BackendMatchManager.GetInstance().IsHost())
-        {
-            Debug.Log("플레이어 세션정보 확인");
-
-            if (BackendMatchManager.GetInstance().IsSessionListNull())
-            {
-                Debug.Log("Player Index Not Exist!");
-                // 호스트 기준 세션데이터가 없으면 게임을 바로 종료한다.
-                foreach (var session in BackendMatchManager.GetInstance().sessionIdList)
-                {
-                    // 세션 순서대로 스택에 추가
-                    gameRecord.Push(session);
-                }
-                //GameEndMessage gameEndMessage = new GameEndMessage(gameRecord);
-                //BackendMatchManager.GetInstance().SendDataToInGame<GameEndMessage>(gameEndMessage);
-                return;
-            }
-        }
-        SetPlayerInfo();
-    }
+    
     
     public void SetPlayerInfo()
     {
@@ -122,13 +101,11 @@ public class WorldManager : MonoBehaviour
         }
         
         Debug.Log(size);
+        Debug.Log(GameManager.GetInstance().GetGameState());
 
         players = new Dictionary<SessionId, Player>();
         BackendMatchManager.GetInstance().SetPlayerSessionList(gamers);
         
-        Debug.Log(gamers[0]);
-        Debug.Log(gamers[1]);
-        Debug.Log(Backend.Match.GetMySessionId());
         int index = 0;
         foreach (var sessionId in gamers)
         {
@@ -158,6 +135,47 @@ public class WorldManager : MonoBehaviour
         }
     }
     
+    public void OnGameStart()
+    {
+        GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
+        if (BackendMatchManager.GetInstance().IsHost())
+        {
+            Debug.Log("플레이어 세션정보 확인");
+
+            if (BackendMatchManager.GetInstance().IsSessionListNull())
+            {
+                Debug.Log("Player Index Not Exist!");
+                // 호스트 기준 세션데이터가 없으면 게임을 바로 종료한다.
+                foreach (var session in BackendMatchManager.GetInstance().sessionIdList)
+                {
+                    // 세션 순서대로 스택에 추가
+                    gameRecord.Push(session);
+                }
+                //GameEndMessage gameEndMessage = new GameEndMessage(gameRecord);
+                //BackendMatchManager.GetInstance().SendDataToInGame<GameEndMessage>(gameEndMessage);
+                return;
+            }
+        }
+        SetPlayerInfo();
+    }
+    
+    IEnumerator StartCount()
+    {
+        StartCountMessage msg = new StartCountMessage(START_COUNT);
+
+        // 카운트 다운
+        for (int i = 0; i < START_COUNT + 1; ++i)
+        {
+            msg.time = START_COUNT - i;
+            BackendMatchManager.GetInstance().SendDataToInGame<StartCountMessage>(msg);
+            yield return new WaitForSeconds(1); //1초 단위
+        }
+
+        // 게임 시작 메시지를 전송
+        GameStartMessage gameStartMessage = new GameStartMessage();
+        BackendMatchManager.GetInstance().SendDataToInGame<GameStartMessage>(gameStartMessage);
+    }
+    
     public void OnRecieve(MatchRelayEventArgs args)
     {
         if (args.BinaryUserData == null)
@@ -182,16 +200,16 @@ public class WorldManager : MonoBehaviour
         }
         switch (msg.type)
         {
-            /*case Protocol.Type.StartCount:
+            case Protocol.Type.StartCount:
                 StartCountMessage startCount = DataParser.ReadJsonData<StartCountMessage>(args.BinaryUserData);
                 Debug.Log("wait second : " + (startCount.time));
-                InGameUiManager.GetInstance().SetStartCount(startCount.time);
+                //InGameUiManager.GetInstance().SetStartCount(startCount.time);
                 break;
             case Protocol.Type.GameStart:
-                InGameUiManager.GetInstance().SetStartCount(0, false);
+                //InGameUiManager.GetInstance().SetStartCount(0, false);
                 GameManager.GetInstance().ChangeState(GameManager.GameState.InGame);
                 break;
-            case Protocol.Type.GameEnd:
+            /*case Protocol.Type.GameEnd:
                 GameEndMessage endMessage = DataParser.ReadJsonData<GameEndMessage>(args.BinaryUserData);
                 SetGameRecord(endMessage.count, endMessage.sessionList);
                 GameManager.GetInstance().ChangeState(GameManager.GameState.Over);
