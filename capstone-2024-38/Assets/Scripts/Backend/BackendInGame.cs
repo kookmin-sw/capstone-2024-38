@@ -34,8 +34,13 @@ public partial class BackendMatchManager : MonoBehaviour
     public void GameSetUp()
     {
         Debug.Log("게임 시작 메시지 수신. 게임 설정 시작");
-        // 게임 시작 메시지가 오면 게임을 레디 상태로 변경
-        OnGameReady();
+        if (GameManager.GetInstance().GetGameState() != GameManager.GameState.Ready)
+        {
+            isHost = false;
+            isSetHost = false;
+            OnGameReady();
+            //LobbyUI.GetInstance().ChangeRoomLoadScene();
+        }
     }
 
     public void OnGameReady()
@@ -56,7 +61,6 @@ public partial class BackendMatchManager : MonoBehaviour
             // 0.5초 후 ReadyToLoadRoom 함수 호출
             Invoke("ReadyToLoadRoom", 0.5f);
         }
-        SceneManager.LoadScene("InGameScene");
     }
     
     // 현재 룸에 접속한 세션들의 정보

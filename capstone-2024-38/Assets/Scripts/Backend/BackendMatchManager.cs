@@ -289,11 +289,11 @@ public partial class BackendMatchManager : MonoBehaviour
             // 서버는 단순 브로드캐스팅만 지원 (서버에서 어떠한 연산도 수행하지 않음)
 
             // 게임 사전 설정
-            /*if (PrevGameMessage(args.BinaryUserData) == true)
+            if (PrevGameMessage(args.BinaryUserData) == true)
             {
                 // 게임 사전 설정을 진행하였으면 바로 리턴
                 return;
-            }*/
+            }
             if (WorldManager.instance == null)
             {
                 // 월드 매니저가 존재하지 않으면 바로 리턴
