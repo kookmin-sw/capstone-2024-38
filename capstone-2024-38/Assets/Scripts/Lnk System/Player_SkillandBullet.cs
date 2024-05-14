@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+<<<<<<<< HEAD:capstone-2024-38/Assets/Scripts/Lnk System/Player_SkillandBullet.cs
 public class Player_SkillandBullet : MonoBehaviour
+========
+public class Player1 : MonoBehaviour
+>>>>>>>> server:capstone-2024-38/Assets/Scripts/Lnk System/Player1.cs
 {
     Bullet bullet;
     Skill skill;

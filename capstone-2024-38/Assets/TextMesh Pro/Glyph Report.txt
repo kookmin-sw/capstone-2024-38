@@ -1,0 +1,12 @@
+Font: Noto Sans KR  Style: Black
+Point Size: 29   SP/PD Ratio: 17.2%
+
+Characters included: 11318/11318
+Missing characters: 0
+Excluded characters: 0
+
+Characters missing from font file:
+----------------------------------------
+
+Characters excluded from packing:
+----------------------------------------

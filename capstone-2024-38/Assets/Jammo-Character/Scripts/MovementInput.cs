@@ -1,7 +1,7 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Protocol;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
@@ -26,6 +26,8 @@ public class MovementInput : MonoBehaviour {
 	public float Speed;
 	public float allowPlayerRotation = 0.1f;
 
+	private bool isMove = false;
+
 
     [Header("Animation Smoothing")]
     [Range(0, 1f)]
@@ -44,8 +46,37 @@ public class MovementInput : MonoBehaviour {
 		anim = this.GetComponent<Animator> ();
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
+		joystick = FindObjectOfType<FixedJoystick>();
 	}
-	
+    
+	void MobileInput()
+	{
+		int keyCode = 0;
+
+
+		isMove = true;
+
+		keyCode |= KeyEventCode.MOVE;
+		//Vector3 moveVector = new Vector3(joystick.GetHorizontalValue(), 0, joystick.GetVerticalValue());
+		moveVector = Vector3.Normalize(moveVector);
+
+
+		if (keyCode <= 0)
+		{
+			return;
+		}
+
+		KeyMessage msg;
+		msg = new KeyMessage(keyCode, moveVector);
+		if (BackendMatchManager.GetInstance().IsHost())
+		{
+			BackendMatchManager.GetInstance().AddMsgToLocalQueue(msg);
+		}
+		else
+		{
+			BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
+		}
+	}
 	void Update () {
 
 		InputMagnitude ();
