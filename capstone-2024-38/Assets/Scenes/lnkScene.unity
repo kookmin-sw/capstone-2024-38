@@ -2433,6 +2433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4601944596107282774}
   - component: {fileID: 6215399493286254804}
+  - component: {fileID: 6215399493286254805}
   m_Layer: 0
   m_Name: ProtoBoyBase
   m_TagString: Untagged
@@ -2783,7 +2784,7 @@ Transform:
   m_GameObject: {fileID: 2439865742835313585}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.0076692, z: 0}
+  m_LocalPosition: {x: 0, y: 1.0076692, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3097,6 +3098,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: -876546973899608171, guid: d720082e5b71004498653db605c207b2, type: 3}
   - {fileID: 2100000, guid: 0119cf1871351e84280870d7e1de4e2d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -3155,6 +3157,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 0.8884624, z: 0.10587436}
     m_Extent: {x: 2.3099856, y: 2.248755, z: 0.6951776}
   m_DirtyAABB: 0
+--- !u!114 &6215399493286254805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439865742835313585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extendsIslandOffset: 1
 --- !u!1 &6219097387526208709
 GameObject:
   m_ObjectHideFlags: 0
