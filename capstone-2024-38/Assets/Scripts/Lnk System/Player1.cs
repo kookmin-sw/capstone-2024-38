@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Player_SkillandBullet : MonoBehaviour
-
-
+public class Player1 : MonoBehaviour
 {
     Bullet bullet;
     Skill skill;
@@ -58,11 +56,6 @@ public class Player_SkillandBullet : MonoBehaviour
         }
         
 
-    }
-
-    public bool getCharging()
-    {
-        return isCharging;
     }
 
     //Player Data Roding Server
