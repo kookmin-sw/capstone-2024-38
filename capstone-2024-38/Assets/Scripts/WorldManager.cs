@@ -18,9 +18,10 @@ public class WorldManager : MonoBehaviour
     public GameObject playerPool;
     public GameObject playerPrefeb;
     public int numOfPlayer = 0;
+    public GameObject particle;
     private const int MAXPLAYER = 4;
     public int alivePlayer { get; set; }
-    public Dictionary<SessionId, Player> players;
+    private Dictionary<SessionId, Player> players;
     public GameObject startPointObject;
     private List<Vector4> startingPoints;
 
@@ -137,7 +138,6 @@ public class WorldManager : MonoBehaviour
     
     public void OnGameStart()
     {
-        GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
         if (BackendMatchManager.GetInstance().IsHost())
         {
             Debug.Log("플레이어 세션정보 확인");

@@ -45,23 +45,6 @@ public partial class BackendMatchManager : MonoBehaviour
     private Queue<KeyMessage> localQueue = null;    // 호스트에서 로컬로 처리하는 패킷을 쌓아두는 큐 (로컬처리하는 데이터는 서버로 발송 안함)
     #endregion
     
-    public class ServerInfo
-    {
-        public string host;
-        public ushort port;
-        public string roomToken;
-    }
-    
-    public class MatchRecord
-    {
-        public MatchType matchType;
-        public MatchModeType modeType;
-        public string matchTitle;
-        public string score = "-";
-        public int win = -1;
-        public int numOfMatch = 0;
-        public double winRate = 0;
-    }
     
     void Awake()
     {
@@ -384,6 +367,24 @@ public partial class BackendMatchManager : MonoBehaviour
             return null;
         }
         return result;
+    }
+    
+    public class ServerInfo
+    {
+        public string host;
+        public ushort port;
+        public string roomToken;
+    }
+    
+    public class MatchRecord
+    {
+        public MatchType matchType;
+        public MatchModeType modeType;
+        public string matchTitle;
+        public string score = "-";
+        public int win = -1;
+        public int numOfMatch = 0;
+        public double winRate = 0;
     }
     
 }
