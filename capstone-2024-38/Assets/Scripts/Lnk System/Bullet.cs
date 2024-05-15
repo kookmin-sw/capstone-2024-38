@@ -68,10 +68,10 @@ public class Bullet : MonoBehaviour
 
         Debug.Log("Roading finished!");
 
-        CubePower = 0.1f;
-        SpherePower = 0.07f;
-        CapsulePower = 0.025f;
-        CylinderPower = 0.025f;
+        CubePower = 1.1f;
+        SpherePower = 1.07f;
+        CapsulePower = 1.025f;
+        CylinderPower = 1.025f;
     }
 
     //Scale Up to CurrBullet
@@ -176,6 +176,7 @@ public class Bullet : MonoBehaviour
                 break;
         }
         CurrBullet.GetComponent<Rigidbody>().useGravity = false;
+        SetInitialBulletScale();
 
     }
 
@@ -228,5 +229,11 @@ public class Bullet : MonoBehaviour
         return (Bulletpattern)enumValues.GetValue(Random.Range(0, enumValues.Length));
     }
 
+
+    private void SetInitialBulletScale()
+    {
+        Vector3 initialScale = new Vector3(1f, 1f, 1f);
+        CurrBullet.transform.localScale = initialScale;
+    }
 
 }

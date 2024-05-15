@@ -39,11 +39,7 @@ public class Skill : MonoBehaviour
         {
             passive_dict.Add(dir, false);
         }
-        //skill test
-        passive_dict[Passive_SKill.BulletSpeedUp] = false;
-        active_dict[Active_Skill.Throw4Way] = false;
-        active_dict[Active_Skill.Shot3] = false;
-        active_dict[Active_Skill.guided] = true;
+
 
         passive_dict[Passive_SKill.bounce] = true;
 
@@ -70,27 +66,39 @@ public class Skill : MonoBehaviour
     }
     public void Shoot(GameObject bullet, Transform tr, float Ch)
     {
-
+        bool allFalse = true;
         foreach (var active in active_dict)
         {
-            if(active.Value)
+            if (active.Value)
             {
+                allFalse = false;
                 switch (active.Key)
                 {
                     case Active_Skill.guided:
                         guided(bullet, tr, Ch);
                         break;
                     case Active_Skill.Throw4Way:
-                        Throw4Way(bullet,tr, Ch);
+                        Throw4Way(bullet, tr, Ch);
                         break;
                     case Active_Skill.Shot3:
                         shot3(bullet, tr, Ch);
                         break;
                 }
+
             }
+        }
+        if (allFalse)
+        {
+            nomal_Shoot(bullet, tr, Ch);
         }
     }
 
+    public void nomal_Shoot(GameObject bullet, Transform tr, float ch)
+    {
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed * ch;
+        bullet.GetComponent<Rigidbody>().useGravity = true;
+        bullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
+    }
     public void Throw4Way(GameObject bullet, Transform tr, float ch)
     {
 
@@ -165,6 +173,6 @@ public class Skill : MonoBehaviour
             bullet.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Impulse);
         }
 
-        
+
     }
 }
