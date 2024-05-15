@@ -73,6 +73,7 @@ public class PlayerKeyBoardMovement : MonoBehaviour
             player_animation.SetTrigger("Hip-Hop Dancing");
         }
         
+        /*
         // charging animation
         if(this.GetComponent<Player_SkillandBullet>().getCharging())
         {
@@ -92,9 +93,41 @@ public class PlayerKeyBoardMovement : MonoBehaviour
                 player_animation.SetLayerWeight(1, charging_animation_temp);
             }
         }
+        */
 
+        // new charging animation
+        if (this.GetComponent<Player_SkillandBullet>().getCharging())
+        {
+            player_animation.SetLayerWeight(1, 1);
+
+            if(player_animation.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5f)
+            {
+                player_animation.SetFloat("throw", 0);
+            }
+            else
+            {
+                player_animation.SetFloat("throw", 1);
+            }
+            player_animation.SetBool("Charging", true);
+        }
+        else
+        {
+            player_animation.SetBool("Charging", false);
+
+            player_animation.SetFloat("throw", 1);
+            // player charging animaion smooth revalance
+            if (player_animation.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5f)
+            {
+                if (charging_animation_temp >= 0)
+                {
+                    charging_animation_temp -= Time.deltaTime;
+                }
+                player_animation.SetLayerWeight(1, charging_animation_temp);
+            }
+        }
+        Debug.Log(player_animation.GetFloat("throw"));
         // Hit animation test must remove this code
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             player_animation.SetTrigger("Hit");
         }
@@ -103,6 +136,8 @@ public class PlayerKeyBoardMovement : MonoBehaviour
         {
             player_animation.SetTrigger("dead");
         }
+
+        
 
     }
 }
