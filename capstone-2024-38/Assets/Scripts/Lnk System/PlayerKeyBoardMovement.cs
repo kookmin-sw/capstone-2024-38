@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class PlayerKeyBoardMovement : MonoBehaviour
 {
-    public float movement_weight;
-    Animator player_animation;
+    public float movement_weight = 5.0f;
+    public float jumpForce = 5.0f;
 
-    float charging_animation_temp = 1;
-    // Start is called before the first frame update
+
+    Animator player_animation;
+    Rigidbody rb;
+
+    public LayerMask groundLayer;
+    public float groundCheckDistance = 0.1f;
+    private bool isGrounded;
+
+    public Transform cameraTransform;
+    
+
     void Start()
     {
         player_animation = this.GetComponent<Animator>();
+        rb = this.GetComponent<Rigidbody>();
+        Transform arm = this.transform.Find("Camera Arm");
+        cameraTransform = arm.Find("Main Camera");
 
         if (player_animation == null)
         {
@@ -27,26 +39,26 @@ public class PlayerKeyBoardMovement : MonoBehaviour
             return;
         }
 
-        // movement power
         float power = movement_weight * Time.deltaTime;
+        Vector3 moveDirection = GetMoveDirection();
+
+
+        transform.position += moveDirection * power;
+
         if (Input.GetKey(KeyCode.W))
         {
-            this.transform.position += new Vector3(0,0, power);
             player_animation.SetBool("IsFront", true);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            this.transform.position += new Vector3(-power, 0, 0);
             player_animation.SetBool("IsLeft", true);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            this.transform.position += new Vector3(0, 0, -power);
             player_animation.SetBool("IsBack", true);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            this.transform.position += new Vector3(power, 0, 0);
             player_animation.SetBool("IsRight", true);
         }
 
@@ -67,42 +79,35 @@ public class PlayerKeyBoardMovement : MonoBehaviour
             player_animation.SetBool("IsRight", false);
         }
 
-        // dancing animation
-        if(Input.GetKeyDown(KeyCode.M))
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            player_animation.SetTrigger("Hip-Hop Dancing");
-        }
-        
-        // charging animation
-        if(this.GetComponent<Player_SkillandBullet>().getCharging())
-        {
-            player_animation.SetLayerWeight(1, 1);
-            player_animation.SetBool("Charging", true);
-        }
-        else
-        {
-            player_animation.SetBool("Charging", false);
-            // player charging animaion smooth revalance
-            if (player_animation.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.7f)
-            {
-                if (charging_animation_temp >= 0)
-                {
-                    charging_animation_temp -= Time.deltaTime;
-                }
-                player_animation.SetLayerWeight(1, charging_animation_temp);
-            }
+            Jump();
         }
 
-        // Hit animation test must remove this code
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            player_animation.SetTrigger("Hit");
-        }
-        // dead animation test must remove this code
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            player_animation.SetTrigger("dead");
-        }
+        
 
     }
+
+    Vector3 GetMoveDirection()
+    {
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        return forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal");
+    }
+
+    private void Jump()
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+    }
+
+    
 }
