@@ -75,7 +75,7 @@ Material:
     - Color_ca031ae309ff42bdb95f777248fb961d: {r: 0.735849, g: 0.27781457, b: 0.051370565, a: 1}
     - Color_e1f155248d144786a62fc1585ca21e9a: {r: 0.41509432, g: 0.23381984, b: 0.08771802, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2125969591403134876
+--- !u!114 &6691277876277775919
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

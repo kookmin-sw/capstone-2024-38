@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4357234126151077766
+--- !u!114 &-8922702043310016538
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,7 +81,7 @@ Material:
     - Vector1_99cc56b5c6fd474082f07f00a6df94f9: 0.0394
     - Vector1_ad7e0fcd37f44d68b68de6f06bb43b96: 0.01
     - Vector1_c6f2603b30534ec8b0039379573789e3: 1
-    - Vector1_d813b569a4d541d1b2ac4ea9bc66a3b9: 0
+    - Vector1_d813b569a4d541d1b2ac4ea9bc66a3b9: 0.2
     - Vector1_dd1e17693dc14b10b91828bdfd5adaa8: 0.94
     - Vector1_ff7a2780aaa94ddd86e156c4707e39a2: 0.64
     - _QueueControl: 0

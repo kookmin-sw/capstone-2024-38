@@ -4,36 +4,47 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public Camera WordCamera;
-    public Camera ShopCamera;
-    float t;
+    [SerializeField]
+    private Animator padeout;
 
-    void Start()
-    {
-        t = 0;
-        WordCamera.enabled = true;
-        ShopCamera.enabled = true;
-    }
+    [SerializeField]
+    private Animator title;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private Animator stage;
+
+    private void Update()
     {
-        t += Time.deltaTime;
-        if (Input.GetKey(KeyCode.K))
+        if(Input.GetKey(KeyCode.K))
         {
-            ShowNextCamera(WordCamera, ShopCamera);
+            titleAnimation();
+            stageAnimation();
         }
-
-        if (Input.GetKey(KeyCode.L))
-        {
-            ShowNextCamera(WordCamera, ShopCamera);
-        }
-
     }
 
-    void ShowNextCamera(Camera currCamera, Camera nextCamera)
+    void titleAnimation()
     {
-        currCamera.depth = -1;
-        nextCamera.depth = 1;
+        if(title.GetBool("Title"))
+        {
+            title.SetBool("Title", false);
+        }
+        else
+        {
+            title.SetBool("Title", true);
+        }
     }
+
+    void stageAnimation()
+    {
+        if (stage.GetBool("Stage"))
+        {
+            stage.SetBool("Stage", false);
+        }
+        else
+        {
+            stage.SetBool("Stage", true);
+        }
+    }
+
+
 }
