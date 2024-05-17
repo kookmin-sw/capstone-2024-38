@@ -39,6 +39,13 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private Animator mail_popup;
 
+    [SerializeField]
+    private GameObject serching;
+
+    [SerializeField]
+    private float serchingTime;
+    float temp_time;
+
     private void Start()
     {
         page_navi = stage.transform.Find("Page_navi");
@@ -47,7 +54,15 @@ public class MainMenuManager : MonoBehaviour
 
     private void Update()
     {
-        
+        if(stageani.GetBool("Stage"))
+        {
+            temp_time += Time.deltaTime;
+            if(temp_time > serchingTime)
+            {
+                serching.SetActive(false);
+            }
+
+        }
     }
 
     void titleAnimation()
@@ -61,7 +76,6 @@ public class MainMenuManager : MonoBehaviour
             title.SetBool("Title", true);
         }
     }
-
     void stageAnimation()
     {
         if (stageani.GetBool("Stage"))
@@ -71,6 +85,8 @@ public class MainMenuManager : MonoBehaviour
         else
         {
             stageani.SetBool("Stage", true);
+            temp_time = 0.0f;
+            serching.SetActive(true);
         }
     }
 
