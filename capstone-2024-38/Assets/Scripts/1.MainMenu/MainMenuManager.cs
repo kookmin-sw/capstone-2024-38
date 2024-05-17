@@ -27,6 +27,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private Animator Ranking;
 
+    [SerializeField]
+    private GameObject Fail_popuo;
+
     private void Start()
     {
         page_navi = stage.transform.Find("Page_navi");
@@ -159,6 +162,18 @@ public class MainMenuManager : MonoBehaviour
         else
         {
             Language_popup.SetActive(true);
+        }
+    }
+
+    public void ButtonClick_FailPopup()
+    {
+        if (Fail_popuo.activeSelf == true)
+        {
+            Fail_popuo.SetActive(false);
+        }
+        else
+        {
+            Fail_popuo.SetActive(true);
         }
     }
 
