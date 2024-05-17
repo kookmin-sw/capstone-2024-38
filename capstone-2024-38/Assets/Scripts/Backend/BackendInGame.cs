@@ -190,6 +190,40 @@ public partial class BackendMatchManager : MonoBehaviour
         SendDataToInGame(new Protocol.LoadGameSceneMessage());
     }
     
+    // 서버로 게임 결과 전송
+    // 서버에서 각 클라이언트가 보낸 결과를 종합
+    public void MatchGameOver(Stack<SessionId> record)
+    {
+        if (nowModeType == MatchModeType.Melee)
+        {
+            matchGameResult = MeleeRecord(record);
+        }
+        else
+        {
+            Debug.LogError("게임 결과 종합 실패 - 알수없는 매치모드타입입니다.\n" + nowModeType);
+            return;
+        }
+
+        //MatchResultUI.GetInstance().SetGameResult(matchGameResult);
+        //RemoveAISessionInGameResult();
+        Backend.Match.MatchEnd(matchGameResult);
+    }
+    
+    private MatchGameResult MeleeRecord(Stack<SessionId> record)
+    {
+        MatchGameResult nowGameResult = new MatchGameResult();
+        nowGameResult.m_draws = null;
+        nowGameResult.m_losers = null;
+        nowGameResult.m_winners = new List<SessionId>();
+        int size = record.Count;
+        for (int i = 0; i < size; ++i)
+        {
+            nowGameResult.m_winners.Add(record.Pop());
+        }
+
+        return nowGameResult;
+    }
+    
     
 
     public void SendDataToInGame<T>(T msg)

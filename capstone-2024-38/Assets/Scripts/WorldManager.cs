@@ -54,8 +54,8 @@ public class WorldManager : MonoBehaviour
         }
         Debug.Log("게임 초기화 진행");
         gameRecord = new Stack<SessionId>();
-        //GameManager.OnGameOver += OnGameOver;
-        //GameManager.OnGameResult += OnGameResult;
+        GameManager.OnGameOver += OnGameOver;
+        GameManager.OnGameResult += OnGameResult;
         myPlayerIndex = SessionId.None;
         SetPlayerAttribute();
         OnGameStart();
@@ -210,6 +210,28 @@ public class WorldManager : MonoBehaviour
         // 게임 시작 메시지를 전송
         GameStartMessage gameStartMessage = new GameStartMessage();
         BackendMatchManager.GetInstance().SendDataToInGame<GameStartMessage>(gameStartMessage);
+    }
+    
+    public void OnGameOver()
+    {
+        Debug.Log("Game End");
+        if (BackendMatchManager.GetInstance() == null)
+        {
+            Debug.LogError("매치매니저가 null 입니다.");
+            return;
+        }
+        BackendMatchManager.GetInstance().MatchGameOver(gameRecord);
+    }
+    
+    public void OnGameResult()
+    {
+        Debug.Log("Game Result");
+        //BackEndMatchManager.GetInstance().LeaveInGameRoom();
+
+        if (GameManager.GetInstance().IsLobbyScene())
+        {
+            GameManager.GetInstance().ChangeState(GameManager.GameState.MatchLobby);
+        }
     }
     
     public void OnRecieve(MatchRelayEventArgs args)
