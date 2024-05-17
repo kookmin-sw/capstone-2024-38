@@ -24,6 +24,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject Language_popup;
 
+    [SerializeField]
+    private Animator Ranking;
+
     private void Start()
     {
         page_navi = stage.transform.Find("Page_navi");
@@ -68,6 +71,18 @@ public class MainMenuManager : MonoBehaviour
         else
         {
             setting.SetBool("check", true);
+        }
+    }
+
+    void RankingAnimation()
+    {
+        if (Ranking.GetBool("check"))
+        {
+            Ranking.SetBool("check", false);
+        }
+        else
+        {
+            Ranking.SetBool("check", true);
         }
     }
 
@@ -145,6 +160,12 @@ public class MainMenuManager : MonoBehaviour
         {
             Language_popup.SetActive(true);
         }
+    }
+
+    public void ButtonClick_Ranking()
+    {
+        titleAnimation();
+        RankingAnimation();
     }
 
 }
