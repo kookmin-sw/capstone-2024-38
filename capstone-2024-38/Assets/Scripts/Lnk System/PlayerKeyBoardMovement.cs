@@ -14,6 +14,7 @@ public class PlayerKeyBoardMovement : MonoBehaviour
     public LayerMask groundLayer;
     public float groundCheckDistance = 0.1f;
     private bool isGrounded;
+    private bool isMoving = false;
 
     public Transform cameraTransform;
     
@@ -42,6 +43,12 @@ public class PlayerKeyBoardMovement : MonoBehaviour
         float power = movement_weight * Time.deltaTime;
         Vector3 moveDirection = GetMoveDirection();
 
+        isMoving = moveDirection.magnitude > 0;
+
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving)
+        {
+            power *= 1.5f;
+        }
 
         transform.position += moveDirection * power;
 

@@ -4,36 +4,28 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject portalPrefab;
-    public GameObject portalPos;
-    private List<Vector4> PortalPoints;
-
+    public GameObject enemyPrefab;
+    public float spawnRadius = 5f;
+    private Transform playerTransform;
 
     void Start()
     {
-        portalPrefab = GameObject.Find("Portal");
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyPrefab = GameObject.Find("Enemy");
 
-        PortalPoints = new List<Vector4>();
+        InvokeRepeating("SpawnEnemy", 0f, 10f);
+    }
 
-        portalPos = GameObject.Find("PortalPostion");
+    void SpawnEnemy()
+    {
+        
+            Vector3 randomPosition = Random.insideUnitSphere * spawnRadius;
+            randomPosition.y = 0f; 
+            Vector3 spawnPosition = playerTransform.position + randomPosition;
 
-        int num = portalPos.transform.childCount;
-
-        for (int i = 0; i < num; ++i)
-        {
-            var child = portalPos.transform.GetChild(i);
-            Vector4 point = child.transform.position;
-            point.w = child.transform.rotation.eulerAngles.y;
-            PortalPoints.Add(point);
-        }
-
-
-
-        foreach (Vector4 position in PortalPoints)
-        {
-            Instantiate(portalPrefab, new Vector3(position.x, position.y, position.z), Quaternion.Euler(0f, position.w, 0f));
-        }
-
+            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
     }
+
+    
 }

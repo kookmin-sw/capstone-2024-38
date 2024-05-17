@@ -5,18 +5,28 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public float movement_speed = 2.0f;
-    public float playerDistance = 10.0f;
     public Transform playerT;
     Animator enemy_animation;
+    private Vector3 moveDirection;
 
     void Start()
     {
         enemy_animation = GetComponent<Animator>();
         playerT = GameObject.Find("Player").transform;
 
-        if (enemy_animation == null)
+        if (playerT != null)
         {
-            Debug.LogWarning("Animator component is missing on the enemy game object.");
+            moveDirection = (playerT.position - transform.position).normalized;
+            transform.LookAt(playerT.position);
+
+            if (enemy_animation == null)
+            {
+                Debug.LogWarning("Animator component is missing on the enemy game object.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Player object not found!");
         }
     }
 
@@ -27,16 +37,13 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        Vector3 direction = (playerT.position - transform.position).normalized;
-        transform.position += direction * movement_speed * Time.deltaTime;
-        transform.LookAt(playerT.position);
+        MoveTowardsTarget();
+    }
 
-        UpdateAnimation(direction);
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            enemy_animation.SetTrigger("dead");
-        }
+    void MoveTowardsTarget()
+    {
+        transform.position += moveDirection * movement_speed * Time.deltaTime;
+        UpdateAnimation(moveDirection);
     }
 
     void UpdateAnimation(Vector3 direction)
@@ -69,7 +76,6 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-
                 enemy_animation.SetBool("IsBack", true);
                 enemy_animation.SetBool("IsFront", false);
                 enemy_animation.SetBool("IsLeft", false);
