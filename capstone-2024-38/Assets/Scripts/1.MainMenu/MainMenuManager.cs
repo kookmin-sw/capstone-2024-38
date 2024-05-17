@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -11,15 +13,26 @@ public class MainMenuManager : MonoBehaviour
     private Animator title;
 
     [SerializeField]
-    private Animator stage;
+    private GameObject stage;
+
+    Animator stageani;
+    Transform page_navi;
+
+    [SerializeField]
+    private Animator setting;
+
+    [SerializeField]
+    private GameObject Language_popup;
+
+    private void Start()
+    {
+        page_navi = stage.transform.Find("Page_navi");
+        stageani = stage.GetComponent<Animator>();
+    }
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.K))
-        {
-            titleAnimation();
-            stageAnimation();
-        }
+        
     }
 
     void titleAnimation()
@@ -36,15 +49,102 @@ public class MainMenuManager : MonoBehaviour
 
     void stageAnimation()
     {
-        if (stage.GetBool("Stage"))
+        if (stageani.GetBool("Stage"))
         {
-            stage.SetBool("Stage", false);
+            stageani.SetBool("Stage", false);
         }
         else
         {
-            stage.SetBool("Stage", true);
+            stageani.SetBool("Stage", true);
         }
     }
 
+    void settingAnimation()
+    {
+        if (setting.GetBool("check"))
+        {
+            setting.SetBool("check", false);
+        }
+        else
+        {
+            setting.SetBool("check", true);
+        }
+    }
+
+    public void StageRightButtonClick()
+    {
+        if(page_navi.Find("Page_1").Find("On").gameObject.activeSelf == true)
+        {
+            page_navi.Find("Page_1").Find("On").gameObject.SetActive(false);
+            page_navi.Find("Page_2").Find("On").gameObject.SetActive(true);
+            stageani.SetInteger("CurStage",2);
+        }
+        else if(page_navi.Find("Page_2").Find("On").gameObject.activeSelf == true)
+        {
+            page_navi.Find("Page_2").Find("On").gameObject.SetActive(false);
+            page_navi.Find("Page_3").Find("On").gameObject.SetActive(true);
+            stageani.SetInteger("CurStage", 3);
+        }
+        else if (page_navi.Find("Page_3").Find("On").gameObject.activeSelf == true)
+        {
+            page_navi.Find("Page_3").Find("On").gameObject.SetActive(false);
+            page_navi.Find("Page_4").Find("On").gameObject.SetActive(true);
+            stageani.SetInteger("CurStage", 4);
+        }
+        else if (page_navi.Find("Page_4").Find("On").gameObject.activeSelf == true)
+        {
+
+        }
+    }
+
+    public void StageLeftButtonClick()
+    {
+        if (page_navi.Find("Page_4").Find("On").gameObject.activeSelf == true)
+        {
+            page_navi.Find("Page_4").Find("On").gameObject.SetActive(false);
+            page_navi.Find("Page_3").Find("On").gameObject.SetActive(true);
+            stageani.SetInteger("CurStage", 3);
+        }
+        else if (page_navi.Find("Page_3").Find("On").gameObject.activeSelf == true)
+        {
+            page_navi.Find("Page_3").Find("On").gameObject.SetActive(false);
+            page_navi.Find("Page_2").Find("On").gameObject.SetActive(true);
+            stageani.SetInteger("CurStage", 2);
+        }
+        else if (page_navi.Find("Page_2").Find("On").gameObject.activeSelf == true)
+        {
+            page_navi.Find("Page_2").Find("On").gameObject.SetActive(false);
+            page_navi.Find("Page_1").Find("On").gameObject.SetActive(true);
+            stageani.SetInteger("CurStage", 1);
+        }
+        else if (page_navi.Find("Page_1").Find("On").gameObject.activeSelf == true)
+        {
+
+        }
+    }
+
+    public void ButtonClick_StageAndTitleSwap()
+    {
+        titleAnimation();
+        stageAnimation();
+    }
+
+    public void ButtonClick_SettingTrtleSwap()
+    {
+        settingAnimation();
+        titleAnimation();
+    }
+
+    public void ButtonClick_LanguageSetting()
+    {
+        if(Language_popup.activeSelf == true)
+        {
+            Language_popup.SetActive(false);
+        }
+        else
+        {
+            Language_popup.SetActive(true);
+        }
+    }
 
 }
