@@ -66,7 +66,22 @@ public class InputManager : MonoBehaviour
 
     void AttackInput()
     {
+        int keyCode = 0;
+        keyCode |= KeyEventCode.ATTACK;
+
+        Vector3 aimPos = new Vector3(0, 0, 1);
+        aimPos += WorldManager.instance.GetMyPlayerPos();
         
+        KeyMessage msg;
+        msg = new KeyMessage(keyCode, aimPos);
+        if (BackendMatchManager.GetInstance().IsHost())
+        {
+            BackendMatchManager.GetInstance().AddMsgToLocalQueue(msg);
+        }
+        else
+        {
+            BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
+        }
     }
     
     void SendNoMoveMessage()

@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     private bool isMe = false;
     
     // 스테이터스
-    public int hp { get; private set; } = 0;
-    private const int MAX_HP = 5;
+    //public int hp { get; private set; } = 0;
+    //private const int MAX_HP = 5;
     private bool isLive = false;
     
     // 이동관련
@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
         this.isRotate = false;
 
         //hp
-        hp = MAX_HP;
 
         playerModelObject = this.gameObject;
         playerModelObject.transform.rotation = Quaternion.Euler(0, rot, 0);
@@ -181,6 +180,17 @@ public class Player : MonoBehaviour
         return gameObject.transform.rotation.eulerAngles;
     }
     #endregion
+    
+    public bool GetIsLive()
+    {
+        return isLive;
+    }
+
+    private void PlayerDie()
+    {
+        isLive = false;
+        // 나머지 게임 오브젝트들 false
+    }
 
     
     void Update()
@@ -220,18 +230,27 @@ public class Player : MonoBehaviour
             Rotate();
         }
         
-
-        if (transform.position.y < -10.0f)
-        {
-            //PlayerDie();
+        /*if (물에 5초간 있으면)
+         {
+            PlayerDie();
             WorldManager.instance.dieEvent(index);
-        }
-
-        if (hp <= 0)
-        {
-            //PlayerDie();
-            WorldManager.instance.dieEvent(index);
-        }
+         }
+         */
         
+    }
+    
+    public SessionId GetIndex()
+    {
+        return index;
+    }
+
+    public bool IsMe()
+    {
+        return isMe;
+    }
+
+    public string GetNickName()
+    {
+        return nickName;
     }
 }

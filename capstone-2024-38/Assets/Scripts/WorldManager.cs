@@ -76,7 +76,43 @@ public class WorldManager : MonoBehaviour
             startingPoints.Add(point);
         }
 
-        //dieEvent += PlayerDieEvent;
+        dieEvent += PlayerDieEvent;
+    }
+
+    private void PlayerDieEvent(SessionId index)
+    {
+        alivePlayer -= 1;
+        players[index].gameObject.SetActive(false);
+        
+        gameRecord.Push(index);
+        
+        Debug.Log(string.Format("Player Die : " + players[index].GetNickName()));
+        
+        if (!BackendMatchManager.GetInstance().IsHost())
+        {
+            return;
+        }
+        
+        if (alivePlayer <= 1)
+        {
+            SendGameEndOrder();
+        }
+
+    }
+    
+    private void SendGameEndOrder()
+    {
+        // 게임 종료 전환 메시지는 호스트에서만 보냄
+        Debug.Log("Make GameResult & Send Game End Order");
+        foreach (SessionId session in BackendMatchManager.GetInstance().sessionIdList)
+        {
+            if (players[session].GetIsLive() && !gameRecord.Contains(session))
+            {
+                gameRecord.Push(session);
+            }
+        }
+        GameEndMessage message = new GameEndMessage(gameRecord);
+        BackendMatchManager.GetInstance().SendDataToInGame<GameEndMessage>(message);
     }
     
     
@@ -209,11 +245,11 @@ public class WorldManager : MonoBehaviour
                 //InGameUiManager.GetInstance().SetStartCount(0, false);
                 GameManager.GetInstance().ChangeState(GameManager.GameState.InGame);
                 break;
-            /*case Protocol.Type.GameEnd:
+            case Protocol.Type.GameEnd:
                 GameEndMessage endMessage = DataParser.ReadJsonData<GameEndMessage>(args.BinaryUserData);
                 SetGameRecord(endMessage.count, endMessage.sessionList);
                 GameManager.GetInstance().ChangeState(GameManager.GameState.Over);
-                break;*/
+                break;
 
             case Protocol.Type.Key:
                 KeyMessage keyMessage = DataParser.ReadJsonData<KeyMessage>(args.BinaryUserData);
@@ -371,5 +407,20 @@ public class WorldManager : MonoBehaviour
     public bool IsMyPlayerMove()
     {
         return players[myPlayerIndex].isMove;
+    }
+    
+    public Vector3 GetMyPlayerPos()
+    {
+        return players[myPlayerIndex].GetPosition();
+    }
+    
+    private void SetGameRecord(int count, int[] arr)
+    {
+        gameRecord = new Stack<SessionId>();
+        // 스택에 넣어야 하므로 제일 뒤에서 부터 스택에 push
+        for (int i = count - 1; i >= 0; --i)
+        {
+            gameRecord.Push((SessionId)arr[i]);
+        }
     }
 }

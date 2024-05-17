@@ -189,6 +189,8 @@ public partial class BackendMatchManager : MonoBehaviour
         Debug.Log("게임 씬 전환 메시지 송신");
         SendDataToInGame(new Protocol.LoadGameSceneMessage());
     }
+    
+    
 
     public void SendDataToInGame<T>(T msg)
     {
