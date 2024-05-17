@@ -30,6 +30,15 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject Fail_popuo;
 
+    [SerializeField]
+    private GameObject Mail;
+
+    [SerializeField]
+    private GameObject MailCheck;
+
+    [SerializeField]
+    private Animator mail_popup;
+
     private void Start()
     {
         page_navi = stage.transform.Find("Page_navi");
@@ -86,6 +95,18 @@ public class MainMenuManager : MonoBehaviour
         else
         {
             Ranking.SetBool("check", true);
+        }
+    }
+
+    void MailAnimation()
+    {
+        if (mail_popup.GetBool("check"))
+        {
+            mail_popup.SetBool("check", false);
+        }
+        else
+        {
+            mail_popup.SetBool("check", true);
         }
     }
 
@@ -181,6 +202,18 @@ public class MainMenuManager : MonoBehaviour
     {
         titleAnimation();
         RankingAnimation();
+    }
+
+    public void ButtonClick_MailSucces()
+    {
+        Mail.SetActive(false);
+        MailCheck.SetActive(false);
+    }
+
+    public void ButtonClick_mailpopup()
+    {
+        titleAnimation();
+        MailAnimation();
     }
 
 }
