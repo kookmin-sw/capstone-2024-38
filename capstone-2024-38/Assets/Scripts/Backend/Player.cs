@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     private GameObject playerModelObject;
     private Rigidbody rigidBody;
     
-    public VirtualStick TESTONLY_vertualStick;
     
     void Start()
     {
@@ -198,9 +197,6 @@ public class Player : MonoBehaviour
         if (BackendMatchManager.GetInstance() == null)
         {
             // 매칭 인스턴스가 존재하지 않는 경우 (인게임 테스트 용도)
-            Vector3 tmp = new Vector3(TESTONLY_vertualStick.GetHorizontalValue(), 0, TESTONLY_vertualStick.GetVerticalValue());
-            tmp = Vector3.Normalize(tmp);
-            SetMoveVector(tmp);
             //Move();
 
 

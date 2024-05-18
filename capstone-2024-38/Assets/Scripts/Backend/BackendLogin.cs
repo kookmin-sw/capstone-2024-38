@@ -64,7 +64,7 @@ public class BackendLogin : MonoBehaviour
         
         if (Backend.UserNickName == "")
         {
-            LoginUI.GetInstance().nickNameWindow.SetActive(true);
+            //LoginUI.GetInstance().nickNameWindow.SetActive(true);
         }
         else
         {

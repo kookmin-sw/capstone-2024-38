@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
     private static bool isCreate = false;
 
     #region Scene
-    private const string LOGIN = "0. Login";
-    private const string LOBBY = "1. MatchLobby";
-    private const string READY = "2. LoadRoom";
-    private const string INGAME = "3. InGame";
+    private const string LOGIN = "0.LoginAndLogoScene";
+    private const string LOBBY = "1.MainMenuScene";
+    private const string READY = "2.LoadingSceneJH";
+    private const string INGAME = "3.InGame_City";
     #endregion
 
 

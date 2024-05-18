@@ -35,6 +35,7 @@ public class BackendRank : MonoBehaviour
     private static BackendRank _instance = null;
 
     public List<Rank> rankList = new List<Rank>();
+    public Rank myRank = new Rank();
 
     public static BackendRank Instance 
     {
@@ -48,9 +49,6 @@ public class BackendRank : MonoBehaviour
             return _instance;
         }
     }
-    
-    public delegate void OnRankListCompleted();
-    public event OnRankListCompleted RankListCompleted;
 
     public void RankInsert(int score)
     {
@@ -141,7 +139,17 @@ public class BackendRank : MonoBehaviour
 
             rankList.Add(rank);
         }
-        RankListCompleted?.Invoke();
+    }
+
+    public void GetMyRank()
+    {
+        string rankUUID = "39290b10-fede-11ee-9011-b105362ee41e";
+        var bro = Backend.URank.User.GetMyRank(rankUUID);
+        
+        LitJson.JsonData jsonData = bro.GetFlattenJSON();
+        myRank.nickname = jsonData["rows"][0]["nickname"].ToString();       
+        myRank.rank = jsonData["rows"][0]["rank"].ToString();       
+        myRank.score = jsonData["rows"][0]["score"].ToString();       
     }
     // Start is called before the first frame update
     void Start()
@@ -152,6 +160,6 @@ public class BackendRank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
