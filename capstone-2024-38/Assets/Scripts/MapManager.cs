@@ -12,7 +12,7 @@ public class MapManager : MonoBehaviour
     private float moveInterval = 30.0f;
     private float elapsedTime = 0.0f;
 
-    public float survivalTime = 300.0f; // 5Ка
+    public float survivalTime = 100.0f;
     private float remainingTime;
     private bool isGameOver = false;
 

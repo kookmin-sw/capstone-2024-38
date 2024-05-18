@@ -5,15 +5,17 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public float spawnRadius = 5f;
+    public GameObject TrackingenemyPrefab;
+    public float spawnRadius = 2f;
     private Transform playerTransform;
 
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         enemyPrefab = GameObject.Find("Enemy");
+        TrackingenemyPrefab = GameObject.Find("TrackingEnemy");
 
-        InvokeRepeating("SpawnEnemy", 0f, 10f);
+        InvokeRepeating("SpawnEnemy", 0f, 2f);
     }
 
     void SpawnEnemy()
@@ -24,6 +26,13 @@ public class Spawner : MonoBehaviour
             Vector3 spawnPosition = playerTransform.position + randomPosition;
 
             Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+            randomPosition = Random.insideUnitSphere * spawnRadius;
+            randomPosition.y = 0f;
+            spawnPosition = playerTransform.position + randomPosition;
+
+            Instantiate(TrackingenemyPrefab, spawnPosition, Quaternion.identity);
+
 
     }
 

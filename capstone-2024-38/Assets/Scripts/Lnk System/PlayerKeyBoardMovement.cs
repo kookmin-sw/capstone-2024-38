@@ -43,7 +43,7 @@ public class PlayerKeyBoardMovement : MonoBehaviour
         float power = movement_weight * Time.deltaTime;
         Vector3 moveDirection = GetMoveDirection();
 
-        isMoving = moveDirection.magnitude > 0;
+        isMoving = (moveDirection.magnitude > 0);
 
         if (Input.GetKey(KeyCode.LeftShift) && isMoving)
         {
