@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     private Rigidbody rigidBody;
     
     
+    
     void Start()
     {
         if (BackendMatchManager.GetInstance() == null)
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
 
         if (this.isMe)
         {
-            //Camera.main.GetComponent<FollowCamera>().target = this.transform;
+            Camera.main.GetComponent<FollowCamera>().target = this.transform;
         }
 
         this.isLive = true;

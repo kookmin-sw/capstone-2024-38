@@ -874,9 +874,7 @@ GameObject:
   - component: {fileID: 3613345832525870924}
   - component: {fileID: 7197110630008642985}
   - component: {fileID: 8472173216518701198}
-  - component: {fileID: 5731515602959418463}
   - component: {fileID: 2295534625218116241}
-  - component: {fileID: 5571583084371421954}
   - component: {fileID: -4976147602989126120}
   m_Layer: 0
   m_Name: Player
@@ -972,18 +970,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 4.301985, z: 1}
   m_Center: {x: 0, y: 2.0190077, z: 0}
---- !u!114 &5731515602959418463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6497248030232732122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36da2eaacfb231d48ac1407bcd6f279e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2295534625218116241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,25 +983,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
---- !u!114 &5571583084371421954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6497248030232732122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5004f8086b4a5a468911a31e5877401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movement_weight: 5
-  jumpForce: 12
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  groundCheckDistance: 1.1
-  cameraTransform: {fileID: 0}
 --- !u!114 &-4976147602989126120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1043,7 +1010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7899871001497997501
 Transform:
   m_ObjectHideFlags: 0
