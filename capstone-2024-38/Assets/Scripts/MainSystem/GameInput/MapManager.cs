@@ -16,14 +16,14 @@ public class MapManager : MonoBehaviour
     private float remainingTime;
     private bool isGameOver = false;
 
-    public Text height;
+    //public Text height;
 
     //public string nextSceneName;
 
     void Start()
     {
-        GameObject rankObject = GameObject.Find("rank");
-        height = rankObject.GetComponentInChildren<Text>();
+        //GameObject rankObject = GameObject.Find("rank");
+        //height = rankObject.GetComponentInChildren<Text>();
 
         lava = FindObjectOfType<upLava>();
         if (lava == null)
@@ -58,7 +58,7 @@ public class MapManager : MonoBehaviour
         }
 
         float playerY = player.transform.position.y;
-        height.text = playerY.ToString("F2") + " m";
+        //height.text = playerY.ToString("F2") + " m";
 
         if (playerY - 25 > lava.transform.position.y)
         {
@@ -89,7 +89,6 @@ public class MapManager : MonoBehaviour
     public void GameOver(bool won)
     {
         isGameOver = true;
-        Time.timeScale = 0f;
         if (won)
         {
             Debug.Log("You survived!");
@@ -106,10 +105,12 @@ public class MapManager : MonoBehaviour
     {
         while (!Input.GetKeyDown(KeyCode.Return))
         {
+
             yield return null;
         }
 
         Time.timeScale = 1f;
+
         //SceneManager.LoadScene(nextSceneName);
     }
 }

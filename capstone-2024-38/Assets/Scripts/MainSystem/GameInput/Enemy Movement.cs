@@ -12,11 +12,13 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         enemy_animation = GetComponent<Animator>();
+        enemy_animation.SetBool("IsMove", true);
         playerT = GameObject.Find("Player").transform;
 
         if (playerT != null)
         {
             moveDirection = (playerT.position - transform.position).normalized;
+            moveDirection.y = 0f;
             transform.LookAt(playerT.position);
 
             if (enemy_animation == null)
@@ -43,6 +45,7 @@ public class EnemyMovement : MonoBehaviour
     void MoveTowardsTarget()
     {
         transform.position += moveDirection * movement_speed * Time.deltaTime;
+        
     }
 
     

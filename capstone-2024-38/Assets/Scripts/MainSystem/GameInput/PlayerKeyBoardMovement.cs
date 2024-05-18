@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerKeyBoardMovement : MonoBehaviour
 {
     public float movement_weight = 5.0f;
-    public float jumpForce = 5.0f;
+    public float jumpForce = 12.0f;
 
 
     Animator player_animation;
@@ -46,10 +46,24 @@ public class PlayerKeyBoardMovement : MonoBehaviour
 
         isMoving = (moveDirection.magnitude > 0);
 
+        if (isMoving)
+        {
+            player_animation.SetBool("IsMove", true);
+        }
+        else
+        {
+            player_animation.SetBool("IsMove", false);
+            player_animation.SetBool("IsRun", false);
+        }
+
         if (Input.GetKey(KeyCode.LeftShift) && isMoving)
         {
             power *= 1.5f;
+            player_animation.SetBool("IsMove", false);
+            player_animation.SetBool("IsRun", true);
         }
+       
+        
 
         transform.position += moveDirection * power;
 
@@ -60,7 +74,19 @@ public class PlayerKeyBoardMovement : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
+
         }
+        if (!isGrounded)
+        {
+            player_animation.SetBool("IsMove", false);
+            player_animation.SetBool("IsRun", false);
+            player_animation.SetTrigger("Jump");
+        }
+        else
+        {
+            player_animation.ResetTrigger("Jump");
+        }
+        
         
 
         

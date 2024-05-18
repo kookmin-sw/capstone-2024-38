@@ -18,6 +18,7 @@ public class EnemyTrackingMovement : MonoBehaviour
         {
             Debug.LogWarning("Animator component is missing on the enemy game object.");
         }
+        enemy_animation.SetBool("IsMove", true);
     }
 
     void Update()
@@ -32,9 +33,11 @@ public class EnemyTrackingMovement : MonoBehaviour
         transform.position += direction * movement_speed * Time.deltaTime;
         transform.LookAt(playerT.position);
 
+        
+
         if (Input.GetKeyDown(KeyCode.P))
         {
-            enemy_animation.SetTrigger("dead");
+            enemy_animation.SetTrigger("Dead");
         }
     }
 
