@@ -143,6 +143,8 @@ public class WorldManager : MonoBehaviour
         players = new Dictionary<SessionId, Player>();
         BackendMatchManager.GetInstance().SetPlayerSessionList(gamers);
         
+        Debug.Log(gamers[0]);
+        Debug.Log(gamers[1]);
         int index = 0;
         foreach (var sessionId in gamers)
         {
