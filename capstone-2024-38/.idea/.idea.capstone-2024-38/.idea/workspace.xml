@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fba3704-9e11-47fa-880d-c4815cf47fdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/0.LoginAndLogoScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/0.LoginAndLogoScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/1.MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/1.MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/0.LoginAndLogoScene/LoginAndLogoSceneManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/0.LoginAndLogoScene/LoginAndLogoSceneManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/1.MainMenu/MainMenuManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/1.MainMenu/MainMenuManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendLogin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendLogin.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendRank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendRank.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/LobbyUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/LobbyUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/LoginUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/LoginUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/RoomUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/RoomUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/UIManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/UI/UIManager.cs.meta" beforeDir="false" />
-    </list>
+    <list default="true" id="4fba3704-9e11-47fa-880d-c4815cf47fdb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1716014982906</updated>
       <workItem from="1716014985635" duration="5000" />
-      <workItem from="1716015174284" duration="10873000" />
+      <workItem from="1716015174284" duration="11132000" />
     </task>
     <servers />
   </component>
