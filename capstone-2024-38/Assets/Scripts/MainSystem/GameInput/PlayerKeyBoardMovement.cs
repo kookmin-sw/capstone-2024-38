@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class PlayerKeyBoardMovement : MonoBehaviour
 {
-    public float movement_weight;
-    Animator player_animation;
+    public float movement_weight = 5.0f;
+    public float jumpForce = 5.0f;
 
-    float charging_animation_temp = 1;
-    // Start is called before the first frame update
+
+    Animator player_animation;
+    Rigidbody rb;
+
+    public LayerMask groundLayer;
+    public float groundCheckDistance = 1.1f;
+    private bool isGrounded;
+    private bool isMoving = false;
+
+    public Transform cameraTransform;
+    
+
     void Start()
     {
         player_animation = this.GetComponent<Animator>();
+        rb = this.GetComponent<Rigidbody>();
+        groundLayer = LayerMask.GetMask("Default");
+        Transform arm = this.transform.Find("Camera Arm");
+        cameraTransform = arm.Find("Main Camera");
 
         if (player_animation == null)
         {
@@ -27,117 +41,50 @@ public class PlayerKeyBoardMovement : MonoBehaviour
             return;
         }
 
-        // movement power
         float power = movement_weight * Time.deltaTime;
-        if (Input.GetKey(KeyCode.W))
+        Vector3 moveDirection = GetMoveDirection();
+
+        isMoving = (moveDirection.magnitude > 0);
+
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving)
         {
-            this.transform.position += new Vector3(0,0, power);
-            player_animation.SetBool("IsFront", true);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            this.transform.position += new Vector3(-power, 0, 0);
-            player_animation.SetBool("IsLeft", true);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            this.transform.position += new Vector3(0, 0, -power);
-            player_animation.SetBool("IsBack", true);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            this.transform.position += new Vector3(power, 0, 0);
-            player_animation.SetBool("IsRight", true);
+            power *= 1.5f;
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            player_animation.SetBool("IsFront", false);
-        }
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            player_animation.SetBool("IsLeft", false);
-        }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            player_animation.SetBool("IsBack", false);
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            player_animation.SetBool("IsRight", false);
-        }
+        transform.position += moveDirection * power;
 
-        // dancing animation
-        if(Input.GetKeyDown(KeyCode.M))
+        
+
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            player_animation.SetTrigger("Hip-Hop Dancing");
+            Jump();
         }
         
-        /*
-        // charging animation
-        if(this.GetComponent<Player_SkillandBullet>().getCharging())
-        {
-            player_animation.SetLayerWeight(1, 1);
-            player_animation.SetBool("Charging", true);
-        }
-        else
-        {
-            player_animation.SetBool("Charging", false);
-            // player charging animaion smooth revalance
-            if (player_animation.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.7f)
-            {
-                if (charging_animation_temp >= 0)
-                {
-                    charging_animation_temp -= Time.deltaTime;
-                }
-                player_animation.SetLayerWeight(1, charging_animation_temp);
-            }
-        }
-        */
-
-        // new charging animation
-        if (this.GetComponent<Player_SkillandBullet>().getCharging())
-        {
-            player_animation.SetLayerWeight(1, 1);
-
-            if(player_animation.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5f)
-            {
-                player_animation.SetFloat("throw", 0);
-            }
-            else
-            {
-                player_animation.SetFloat("throw", 1);
-            }
-            player_animation.SetBool("Charging", true);
-        }
-        else
-        {
-            player_animation.SetBool("Charging", false);
-
-            player_animation.SetFloat("throw", 1);
-            // player charging animaion smooth revalance
-            if (player_animation.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5f)
-            {
-                if (charging_animation_temp >= 0)
-                {
-                    charging_animation_temp -= Time.deltaTime;
-                }
-                player_animation.SetLayerWeight(1, charging_animation_temp);
-            }
-        }
-        Debug.Log(player_animation.GetFloat("throw"));
-        // Hit animation test must remove this code
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            player_animation.SetTrigger("Hit");
-        }
-        // dead animation test must remove this code
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            player_animation.SetTrigger("dead");
-        }
 
         
 
     }
+
+    Vector3 GetMoveDirection()
+    {
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        return forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal");
+    }
+
+    private void Jump()
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+    }
+
+    
 }
