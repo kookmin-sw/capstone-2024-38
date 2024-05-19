@@ -1,50 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
-public class PlayerKeyBoardMovement : MonoBehaviour
+public class move_Controll : MonoBehaviour
 {
-    public float movement_weight = 5.0f;
+    public float moveSpeed = 5.0f;
     public float jumpForce = 12.0f;
+    public CinemachineFreeLook freeLookCamera;
 
 
+    Rigidbody rigid;
+    Vector3 moveVector;
     Animator player_animation;
-    Rigidbody rb;
 
     public LayerMask groundLayer;
     public float groundCheckDistance = 1.1f;
-    private bool isGrounded;
+    private bool isGrounded = false;
     private bool isMoving = false;
-
-    public Transform cameraTransform;
-    
 
     void Start()
     {
-        player_animation = this.GetComponent<Animator>();
-        rb = this.GetComponent<Rigidbody>();
+        rigid = GetComponent<Rigidbody>();
+        freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
         groundLayer = LayerMask.GetMask("Default");
-        Transform arm = this.transform.Find("Camera Arm");
-        cameraTransform = arm.Find("Main Camera");
-
-        if (player_animation == null)
-        {
-            Debug.LogWarning("Animator component is missing on the player game object.");
-        }
+        player_animation = this.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (player_animation == null)
+        float x = Input.GetAxis("Vertical");
+        float z = Input.GetAxis("Horizontal");
+
+        float Fx = freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineOrbitalTransposer>().m_XAxis.Value;
+
+        if (x != 0 || z != 0)
         {
-            return;
+            float angle = Mathf.Atan2(z, x) * Mathf.Rad2Deg; 
+            angle += Fx;
+            if (angle < 0f)
+            {
+                angle += 360f;
+            }
+
+            
+            Vector3 moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            
+            if (Input.GetKey(KeyCode.LeftShift)){
+                moveVector = moveDirection * (moveSpeed * 1.5f);
+            }
+            else
+            {
+                moveVector = moveDirection * moveSpeed;
+            }
+            isMoving = true;
         }
-
-        float power = movement_weight * Time.deltaTime;
-        Vector3 moveDirection = GetMoveDirection();
-
-        isMoving = (moveDirection.magnitude > 0);
+        else
+        {
+            moveVector = Vector3.zero;
+            isMoving = false;
+        }
 
         if (isMoving)
         {
@@ -58,16 +73,10 @@ public class PlayerKeyBoardMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && isMoving)
         {
-            power *= 1.5f;
             player_animation.SetBool("IsMove", false);
             player_animation.SetBool("IsRun", true);
         }
-       
-        
 
-        transform.position += moveDirection * power;
-
-        
 
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
 
@@ -76,6 +85,7 @@ public class PlayerKeyBoardMovement : MonoBehaviour
             Jump();
 
         }
+
         if (!isGrounded)
         {
             player_animation.SetBool("IsMove", false);
@@ -102,31 +112,26 @@ public class PlayerKeyBoardMovement : MonoBehaviour
             }
 
         }
-        
-        
 
-        
 
     }
 
-    Vector3 GetMoveDirection()
+    void FixedUpdate()
     {
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
+        if (moveVector != Vector3.zero)
+        {
+            rigid.MovePosition(rigid.position + moveVector * Time.fixedDeltaTime);
 
-        forward.y = 0f;
-        right.y = 0f;
-        forward.Normalize();
-        right.Normalize();
-
-        return forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal");
+            Quaternion directionQuat = Quaternion.LookRotation(moveVector);
+            Quaternion moveQuat = Quaternion.Slerp(rigid.rotation, directionQuat, 0.3f);
+            rigid.MoveRotation(moveQuat);
+        }
     }
 
     private void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
     }
 
-    
 }

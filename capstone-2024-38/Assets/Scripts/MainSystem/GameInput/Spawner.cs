@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject TrackingenemyPrefab;
-    public float spawnRadius = 2f;
+    public float spawnRadius = 4f;
     private Transform playerTransform;
 
     void Start()
