@@ -18,6 +18,7 @@ public class move_Controll : MonoBehaviour
     public float groundCheckDistance = 1.1f;
     private bool isGrounded = false;
     private bool isMoving = false;
+    public float pushForce = 10.0f; 
 
 
     void Start()
@@ -119,6 +120,12 @@ public class move_Controll : MonoBehaviour
 
         }
 
+        if (Input.GetKey(KeyCode.E))
+        {
+            player_animation.SetTrigger("Push");
+            PushPlayer();
+        }
+
 
     }
 
@@ -139,6 +146,23 @@ public class move_Controll : MonoBehaviour
     {
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
+    }
+
+    private void PushPlayer()
+    {
+        
+        Vector3 pushDirection = transform.forward; 
+        Vector3 pushPosition = transform.position + transform.forward * 1.5f;
+        Collider[] colliders = Physics.OverlapSphere(pushPosition, 0.5f);
+
+        foreach (Collider collider in colliders)
+        {
+            Rigidbody otherRigidbody = collider.GetComponent<Rigidbody>();
+            if (otherRigidbody != null && otherRigidbody != rigid)
+            {
+                otherRigidbody.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+            }
+        }
     }
 
 }
