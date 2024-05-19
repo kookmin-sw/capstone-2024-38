@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
         {
             isDead = true;
             Debug.Log("Player has died.");
-            player_animation.SetTrigger("Dead");
+            
 
             PlayerKeyBoardMovement playerMovement = GetComponent<PlayerKeyBoardMovement>();
             if (playerMovement != null)
@@ -34,7 +34,8 @@ public class PlayerHealth : MonoBehaviour
                 mapManager.GameOver(false);
             }
 
-            StartCoroutine(StopGame(2f));
+            player_animation.SetTrigger("Dead");
+            StartCoroutine(StopGame(1f));
         }
     }
 

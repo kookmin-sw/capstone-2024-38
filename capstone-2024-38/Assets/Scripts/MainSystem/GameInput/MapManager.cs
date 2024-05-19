@@ -9,22 +9,18 @@ public class MapManager : MonoBehaviour
     public upLava lava;
     public GameObject player;
 
-    private float moveInterval = 30.0f;
+    private float moveInterval = 5.0f;
     private float elapsedTime = 0.0f;
+    private float upHeight = 2.0f;
 
     public float survivalTime = 100.0f;
     private float remainingTime;
     private bool isGameOver = false;
 
-    //public Text height;
-
-    //public string nextSceneName;
+    public float RemainingTime => remainingTime;
 
     void Start()
     {
-        //GameObject rankObject = GameObject.Find("rank");
-        //height = rankObject.GetComponentInChildren<Text>();
-
         lava = FindObjectOfType<upLava>();
         if (lava == null)
         {
@@ -53,12 +49,11 @@ public class MapManager : MonoBehaviour
 
         if (elapsedTime >= moveInterval)
         {
-            lava.targetY += 5.0f;
+            lava.targetY += upHeight;
             elapsedTime = 0.0f;
         }
 
         float playerY = player.transform.position.y;
-        //height.text = playerY.ToString("F2") + " m";
 
         if (playerY - 25 > lava.transform.position.y)
         {
@@ -105,12 +100,10 @@ public class MapManager : MonoBehaviour
     {
         while (!Input.GetKeyDown(KeyCode.Return))
         {
-
             yield return null;
         }
 
         Time.timeScale = 1f;
-
-        //SceneManager.LoadScene(nextSceneName);
+        // SceneManager.LoadScene(nextSceneName);
     }
 }

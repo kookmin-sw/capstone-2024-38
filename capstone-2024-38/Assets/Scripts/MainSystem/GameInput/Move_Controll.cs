@@ -19,6 +19,7 @@ public class move_Controll : MonoBehaviour
     private bool isGrounded = false;
     private bool isMoving = false;
 
+
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -120,6 +121,7 @@ public class move_Controll : MonoBehaviour
 
 
     }
+
 
     void FixedUpdate()
     {
