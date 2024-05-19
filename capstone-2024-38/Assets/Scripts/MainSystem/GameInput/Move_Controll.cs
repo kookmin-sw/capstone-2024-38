@@ -107,8 +107,13 @@ public class move_Controll : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftShift) && isMoving)
             {
-                player_animation.SetBool("IsMove", false);
+                player_animation.SetBool("IsMove", true);
                 player_animation.SetBool("IsRun", true);
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift) && isMoving)
+            {
+                player_animation.SetBool("IsMove", true);
+                player_animation.SetBool("IsRun", false);
             }
 
         }
