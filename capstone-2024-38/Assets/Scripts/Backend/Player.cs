@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     private GameObject playerModelObject;
     private Rigidbody rigidBody;
 
+    public upLava lava;
+
     public Animator anim;
     
     
@@ -70,6 +72,7 @@ public class Player : MonoBehaviour
 
         rigidBody = this.GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        lava = FindObjectOfType<upLava>();
         
         if (BackendMatchManager.GetInstance().nowModeType == MatchModeType.TeamOnTeam)
         {
@@ -158,6 +161,7 @@ public class Player : MonoBehaviour
     public void Jump()
     {
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        anim.SetTrigger("Jump");
     }
 
     public void SetPosition(Vector3 pos)
@@ -200,6 +204,7 @@ public class Player : MonoBehaviour
     private void PlayerDie()
     {
         isLive = false;
+        anim.SetTrigger("Dead");
         // 나머지 게임 오브젝트들 false
     }
 
@@ -230,13 +235,13 @@ public class Player : MonoBehaviour
 
         if (isMove)
         {
-            anim.SetBool("IsMove", true);
+            anim.SetBool("IsRun", true);
             Move();
         }
 
         if (!isMove)
         {
-            anim.SetBool("IsMove", false);
+            anim.SetBool("IsRun", false);
         }
 
         if (isRotate)
@@ -244,13 +249,11 @@ public class Player : MonoBehaviour
             Rotate();
         }
         
-        /*if (물에 5초간 있으면)
+        if (transform.position.y < lava.transform.position.y - 5)
          {
             PlayerDie();
             WorldManager.instance.dieEvent(index);
          }
-         */
-        
     }
     
     public SessionId GetIndex()

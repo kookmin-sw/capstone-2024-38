@@ -56,7 +56,7 @@ public class MapManager : MonoBehaviour
             elapsedTime = 0.0f;
         }
 
-        float playerY = player.transform.position.y;
+        /*float playerY = player.transform.position.y;
 
         if (playerY - 25 > lava.transform.position.y)
         {
@@ -65,7 +65,7 @@ public class MapManager : MonoBehaviour
         else
         {
             Debug.Log("Player is below Lava.");
-        }
+        }*/
 
         Debug.Log("Current targetY: " + lava.targetY);
 
