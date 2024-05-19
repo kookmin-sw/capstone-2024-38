@@ -90,11 +90,11 @@ public class InputManager : MonoBehaviour
         int keyCode = 0;
         keyCode |= KeyEventCode.JUMP;
 
-        if (!Input.GetKeyDown(KeyCode.Space))
+        if (!Input.GetKey(KeyCode.F))
         {
             return;
         }
-
+        Debug.Log("2");
         Vector3 jumpVector = Vector3.zero;
 
         KeyMessage msg;

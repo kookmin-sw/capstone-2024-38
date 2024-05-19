@@ -330,6 +330,7 @@ public class WorldManager : MonoBehaviour
         bool isMove = false;
         bool isAttack = false;
         bool isNoMove = false;
+        bool isJump = false;
 
         int keyData = keyMessage.keyData;
 
@@ -347,6 +348,12 @@ public class WorldManager : MonoBehaviour
             attackPos = new Vector3(keyMessage.x, keyMessage.y, keyMessage.z);
             //players[index].Attack(attackPos);
             isAttack = true;
+        }
+
+        if ((keyData & KeyEventCode.JUMP) == KeyEventCode.JUMP)
+        {
+            players[index].Jump();
+            isJump = true;
         }
 
         if ((keyData & KeyEventCode.NO_MOVE) == KeyEventCode.NO_MOVE)
@@ -369,6 +376,12 @@ public class WorldManager : MonoBehaviour
         {
             PlayerAttackMessage msg = new PlayerAttackMessage(index, attackPos);
             BackendMatchManager.GetInstance().SendDataToInGame<PlayerAttackMessage>(msg);
+        }
+
+        if (isJump)
+        {
+            PlayerJumpMessage msg = new PlayerJumpMessage(index);
+            BackendMatchManager.GetInstance().SendDataToInGame<PlayerJumpMessage>(msg);
         }
     }
 
