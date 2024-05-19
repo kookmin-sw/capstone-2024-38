@@ -444,6 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lava: {fileID: 0}
   player: {fileID: 0}
+  inGameUi: {fileID: 0}
   survivalTime: 100
 --- !u!1 &235221559
 GameObject:
@@ -4230,6 +4231,9 @@ MonoBehaviour:
   height: 5
   smoothRotate: 100
   rotateSpeed: 5
+  offsetX: 0
+  offsetY: 3
+  offsetZ: -5
 --- !u!114 &1347500394
 MonoBehaviour:
   m_ObjectHideFlags: 0

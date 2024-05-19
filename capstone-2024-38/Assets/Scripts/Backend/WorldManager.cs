@@ -284,6 +284,7 @@ public class WorldManager : MonoBehaviour
                 ProcessPlayerData(moveMessage);
                 break;
             case Protocol.Type.PlayerJump:
+                Debug.Log("1");
                 PlayerJumpMessage jumpMessage = DataParser.ReadJsonData<PlayerJumpMessage>(args.BinaryUserData);
                 ProcessPlayerData(jumpMessage);
                 break;

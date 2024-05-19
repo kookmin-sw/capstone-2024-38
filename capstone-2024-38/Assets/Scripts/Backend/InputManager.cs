@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     {
         GameManager.InGame += MobileInput;
         GameManager.InGame += AttackInput;
+        GameManager.InGame += JumpInput;
         GameManager.AfterInGame += SendNoMoveMessage;
     }
     
@@ -62,11 +63,6 @@ public class InputManager : MonoBehaviour
             moveVector = new Vector3(1,0, -1);
         }
         
-        if (Input.GetKey(KeyCode.Space))
-        {
-            keyCode |= KeyEventCode.JUMP;
-            isJump = true;
-        }
         
         //Vector3 moveVector = new Vector3(virtualStick.GetHorizontalValue(), 0, virtualStick.GetVerticalValue());
         moveVector = Vector3.Normalize(moveVector);
@@ -94,11 +90,23 @@ public class InputManager : MonoBehaviour
         int keyCode = 0;
         keyCode |= KeyEventCode.JUMP;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (!Input.GetKeyDown(KeyCode.Space))
         {
-            
+            return;
         }
-        
+
+        Vector3 jumpVector = Vector3.zero;
+
+        KeyMessage msg;
+        msg = new KeyMessage(keyCode, jumpVector);
+        if (BackendMatchManager.GetInstance().IsHost())
+        {
+            BackendMatchManager.GetInstance().AddMsgToLocalQueue(msg);
+        }
+        else
+        {
+            BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
+        }
     }
 
     void AttackInput()

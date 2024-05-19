@@ -243,11 +243,6 @@ public class Player : MonoBehaviour
         {
             Rotate();
         }
-
-        if (isJump)
-        {
-            
-        }
         
         /*if (물에 5초간 있으면)
          {
