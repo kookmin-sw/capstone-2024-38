@@ -283,6 +283,10 @@ public class WorldManager : MonoBehaviour
                 PlayerMoveMessage moveMessage = DataParser.ReadJsonData<PlayerMoveMessage>(args.BinaryUserData);
                 ProcessPlayerData(moveMessage);
                 break;
+            case Protocol.Type.PlayerJump:
+                PlayerJumpMessage jumpMessage = DataParser.ReadJsonData<PlayerJumpMessage>(args.BinaryUserData);
+                ProcessPlayerData(jumpMessage);
+                break;
             case Protocol.Type.PlayerAttack:
                 PlayerAttackMessage attackMessage = DataParser.ReadJsonData<PlayerAttackMessage>(args.BinaryUserData);
                 ProcessPlayerData(attackMessage);
@@ -393,6 +397,16 @@ public class WorldManager : MonoBehaviour
     {
         players[data.playerSession].SetPosition(data.xPos, data.yPos, data.zPos);
         players[data.playerSession].SetMoveVector(Vector3.zero);
+    }
+
+    private void ProcessPlayerData(PlayerJumpMessage data)
+    {
+        if (BackendMatchManager.GetInstance().IsHost() == true)
+        {
+            //호스트면 리턴
+            return;
+        }
+        players[data.playerSession].Jump();
     }
     private void ProcessPlayerData(PlayerAttackMessage data)
     {

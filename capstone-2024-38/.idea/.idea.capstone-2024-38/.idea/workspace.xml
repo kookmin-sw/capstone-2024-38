@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="4fba3704-9e11-47fa-880d-c4815cf47fdb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.capstone-2024-38/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.capstone-2024-38/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/HyperCoBoyAndGirlDoganinds/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/HyperCoBoyAndGirlDoganinds/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/1.MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/1.MainMenuScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/3.InGame_City.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/3.InGame_City.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/FollowCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/FollowCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/InputManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/Protocol.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/Protocol.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/WorldManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/WorldManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +98,8 @@
       <updated>1716014982906</updated>
       <workItem from="1716014985635" duration="5000" />
       <workItem from="1716015174284" duration="11132000" />
-      <workItem from="1716037197110" duration="8259000" />
+      <workItem from="1716037197110" duration="9094000" />
+      <workItem from="1716106682146" duration="11823000" />
     </task>
     <servers />
   </component>

@@ -7,6 +7,8 @@ using Protocol;
 public class InputManager : MonoBehaviour
 {
     private bool isMove = false;
+    private bool isJump = true;
+    
 
     private void Start()
     {
@@ -43,6 +45,29 @@ public class InputManager : MonoBehaviour
         {
             moveVector = new Vector3(1, 0, 0);
         }
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+        {
+            moveVector = new Vector3(-1,0, 1);
+        }
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+        {
+            moveVector = new Vector3(1,0, 1);
+        }
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+        {
+            moveVector = new Vector3(-1,0, -1);
+        }
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        {
+            moveVector = new Vector3(1,0, -1);
+        }
+        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            keyCode |= KeyEventCode.JUMP;
+            isJump = true;
+        }
+        
         //Vector3 moveVector = new Vector3(virtualStick.GetHorizontalValue(), 0, virtualStick.GetVerticalValue());
         moveVector = Vector3.Normalize(moveVector);
 
@@ -62,6 +87,18 @@ public class InputManager : MonoBehaviour
         {
             BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
         }
+    }
+
+    void JumpInput()
+    {
+        int keyCode = 0;
+        keyCode |= KeyEventCode.JUMP;
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            
+        }
+        
     }
 
     void AttackInput()
@@ -87,7 +124,7 @@ public class InputManager : MonoBehaviour
     void SendNoMoveMessage()
     {
         int keyCode = 0;
-        if (!isMove && WorldManager.instance.IsMyPlayerMove())
+        if (!isMove && !isJump && WorldManager.instance.IsMyPlayerMove())
         {
             keyCode |= KeyEventCode.NO_MOVE;
         }

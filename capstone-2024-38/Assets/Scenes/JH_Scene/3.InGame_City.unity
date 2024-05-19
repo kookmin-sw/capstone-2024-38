@@ -4227,8 +4227,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   dist: 8
-  height: 10
-  smoothRotate: 5
+  height: 5
+  smoothRotate: 100
+  rotateSpeed: 5
 --- !u!114 &1347500394
 MonoBehaviour:
   m_ObjectHideFlags: 0

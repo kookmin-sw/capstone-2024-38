@@ -9,6 +9,7 @@ namespace Protocol
     {
         Key = 0,        // 키(가상 조이스틱) 입력
         PlayerMove,     // 플레이어 이동
+        PlayerJump,
         PlayerRotate,   // 플레이어 회전
         PlayerAttack,   // 플레이어 공격
         PlayerDamaged,  // 플레이어 데미지 받음
@@ -44,6 +45,7 @@ namespace Protocol
         public const int NONE = 0;
         public const int MOVE = 1;      // 이동 메시지
         public const int ATTACK = 2;    // 공격 메시지
+        public const int JUMP = 3;
         public const int NO_MOVE = 4;   // 이동 멈춤 메시지
     }
 
@@ -85,6 +87,27 @@ namespace Protocol
         public float yDir;
         public float zDir;
         public PlayerMoveMessage(SessionId session, Vector3 pos, Vector3 dir) : base(Type.PlayerMove)
+        {
+            this.playerSession = session;
+            this.xPos = pos.x;
+            this.yPos = pos.y;
+            this.zPos = pos.z;
+            this.xDir = dir.x;
+            this.yDir = dir.y;
+            this.zDir = dir.z;
+        }
+    }
+    
+    public class PlayerJumpMessage : Message
+    {
+        public SessionId playerSession;
+        public float xPos;
+        public float yPos;
+        public float zPos;
+        public float xDir;
+        public float yDir;
+        public float zDir;
+        public PlayerJumpMessage(SessionId session, Vector3 pos, Vector3 dir) : base(Type.PlayerJump)
         {
             this.playerSession = session;
             this.xPos = pos.x;

@@ -22,12 +22,17 @@ public class Player : MonoBehaviour
     public Vector3 moveVector { get; private set; }
 
     public bool isRotate { get; private set; }
+    
+    public bool isJump { get; private set; }
 
     private float rotSpeed = 4.0f;
     private float moveSpeed = 4.0f;
+    public float jumpForce = 12.0f;
 
     private GameObject playerModelObject;
     private Rigidbody rigidBody;
+
+    public Animator anim;
     
     
     
@@ -56,6 +61,7 @@ public class Player : MonoBehaviour
         this.isMove = false;
         this.moveVector = new Vector3(0, 0, 0);
         this.isRotate = false;
+        this.isJump = false;
 
         //hp
 
@@ -63,6 +69,7 @@ public class Player : MonoBehaviour
         playerModelObject.transform.rotation = Quaternion.Euler(0, rot, 0);
 
         rigidBody = this.GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         
         if (BackendMatchManager.GetInstance().nowModeType == MatchModeType.TeamOnTeam)
         {
@@ -144,6 +151,13 @@ public class Player : MonoBehaviour
             return;
         }
         playerModelObject.transform.rotation = Quaternion.Lerp(playerModelObject.transform.rotation, Quaternion.LookRotation(moveVector), Time.deltaTime * rotSpeed);
+        
+        // 마우스 입력에 따라 회전할 각도를 계산합니다.
+    }
+    
+    public void Jump()
+    {
+        rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     public void SetPosition(Vector3 pos)
@@ -216,12 +230,23 @@ public class Player : MonoBehaviour
 
         if (isMove)
         {
+            anim.SetBool("IsMove", true);
             Move();
+        }
+
+        if (!isMove)
+        {
+            anim.SetBool("IsMove", false);
         }
 
         if (isRotate)
         {
             Rotate();
+        }
+
+        if (isJump)
+        {
+            
         }
         
         /*if (물에 5초간 있으면)
