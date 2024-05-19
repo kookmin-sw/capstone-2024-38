@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using System.Globalization;
+using System;
 
 public class InGameUI : MonoBehaviour
 {
@@ -12,6 +16,10 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     private GameObject failPopup;
+    private Animator failPopupAnimator;
+    [SerializeField]
+    private GameObject clearPopup;
+    private Animator clearPopupAnimator;
 
     private void Start()
     {
@@ -20,7 +28,9 @@ public class InGameUI : MonoBehaviour
         //heightText = rankObject.GetComponentInChildren<TMP_Text>();
         timeText = rankObject.GetComponentInChildren<TMP_Text>();
         failPopup = GameObject.Find("Popup_Lose");
-        failPopup.SetActive(false);
+        failPopupAnimator = failPopup.GetComponent<Animator>();
+        clearPopup = GameObject.Find("Popup_Stage_Complete_1");
+        clearPopupAnimator = clearPopup.GetComponent<Animator>();
 
         mapManager = FindObjectOfType<MapManager>();
     }
@@ -31,6 +41,12 @@ public class InGameUI : MonoBehaviour
         //heightText.text = playerY.ToString("F2") + " m";
 
         UpdateTimeText();
+
+        if (Input.GetKey(KeyCode.P))
+        {
+            SetFailPopupTrigger();
+        }
+
     }
 
     private void UpdateTimeText()
@@ -43,4 +59,21 @@ public class InGameUI : MonoBehaviour
             timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }
+
+    public void SetFailPopupTrigger()
+    {
+        if (failPopupAnimator != null)
+        {
+            failPopupAnimator.SetTrigger("lose");
+        }
+    }
+
+    public void SetClearPopupTrigger()
+    {
+        if (clearPopupAnimator != null)
+        {
+            clearPopupAnimator.SetTrigger("win");
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
 {
     public upLava lava;
     public GameObject player;
+    public InGameUI inGameUi;
 
     private float moveInterval = 5.0f;
     private float elapsedTime = 0.0f;
@@ -26,6 +27,8 @@ public class MapManager : MonoBehaviour
         {
             Debug.Log("upLava object not found!");
         }
+
+        inGameUi = FindObjectOfType<InGameUI>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
@@ -86,10 +89,12 @@ public class MapManager : MonoBehaviour
         isGameOver = true;
         if (won)
         {
+            inGameUi.SetClearPopupTrigger();
             Debug.Log("You survived!");
         }
         else
         {
+            inGameUi.SetFailPopupTrigger();
             Debug.Log("Game Over! You died.");
         }
 

@@ -35,14 +35,8 @@ public class PlayerHealth : MonoBehaviour
             }
 
             player_animation.SetTrigger("Dead");
-            StartCoroutine(StopGame(1f));
         }
     }
 
-    IEnumerator StopGame(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        Time.timeScale = 0f;
-    }
+   
 }

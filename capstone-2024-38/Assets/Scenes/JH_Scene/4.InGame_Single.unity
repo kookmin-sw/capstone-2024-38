@@ -444,6 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lava: {fileID: 0}
   player: {fileID: 0}
+  inGameUi: {fileID: 0}
   survivalTime: 100
 --- !u!1 &235221559
 GameObject:
@@ -588,7 +589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &252691151
 Transform:
   m_ObjectHideFlags: 0
@@ -618,7 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 0}
   TrackingenemyPrefab: {fileID: 0}
-  spawnRadius: 2
+  spawnRadius: 4
 --- !u!1 &297948799
 GameObject:
   m_ObjectHideFlags: 0
@@ -4076,6 +4077,7 @@ MonoBehaviour:
   timeText: {fileID: 0}
   mapManager: {fileID: 0}
   failPopup: {fileID: 0}
+  clearPopup: {fileID: 0}
 --- !u!4 &1169970704
 Transform:
   m_ObjectHideFlags: 0
@@ -7792,7 +7794,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 63.8, y: 0.0000019073486, z: 18.6}
-  m_LocalScale: {x: 0.2, y: 0.5, z: 0.2}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2437540130322280394}
@@ -10595,7 +10597,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2667551498201460201}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.047471303, y: -0.0000000021483728, z: 1.02101175e-10, w: 0.99887264}
+  m_LocalRotation: {x: 0.047471303, y: 0.0000000021483728, z: -1.02101175e-10, w: 0.99887264}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
