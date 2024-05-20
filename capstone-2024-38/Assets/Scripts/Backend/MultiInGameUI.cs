@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 using TMPro;
 
 public class MultiInGameUI : MonoBehaviour
@@ -45,28 +42,11 @@ public class MultiInGameUI : MonoBehaviour
     {
         clearAnim = clearWindow.GetComponent<Animator>();
         failAnim = failWindow.GetComponent<Animator>();
-=======
->>>>>>> Stashed changes
-
-public class MultiInGameUI : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-<<<<<<< Updated upstream
-=======
->>>>>>> 833ffab04570b9c96b843d0d489a122fa74ef081
->>>>>>> Stashed changes
     }
 
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
-        
-=======
-<<<<<<< HEAD
         UpdateTimeText();
     }
     
@@ -95,9 +75,5 @@ public class MultiInGameUI : MonoBehaviour
         {
             clearAnim.SetTrigger("win");
         }
-=======
-        
->>>>>>> 833ffab04570b9c96b843d0d489a122fa74ef081
->>>>>>> Stashed changes
     }
 }
