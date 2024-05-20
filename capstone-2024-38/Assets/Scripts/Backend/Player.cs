@@ -217,6 +217,7 @@ public class Player : MonoBehaviour
 
     private void PlayerDie()
     {
+        MultiInGameUI.Instance.SetFailPopupTrigger();
         isLive = false;
         anim.SetTrigger("Dead");
         // 나머지 게임 오브젝트들 false
@@ -263,11 +264,16 @@ public class Player : MonoBehaviour
             Rotate();
         }
         
-        if (transform.position.y < lava.transform.position.y - 5)
-         {
+        if (transform.position.y < lava.targetY- 5)
+        {
             PlayerDie();
             WorldManager.instance.dieEvent(index);
-         }
+        }
+
+        if (isLive && WorldManager.instance.alivePlayer == 1)
+        {
+            MultiInGameUI.Instance.SetClearPopupTrigger();
+        }
     }
     
     public SessionId GetIndex()

@@ -97,7 +97,6 @@ public class WorldManager : MonoBehaviour
         {
             SendGameEndOrder();
         }
-
     }
     
     private void SendGameEndOrder()
@@ -274,7 +273,6 @@ public class WorldManager : MonoBehaviour
                 SetGameRecord(endMessage.count, endMessage.sessionList);
                 GameManager.GetInstance().ChangeState(GameManager.GameState.Over);
                 break;
-
             case Protocol.Type.Key:
                 KeyMessage keyMessage = DataParser.ReadJsonData<KeyMessage>(args.BinaryUserData);
                 ProcessKeyEvent(args.From.SessionId, keyMessage);
