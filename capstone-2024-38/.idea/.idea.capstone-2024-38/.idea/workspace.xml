@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fba3704-9e11-47fa-880d-c4815cf47fdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Player.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.capstone-2024-38/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.capstone-2024-38/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/HyperCoBoyAndGirlDoganinds/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/HyperCoBoyAndGirlDoganinds/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/3.InGame_City.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JH_Scene/3.InGame_City.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendInGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendInGame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendMatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/BackendMatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Backend/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Backend/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MainSystem/GameInput/MapManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MainSystem/GameInput/MapManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +20,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Backend/FollowCamera.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Backend/InGameUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../카카오톡 받은 파일/LobbyUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../카카오톡 받은 파일/LoginUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../카카오톡 받은 파일/RoomUI.cs" root0="SKIP_HIGHLIGHTING" />
@@ -92,7 +99,7 @@
       <workItem from="1716014985635" duration="5000" />
       <workItem from="1716015174284" duration="11132000" />
       <workItem from="1716037197110" duration="9094000" />
-      <workItem from="1716106682146" duration="21598000" />
+      <workItem from="1716106682146" duration="31043000" />
     </task>
     <servers />
   </component>

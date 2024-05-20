@@ -198,6 +198,11 @@ public partial class BackendMatchManager : MonoBehaviour
         {
             matchGameResult = MeleeRecord(record);
         }
+
+        if (nowModeType == MatchModeType.OneOnOne)
+        {
+            matchGameResult = OneOnOneRecord(record);
+        }
         else
         {
             Debug.LogError("게임 결과 종합 실패 - 알수없는 매치모드타입입니다.\n" + nowModeType);
@@ -220,6 +225,21 @@ public partial class BackendMatchManager : MonoBehaviour
         {
             nowGameResult.m_winners.Add(record.Pop());
         }
+
+        return nowGameResult;
+    }
+    
+    private MatchGameResult OneOnOneRecord(Stack<SessionId> record)
+    {
+        MatchGameResult nowGameResult = new MatchGameResult();
+
+        nowGameResult.m_winners = new List<SessionId>();
+        nowGameResult.m_winners.Add(record.Pop());
+
+        nowGameResult.m_losers = new List<SessionId>();
+        nowGameResult.m_losers.Add(record.Pop());
+
+        nowGameResult.m_draws = null;
 
         return nowGameResult;
     }

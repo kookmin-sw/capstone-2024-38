@@ -67,7 +67,7 @@ public class MapManager : MonoBehaviour
             Debug.Log("Player is below Lava.");
         }*/
 
-        Debug.Log("Current targetY: " + lava.targetY);
+        //Debug.Log("Current targetY: " + lava.targetY);
 
         UpdateTimerText();
 
@@ -81,7 +81,7 @@ public class MapManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
-        Debug.Log(string.Format("{0:00}:{1:00}", minutes, seconds));
+        //Debug.Log(string.Format("{0:00}:{1:00}", minutes, seconds));
     }
 
     public void GameOver(bool won)

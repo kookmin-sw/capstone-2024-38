@@ -96,6 +96,7 @@ public partial class BackendMatchManager : MonoBehaviour
         }
         // 변수 초기화
         isConnectInGameServer = false;
+        Debug.Log(matchInfos[0].matchModeType);
         
         Backend.Match.RequestMatchMaking(matchInfos[0].matchType, matchInfos[0].matchModeType, matchInfos[0].inDate);
         if (isConnectMatchServer)

@@ -27,7 +27,11 @@ public class Player : MonoBehaviour
 
     private float rotSpeed = 4.0f;
     private float moveSpeed = 4.0f;
-    public float jumpForce = 12.0f;
+    public float jumpForce = 6.0f;
+    
+    public LayerMask groundLayer;
+    public float groundCheckDistance = 2.2f;
+    public bool isGrounded;
 
     private GameObject playerModelObject;
     private Rigidbody rigidBody;
@@ -64,6 +68,7 @@ public class Player : MonoBehaviour
         this.moveVector = new Vector3(0, 0, 0);
         this.isRotate = false;
         this.isJump = false;
+        isGrounded = true;
 
         //hp
 
@@ -160,8 +165,17 @@ public class Player : MonoBehaviour
     
     public void Jump()
     {
+        isGrounded = false;
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         anim.SetTrigger("Jump");
+    }
+    
+    void OnTriggerEnter(Collider collider) //충돌 감지
+    {
+        if (collider.gameObject.tag == "Floor") 
+        { 
+            isGrounded = true; 
+        }
     }
 
     public void SetPosition(Vector3 pos)
