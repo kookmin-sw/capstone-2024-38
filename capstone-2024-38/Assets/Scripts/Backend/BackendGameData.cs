@@ -10,13 +10,25 @@ public class UserData
 {
     public int level;
     public int rankPoint;
+    public int gold;
+    public int gem;
     public Dictionary<string, int> inventory = new Dictionary<string, int>();
 }
 
 public class BackendGameData : MonoBehaviour
 {
     private static BackendGameData _instance = null;
-
+    
+    void Awake()
+    {
+        // 인스턴스가 하나만 존재하게 함
+        if (_instance != null)
+        {
+            Destroy(_instance);
+        }
+        _instance = this;
+        
+    }
     public static BackendGameData Instance
     {
         get
@@ -30,7 +42,7 @@ public class BackendGameData : MonoBehaviour
         }
     }
 
-    public static UserData userData;
+    public UserData userData;
 
     private string gameDataRowInDate = string.Empty; //스트링 초기화
 
@@ -44,10 +56,14 @@ public class BackendGameData : MonoBehaviour
         Debug.Log("데이터를 초기화합니다.");
         userData.level = 1;
         userData.rankPoint = 0;
+        userData.gold = 0;
+        userData.gem = 0;
 
         Param param = new Param();
         param.Add("level", userData.level);
         param.Add("rankPoint", userData.rankPoint);
+        param.Add("gold", userData.gold);
+        param.Add("gem", userData.gem);
         
         Debug.Log("게임정보 데이터 삽입을 요청합니다.");
         var bro = Backend.GameData.Insert("USER_DATA", param);
@@ -85,6 +101,8 @@ public class BackendGameData : MonoBehaviour
 
                 userData.level = int.Parse(gameDataJson[0]["level"].ToString());
                 userData.rankPoint = int.Parse(gameDataJson[0]["rankPoint"].ToString());
+                userData.gold = int.Parse(gameDataJson[0]["gold"].ToString());
+                userData.gem = int.Parse(gameDataJson[0]["gem"].ToString());
 
                 Debug.Log(userData.ToString());
             }

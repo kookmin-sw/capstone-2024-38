@@ -84,13 +84,13 @@ public class BackendPost : MonoBehaviour
                 string itemName = itemJson["item"]["itemName"].ToString();
                 int itemCount = int.Parse(itemJson["itemCount"].ToString());
 
-                if(BackendGameData.userData.inventory.ContainsKey(itemName)) 
+                if(BackendGameData.Instance.userData.inventory.ContainsKey(itemName)) 
                 {
-                    BackendGameData.userData.inventory[itemName] += itemCount;
+                    BackendGameData.Instance.userData.inventory[itemName] += itemCount;
                 }
                 else 
                 {
-                    BackendGameData.userData.inventory.Add(itemName, itemCount);
+                    BackendGameData.Instance.userData.inventory.Add(itemName, itemCount);
                 }
 
                 Debug.Log($"아이템을 수령했습니다. : {itemName} - {itemCount}개");

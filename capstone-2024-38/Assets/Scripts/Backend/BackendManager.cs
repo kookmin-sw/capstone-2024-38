@@ -43,7 +43,7 @@ public class BackendManager : MonoBehaviour
 
             BackendGameData.Instance.GameDataGet();
 
-            if (BackendGameData.userData == null)
+            if (BackendGameData.Instance.userData == null)
             {
                 BackendGameData.Instance.GameDataInsert();
             }

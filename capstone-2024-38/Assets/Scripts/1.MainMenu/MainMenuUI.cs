@@ -86,6 +86,14 @@ public class MainMenuUI : MonoBehaviour
     public TMP_Text myRankScore;
 
     public TMP_Text myRankNum;
+
+    public TMP_Text myNickname;
+
+    public TMP_Text levelInfo;
+    public TMP_Text winsInfo;
+    public TMP_Text loseInfo;
+    public TMP_Text goldInfo;
+    public TMP_Text gemInfo;
     
     public GameObject postPrefab;
     public GameObject postList;
@@ -101,6 +109,7 @@ public class MainMenuUI : MonoBehaviour
         page_navi = stage.transform.Find("Page_navi");
         stageani = stage.GetComponent<Animator>();
         DisplayMail();
+        BackendGameData.Instance.GameDataGet();
     }
 
     private void Update()
@@ -155,6 +164,15 @@ public class MainMenuUI : MonoBehaviour
         {
             myinfo_popup.SetBool("check", true);
         }
+        Debug.Log(BackendGameData.Instance.userData);
+        myNickname.text = BackendMatchManager.GetInstance().myNickName;
+        
+        levelInfo.text = BackendGameData.Instance.userData.level.ToString();
+        goldInfo.text = BackendGameData.Instance.userData.gold.ToString();
+        gemInfo.text = BackendGameData.Instance.userData.gem.ToString();
+        winsInfo.text = BackendMatchManager.GetInstance().GetMyMatchRecord(0).win.ToString();
+        loseInfo.text = (BackendMatchManager.GetInstance().GetMyMatchRecord(0).numOfMatch -
+                         BackendMatchManager.GetInstance().GetMyMatchRecord(0).win).ToString();
     }
     void stageAnimation()
     {

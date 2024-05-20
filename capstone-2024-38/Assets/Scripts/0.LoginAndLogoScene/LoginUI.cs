@@ -17,6 +17,9 @@ public class LoginUI : MonoBehaviour
 
     [SerializeField]
     private Animator SingUp;
+    
+    [SerializeField]
+    public Animator NicknameUp;
 
     [SerializeField]
     private Animator ForgotPassword;
@@ -37,6 +40,9 @@ public class LoginUI : MonoBehaviour
 
     public Button loginButton;
     public Button signUpButton;
+    public Button nicknameButton;
+
+    public GameObject nicknameWindow;
 
     void Awake()
     {
@@ -56,6 +62,7 @@ public class LoginUI : MonoBehaviour
     void Start()
     {
         first = true;
+        nicknameButton.onClick.AddListener(NicknameButtonClicked);
     }
 
     // Update is called once per frame
@@ -133,5 +140,10 @@ public class LoginUI : MonoBehaviour
         LoginPopUp.SetTrigger("Cancel");
         BackendLogin.Instance.CustomLogin(loginId, loginPw);
         //SceneManager.LoadScene("1.MainMenuScene");
+    }
+
+    public void NicknameButtonClicked()
+    {
+        BackendLogin.Instance.CreateNickname(nickname);
     }
 }

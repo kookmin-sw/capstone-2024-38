@@ -404,57 +404,62 @@ public partial class BackendMatchManager : MonoBehaviour
         return result;
     }
     
-    public void GetMyMatchRecord(int index, Action<MatchRecord, bool> func)
+    public MatchRecord GetMyMatchRecord(int index)
     {
         var inDate = myIndate;
+        var matchInfo = matchInfos[index];
 
-        SendQueue.Enqueue(Backend.Match.GetMatchRecord, inDate, matchInfos[index].matchType, matchInfos[index].matchModeType, matchInfos[index].inDate, callback =>
+        BackendReturnObject callback = Backend.Match.GetMatchRecord(inDate, matchInfo.matchType, matchInfo.matchModeType, matchInfo.inDate);
+
+        MatchRecord record = new MatchRecord();
+        record.matchTitle = matchInfo.title;
+        record.matchType = matchInfo.matchType;
+        record.modeType = matchInfo.matchModeType;
+
+        if (!callback.IsSuccess())
         {
-            MatchRecord record = new MatchRecord();
-            record.matchTitle = matchInfos[index].title;
-            record.matchType = matchInfos[index].matchType;
-            record.modeType = matchInfos[index].matchModeType;
+            Debug.LogError("매칭 기록 조회 실패\n" + callback);
+            return record;
+        }
 
-            if (!callback.IsSuccess())
-            {
-                Debug.LogError("매칭 기록 조회 실패\n" + callback);
-                func(record, false);
-                return;
-            }
+        if (callback.Rows().Count <= 0)
+        {
+            Debug.Log("매칭 기록이 존재하지 않습니다.\n" + callback);
+            record.win = 0;
+            record.numOfMatch = 0;
+            record.score = "0";
+            record.winRate = 0;
+            return record;
+        }
 
-            if (callback.Rows().Count <= 0)
-            {
-                Debug.Log("매칭 기록이 존재하지 않습니다.\n" + callback);
-                func(record, true);
-                return;
-            }
-            var data = callback.Rows()[0];
-            var win = Convert.ToInt32(data["victory"]["N"].ToString());
-            var draw = Convert.ToInt32(data["draw"]["N"].ToString());
-            var defeat = Convert.ToInt32(data["defeat"]["N"].ToString());
-            var numOfMatch = win + draw + defeat;
-            string point = string.Empty;
-            if (matchInfos[index].matchType == MatchType.MMR)
-            {
-                point = data["mmr"]["N"].ToString();
-            }
-            else if (matchInfos[index].matchType == MatchType.Point)
-            {
-                point = data["point"]["N"].ToString() + " P";
-            }
-            else
-            {
-                point = "-";
-            }
+        var data = callback.Rows()[0];
+        var win = Convert.ToInt32(data["victory"]["N"].ToString());
+        var draw = Convert.ToInt32(data["draw"]["N"].ToString());
+        var defeat = Convert.ToInt32(data["defeat"]["N"].ToString());
+        var numOfMatch = win + draw + defeat;
+        string point = string.Empty;
 
-            record.win = win;
-            record.numOfMatch = numOfMatch;
-            record.winRate = Math.Round(((float)win / numOfMatch) * 100 * 100) / 100;
-            record.score = point;
+        if (matchInfo.matchType == MatchType.MMR)
+        {
+            point = data["mmr"]["N"].ToString();
+        }
+        else if (matchInfo.matchType == MatchType.Point)
+        {
+            point = data["point"]["N"].ToString() + " P";
+        }
+        else
+        {
+            point = "-";
+        }
 
-            func(record, true);
-        });
+        record.win = win;
+        record.numOfMatch = numOfMatch;
+        record.winRate = Math.Round(((float)win / numOfMatch) * 100 * 100) / 100;
+        record.score = point;
+
+        return record;
     }
+
     
     public class ServerInfo
     {
