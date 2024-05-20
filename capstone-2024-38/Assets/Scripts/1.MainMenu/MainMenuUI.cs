@@ -92,6 +92,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
+        BackendMatchManager.GetInstance().GetMyData();
         BackendMatchManager.GetInstance().JoinMatchServer();
         Invoke("CreateRoom", 0.5f);
         BackendRank.Instance.RankGet();
@@ -99,6 +100,7 @@ public class MainMenuUI : MonoBehaviour
         BackendPost.Instance.PostListGet(PostType.Admin);
         page_navi = stage.transform.Find("Page_navi");
         stageani = stage.GetComponent<Animator>();
+        DisplayMail();
     }
 
     private void Update()
@@ -331,8 +333,10 @@ public class MainMenuUI : MonoBehaviour
     {
         titleAnimation();
         MailAnimation();
-        
-        Debug.Log(BackendPost.Instance._postList.Count);
+    }
+
+    void DisplayMail()
+    {
         for (int i = 0; i < BackendPost.Instance._postList.Count; i++)
         {
             GameObject newPost = Instantiate(postPrefab, null, false);

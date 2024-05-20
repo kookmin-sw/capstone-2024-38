@@ -310,6 +310,16 @@ public partial class BackendMatchManager : MonoBehaviour
 
             WorldManager.instance.OnRecieve(args);
         };
+        
+        Backend.Match.OnLeaveInGameServer += (args) =>
+        {
+            Debug.Log("OnLeaveInGameServer : " + args.ErrInfo + " : " + args.Reason);
+            if (args.Reason.Equals("Fail To Reconnect"))
+            {
+                JoinMatchServer();
+            }
+            isConnectInGameServer = false;
+        };
     }
 
     private void ExceptionHandler()
@@ -392,6 +402,58 @@ public partial class BackendMatchManager : MonoBehaviour
             return null;
         }
         return result;
+    }
+    
+    public void GetMyMatchRecord(int index, Action<MatchRecord, bool> func)
+    {
+        var inDate = myIndate;
+
+        SendQueue.Enqueue(Backend.Match.GetMatchRecord, inDate, matchInfos[index].matchType, matchInfos[index].matchModeType, matchInfos[index].inDate, callback =>
+        {
+            MatchRecord record = new MatchRecord();
+            record.matchTitle = matchInfos[index].title;
+            record.matchType = matchInfos[index].matchType;
+            record.modeType = matchInfos[index].matchModeType;
+
+            if (!callback.IsSuccess())
+            {
+                Debug.LogError("매칭 기록 조회 실패\n" + callback);
+                func(record, false);
+                return;
+            }
+
+            if (callback.Rows().Count <= 0)
+            {
+                Debug.Log("매칭 기록이 존재하지 않습니다.\n" + callback);
+                func(record, true);
+                return;
+            }
+            var data = callback.Rows()[0];
+            var win = Convert.ToInt32(data["victory"]["N"].ToString());
+            var draw = Convert.ToInt32(data["draw"]["N"].ToString());
+            var defeat = Convert.ToInt32(data["defeat"]["N"].ToString());
+            var numOfMatch = win + draw + defeat;
+            string point = string.Empty;
+            if (matchInfos[index].matchType == MatchType.MMR)
+            {
+                point = data["mmr"]["N"].ToString();
+            }
+            else if (matchInfos[index].matchType == MatchType.Point)
+            {
+                point = data["point"]["N"].ToString() + " P";
+            }
+            else
+            {
+                point = "-";
+            }
+
+            record.win = win;
+            record.numOfMatch = numOfMatch;
+            record.winRate = Math.Round(((float)win / numOfMatch) * 100 * 100) / 100;
+            record.score = point;
+
+            func(record, true);
+        });
     }
     
     public class ServerInfo

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     // 스테이터스
     //public int hp { get; private set; } = 0;
     //private const int MAX_HP = 5;
-    private bool isLive = false;
+    public bool isLive = false;
     
     // 이동관련
     public bool isMove { get; private set; }
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     public float jumpForce = 6.0f;
     
     public LayerMask groundLayer;
-    public float groundCheckDistance = 2.2f;
+    public float groundCheckDistance = 1.1f;
     public bool isGrounded;
 
     private GameObject playerModelObject;
@@ -165,7 +165,11 @@ public class Player : MonoBehaviour
     
     public void Jump()
     {
-        isGrounded = false;
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+        if (!isGrounded)
+        {
+            return;
+        }
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         anim.SetTrigger("Jump");
     }

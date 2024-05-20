@@ -90,7 +90,7 @@ public class InputManager : MonoBehaviour
         int keyCode = 0;
         keyCode |= KeyEventCode.JUMP;
 
-        if (!Input.GetKey(KeyCode.F))
+        if (!Input.GetKey(KeyCode.Space))
         {
             return;
         }

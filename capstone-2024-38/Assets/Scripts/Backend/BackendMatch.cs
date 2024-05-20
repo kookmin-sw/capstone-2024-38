@@ -12,6 +12,9 @@ public partial class BackendMatchManager : MonoBehaviour
 
     public MatchModeType nowModeType { get; private set; } = MatchModeType.None;
     
+    public string myNickName { get; private set; } = string.Empty;  // 로그인한 계정의 닉네임
+    public string myIndate { get; private set; } = string.Empty;    // 로그인한 계정의 inDate
+    
     // 디버그 로그
     private string NOTCONNECT_MATCHSERVER = "매치 서버에 연결되어 있지 않습니다.";
     private string RECONNECT_MATCHSERVER = "매치 서버에 접속을 시도합니다.";
@@ -284,40 +287,14 @@ public partial class BackendMatchManager : MonoBehaviour
         isJoinGameRoom = false;
         isReconnectProcess = true;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public void GetMyData()
+    {
+        var bro = Backend.BMember.GetUserInfo();
+        
+        LitJson.JsonData userInfoJson = bro.GetReturnValuetoJSON()["row"];
+        
+        myNickName = userInfoJson["nickname"].ToString();
+        myIndate = userInfoJson["inDate"].ToString();
+    }
 }

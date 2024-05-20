@@ -211,6 +211,7 @@ public partial class BackendMatchManager : MonoBehaviour
 
         //MatchResultUI.GetInstance().SetGameResult(matchGameResult);
         //RemoveAISessionInGameResult();
+        Debug.Log("매치 끝");
         Backend.Match.MatchEnd(matchGameResult);
     }
     

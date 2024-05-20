@@ -100,13 +100,7 @@ public class PlayerKeyBoardMovement : MonoBehaviour
                 player_animation.SetBool("IsMove", false);
                 player_animation.SetBool("IsRun", true);
             }
-
         }
-        
-        
-
-        
-
     }
 
     Vector3 GetMoveDirection()
