@@ -67,11 +67,13 @@ public class MainMenuUI : MonoBehaviour
     private Animator myinfo_popup;
 
     [SerializeField]
+    private Animator shop_popup;
+
+    [SerializeField]
     private GameObject serching;
 
     [SerializeField]
     private float serchingTime;
-    float temp_time;
 
     public TMP_Text rank1Name;
     public TMP_Text rank2Name;
@@ -129,6 +131,18 @@ public class MainMenuUI : MonoBehaviour
         }
     }
 
+    void shopAnimation()
+    {
+        if (shop_popup.GetBool("check"))
+        {
+            shop_popup.SetBool("check", false);
+        }
+        else
+        {
+            shop_popup.SetBool("check", true);
+        }
+    }
+
     void myinfoAnimation()
     {
         if (myinfo_popup.GetBool("check"))
@@ -149,7 +163,6 @@ public class MainMenuUI : MonoBehaviour
         else
         {
             stageani.SetBool("Stage", true);
-            temp_time = 0.0f;
             serching.SetActive(true);
         }
     }
@@ -252,6 +265,12 @@ public class MainMenuUI : MonoBehaviour
     public void ButtonClick_SettingTitleSwap()
     {
         settingAnimation();
+        titleAnimation();
+    }
+
+    public void ButtonClick_shopTitleSwap()
+    {
+        shopAnimation();
         titleAnimation();
     }
 
