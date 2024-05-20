@@ -64,6 +64,9 @@ public class MainMenuUI : MonoBehaviour
     private Animator mail_popup;
 
     [SerializeField]
+    private Animator myinfo_popup;
+
+    [SerializeField]
     private GameObject serching;
 
     [SerializeField]
@@ -123,6 +126,18 @@ public class MainMenuUI : MonoBehaviour
         else
         {
             title.SetBool("Title", true);
+        }
+    }
+
+    void myinfoAnimation()
+    {
+        if (myinfo_popup.GetBool("check"))
+        {
+            myinfo_popup.SetBool("check", false);
+        }
+        else
+        {
+            myinfo_popup.SetBool("check", true);
         }
     }
     void stageAnimation()
@@ -237,6 +252,12 @@ public class MainMenuUI : MonoBehaviour
     public void ButtonClick_SettingTitleSwap()
     {
         settingAnimation();
+        titleAnimation();
+    }
+
+    public void ButtonClick_myInfoTitleSwap()
+    {
+        myinfoAnimation();
         titleAnimation();
     }
 
