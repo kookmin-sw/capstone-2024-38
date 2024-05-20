@@ -38,5 +38,5 @@ DON'T FALL
 ### 5. 기타
 
 추가적인 내용은 자유롭게 작성하세요.
-
+포스터 https://drive.google.com/file/d/1iSKbSGFwh82fAEX-vaXw2oUOjTaLJgTc/view?usp=sharing
 
