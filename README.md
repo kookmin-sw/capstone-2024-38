@@ -1,8 +1,7 @@
 2024년 38조  https://kookmin-sw.github.io/capstone-2024-38/
 
-![header](https://capsule-render.vercel.app/api?type=Waving&height=200&text=ColoringtheBattlefield&fontColor=d5e6f5&color=timeGradient&animation=fadeIn)
-![Uploading 무제-5.png…]()
-
+![header](https://capsule-render.vercel.app/api?type=Waving&height=200&textDON'TFALL&fontColor=d5e6f5&color=timeGradient&animation=fadeIn)
+![무제-5](https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/3e1bd16f-266b-484a-86f7-ca5cbef275c9)
 ### 1. 프로젝트 소개
 DON'T FALL
 
