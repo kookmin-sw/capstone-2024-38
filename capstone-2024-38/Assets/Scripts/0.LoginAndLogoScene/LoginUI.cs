@@ -24,7 +24,8 @@ public class LoginUI : MonoBehaviour
     [SerializeField]
     private GameObject nickname_popup;
 
-
+    [SerializeField]
+    private GameObject failpopup;
 
     bool first;
 
@@ -71,6 +72,18 @@ public class LoginUI : MonoBehaviour
         }
     }
 
+
+    public void fail_Check()
+    {
+        if(failpopup.activeSelf)
+        {
+            failpopup.SetActive(false);
+        }
+        else
+        {
+            failpopup.SetActive(true);
+        }
+    }
     public void nickname_popupOn()
     {
         nickname_popup.SetActive(true);
