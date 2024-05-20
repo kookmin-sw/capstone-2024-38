@@ -21,6 +21,11 @@ public class LoginUI : MonoBehaviour
     [SerializeField]
     private Animator ForgotPassword;
 
+    [SerializeField]
+    private GameObject nickname_popup;
+
+
+
     bool first;
 
     public TMP_InputField loginId;
@@ -66,6 +71,16 @@ public class LoginUI : MonoBehaviour
         }
     }
 
+    public void nickname_popupOn()
+    {
+        nickname_popup.SetActive(true);
+    }
+
+    public void nickname_popupOff()
+    {
+
+        nickname_popup.SetActive(false);
+    }
     public void SingUpButtonClick()
     {
         SingUp.SetTrigger("PressAnyKey");
