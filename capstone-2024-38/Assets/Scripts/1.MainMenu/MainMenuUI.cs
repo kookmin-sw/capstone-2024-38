@@ -323,6 +323,13 @@ public class MainMenuUI : MonoBehaviour
         titleAnimation();
     }
 
+    public void ButtonClick_MatchMakingCancel()
+    {
+        titleAnimation();
+        stageAnimation();
+        Debug.Log("여기서 서버 연동");
+    }
+
     public void ButtonClick_LanguageSetting()
     {
         if(Language_popup.activeSelf == true)
