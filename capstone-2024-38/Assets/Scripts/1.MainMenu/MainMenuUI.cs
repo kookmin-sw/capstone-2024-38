@@ -70,6 +70,10 @@ public class MainMenuUI : MonoBehaviour
     private Animator shop_popup;
 
     [SerializeField]
+    private GameObject Mission;
+    private Animator Mission_ani;
+
+    [SerializeField]
     private GameObject serching;
 
     [SerializeField]
@@ -100,6 +104,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
+        Mission_ani = Mission.GetComponent<Animator>();
         BackendMatchManager.GetInstance().GetMyData();
         BackendMatchManager.GetInstance().JoinMatchServer();
         Invoke("CreateRoom", 0.5f);
@@ -139,6 +144,18 @@ public class MainMenuUI : MonoBehaviour
         else
         {
             title.SetBool("Title", true);
+        }
+    }
+
+    void MissionAnimation()
+    {
+        if (Mission_ani.GetBool("check"))
+        {
+            Mission_ani.SetBool("check", false);
+        }
+        else
+        {
+            Mission_ani.SetBool("check", true);
         }
     }
 
@@ -291,6 +308,12 @@ public class MainMenuUI : MonoBehaviour
     public void ButtonClick_shopTitleSwap()
     {
         shopAnimation();
+        titleAnimation();
+    }
+
+    public void ButtonClick_MissionTitleSwap()
+    {
+        MissionAnimation();
         titleAnimation();
     }
 
