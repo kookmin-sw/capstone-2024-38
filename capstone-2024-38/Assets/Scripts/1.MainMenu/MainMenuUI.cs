@@ -99,8 +99,18 @@ public class MainMenuUI : MonoBehaviour
     public TMP_Text goldInfo;
     public TMP_Text gemInfo;
     
+    public TMP_Text missionLevelText;
+    public TMP_Text missionWinsText;
+    public TMP_Text missionRPText;
+    public TMP_Text missionMatchText;
+    
     public GameObject postPrefab;
     public GameObject postList;
+    
+    public Slider levelSlider;
+    public Slider winSlider;
+    public Slider rankPointSlider;
+    public Slider matchSlider;
 
     private void Start()
     {
@@ -315,6 +325,15 @@ public class MainMenuUI : MonoBehaviour
     {
         MissionAnimation();
         titleAnimation();
+        levelSlider.value = BackendGameData.Instance.userData.level;
+        rankPointSlider.value = BackendGameData.Instance.userData.rankPoint;
+        winSlider.value = BackendMatchManager.GetInstance().GetMyMatchRecord(0).win;
+        matchSlider.value = BackendMatchManager.GetInstance().GetMyMatchRecord(0).numOfMatch;
+
+        missionLevelText.text = BackendGameData.Instance.userData.level.ToString() + " / 10";
+        missionRPText.text = BackendGameData.Instance.userData.rankPoint.ToString() + " / 100";
+        missionWinsText.text = BackendMatchManager.GetInstance().GetMyMatchRecord(0).win + " / 10";
+        missionMatchText.text = BackendMatchManager.GetInstance().GetMyMatchRecord(0).numOfMatch + " / 1";
     }
 
     public void ButtonClick_myInfoTitleSwap()
@@ -327,12 +346,12 @@ public class MainMenuUI : MonoBehaviour
     {
         titleAnimation();
         stageAnimation();
-        Debug.Log("¿©±â¼­ ¼­¹ö ¿¬µ¿");
+        Debug.Log("ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
     }
 
     public void GameStartButton()
     {
-        Debug.Log("ÀÓ½Ã ¹öÆ° ÀÏ´Ü ÀÎ°ÔÀÓ È®ÀÎÀ» À§ÇØ ÀÌ ¹öÆ° ¿¬µ¿ ½ÃÄÑ¼­ ¾À ÀÌµ¿ ÇÏ¸é µÉµí");
+        Debug.Log("ï¿½Ó½ï¿½ ï¿½ï¿½Æ° ï¿½Ï´ï¿½ ï¿½Î°ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ¼ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Ï¸ï¿½ ï¿½Éµï¿½");
     }
 
     public void ButtonClick_LanguageSetting()
