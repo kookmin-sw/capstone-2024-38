@@ -30,6 +30,9 @@ public class LoginUI : MonoBehaviour
     [SerializeField]
     private GameObject failpopup;
 
+    [SerializeField]
+    private GameObject succespopup;
+
     bool first;
 
     public TMP_InputField loginId;
@@ -89,6 +92,18 @@ public class LoginUI : MonoBehaviour
         else
         {
             failpopup.SetActive(true);
+        }
+    }
+
+    public void succes_Check()
+    {
+        if (succespopup.activeSelf)
+        {
+            succespopup.SetActive(false);
+        }
+        else
+        {
+            succespopup.SetActive(true);
         }
     }
     public void nickname_popupOn()
