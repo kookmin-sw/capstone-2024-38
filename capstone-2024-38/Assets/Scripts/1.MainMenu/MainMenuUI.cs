@@ -330,6 +330,11 @@ public class MainMenuUI : MonoBehaviour
         Debug.Log("여기서 서버 연동");
     }
 
+    public void GameStartButton()
+    {
+        Debug.Log("임시 버튼 일단 인게임 확인을 위해 이 버튼 연동 시켜서 씬 이동 하면 될듯");
+    }
+
     public void ButtonClick_LanguageSetting()
     {
         if(Language_popup.activeSelf == true)
