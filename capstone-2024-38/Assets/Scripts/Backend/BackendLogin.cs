@@ -37,10 +37,12 @@ public class BackendLogin : MonoBehaviour
         if (bro.IsSuccess())
         {
             Debug.Log("회원가입에 성공했습니다. : " + bro);
+            LoginUI.GetInstance().signUpSuccess();
         }
         else
         {
             Debug.LogError("회원가입에 실패했습니다. : " + bro);
+            LoginUI.GetInstance().signUpFailOn();
         }
     }
 
@@ -59,11 +61,14 @@ public class BackendLogin : MonoBehaviour
         }
         else
         {
+            LoginUI.GetInstance().fail_popupOn();
             Debug.Log("로그인이 실패했습니다. : " + bro);
+            return;
         }
         
         if (Backend.UserNickName == "")
         {
+            LoginUI.GetInstance().LoginPopUp.SetTrigger("Cancel");
             LoginUI.GetInstance().nicknameWindow.SetActive(true);
             LoginUI.GetInstance().NicknameUp.SetTrigger("PressAnyKey");
         }
@@ -81,16 +86,18 @@ public class BackendLogin : MonoBehaviour
         var bro = Backend.BMember.UpdateNickname(name);
         BackendGameData.Instance.GameDataInsert();
         BackendRank.Instance.RankInsert(0);
-        GameManager.GetInstance().ChangeState(GameManager.GameState.MatchLobby);
         //SceneManager.LoadScene("1. MatchLobby");
 
         if (bro.IsSuccess())
         {
             Debug.Log("닉네임 변경에 성공했습니다. : " + bro);
+            GameManager.GetInstance().ChangeState(GameManager.GameState.MatchLobby);
+
         }
         else
         {
             Debug.LogError("닉네임 변경에 실패했습니다. : " + bro);
+            LoginUI.GetInstance().nicknameFailOn();
         }
     }
     // Start is called before the first frame update

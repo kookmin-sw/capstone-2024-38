@@ -10,7 +10,7 @@ public class LoginUI : MonoBehaviour
     private static LoginUI instance;
     
     [SerializeField]
-    private Animator LoginPopUp;
+    public Animator LoginPopUp;
 
     [SerializeField]
     private Animator Logo;
@@ -46,6 +46,10 @@ public class LoginUI : MonoBehaviour
     public Button nicknameButton;
 
     public GameObject nicknameWindow;
+    public GameObject loginFailWindow;
+    public GameObject signUpFailWindow;
+    public GameObject nicknameFailWindow;
+    public GameObject signUpSuccessWindow;
 
     void Awake()
     {
@@ -116,6 +120,32 @@ public class LoginUI : MonoBehaviour
 
         nickname_popup.SetActive(false);
     }
+
+    public void fail_popupOn()
+    {
+        loginFailWindow.SetActive(true);    
+    }
+
+    public void fail_popupOff()
+    {
+        loginFailWindow.SetActive(false);
+    }
+
+    public void signUpFailOn()
+    {
+        signUpFailWindow.SetActive(true);
+    }
+
+    public void nicknameFailOn()
+    {
+        nicknameFailWindow.SetActive(true);
+    }
+
+    public void signUpSuccess()
+    {
+        signUpSuccessWindow.SetActive(true);
+    }
+    
     public void SingUpButtonClick()
     {
         SingUp.SetTrigger("PressAnyKey");
@@ -152,7 +182,7 @@ public class LoginUI : MonoBehaviour
     public void GameStartButtonClick()
     {
         // Check the User for server
-        LoginPopUp.SetTrigger("Cancel");
+        //LoginPopUp.SetTrigger("Cancel");
         BackendLogin.Instance.CustomLogin(loginId, loginPw);
         //SceneManager.LoadScene("1.MainMenuScene");
     }
