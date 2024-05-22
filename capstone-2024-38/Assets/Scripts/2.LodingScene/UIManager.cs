@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     private void Setiing(GameObject id,string level = "1", string wins = "1", string lose = "1", string gold = "1", string exp = "1")
     {
-        id.GetComponent<Image>().color = getrandomcolor();
+        id.transform.Find("outline").GetComponent<Image>().color = getrandomcolor();
 
         id.transform.Find("Group_Info").Find("Group_Value").Find("Text_Level_Value").GetComponent<TextMeshProUGUI>().text = level;
         id.transform.Find("Group_Info").Find("Group_Value").Find("Text_Wins_Value").GetComponent<TextMeshProUGUI>().text = wins;
