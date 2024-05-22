@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 926513674213839058}
   - component: {fileID: 8945090481240138115}
+  - component: {fileID: 635291721294251445}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -48,6 +49,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterBody: {fileID: 0}
   cameraArm: {fileID: 0}
+--- !u!114 &635291721294251445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992185746505348885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65fcfc7b92daf0141af602a32ac08e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLive: 0
+  jumpForce: 6
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheckDistance: 1.1
+  isGrounded: 0
+  playerModelObject: {fileID: 4740728088898349613}
+  lava: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1 &4153053752336251457
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +310,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49e3115b405503c459ad98e7bf892154, type: 3}
+--- !u!1 &4740728088898349613 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6497248030232732122, guid: 49e3115b405503c459ad98e7bf892154, type: 3}
+  m_PrefabInstance: {fileID: 2008798658079771639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7205208628843131388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8655536602139228683, guid: 49e3115b405503c459ad98e7bf892154, type: 3}

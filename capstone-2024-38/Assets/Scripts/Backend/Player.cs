@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     public float groundCheckDistance = 1.1f;
     public bool isGrounded;
 
-    private GameObject playerModelObject;
+    public GameObject playerModelObject;
     private Rigidbody rigidBody;
 
     public upLava lava;
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
         if (this.isMe)
         {
-            //Camera.main.GetComponent<FollowCamera>().target = this.transform;
+            Camera.main.GetComponent<FollowCamera>().target = this.transform;
         }
 
         this.isLive = true;

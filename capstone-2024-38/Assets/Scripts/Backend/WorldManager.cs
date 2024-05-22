@@ -152,15 +152,12 @@ public class WorldManager : MonoBehaviour
 
             if (BackendMatchManager.GetInstance().IsMySessionId(sessionId))
             {
-                InputManager.instance.playerBody = player.transform;
-                InputManager.instance.cameraArm = player.transform.Find("Camera Arm");
                 myPlayerIndex = sessionId;
                 players[sessionId].Initialize(true, myPlayerIndex, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), startingPoints[index].w);
             }
             else
             {
                 players[sessionId].Initialize(false, sessionId, BackendMatchManager.GetInstance().GetNickNameBySessionId(sessionId), startingPoints[index].w);
-                player.transform.Find("Camera Arm").gameObject.SetActive(false);
             }
             index += 1;
         }
