@@ -876,6 +876,7 @@ GameObject:
   - component: {fileID: 8472173216518701198}
   - component: {fileID: -4976147602989126120}
   - component: {fileID: 2454307951132793091}
+  - component: {fileID: -4757892430082182655}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -982,11 +983,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65fcfc7b92daf0141af602a32ac08e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLive: 0
   jumpForce: 6
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   groundCheckDistance: 0.1
+  isGrounded: 0
   lava: {fileID: 0}
   anim: {fileID: 0}
 --- !u!65 &2454307951132793091
@@ -1010,6 +1013,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4757892430082182655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6497248030232732122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36da2eaacfb231d48ac1407bcd6f279e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6748152423658784746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,7 +1040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7899871001497997501
 Transform:
   m_ObjectHideFlags: 0

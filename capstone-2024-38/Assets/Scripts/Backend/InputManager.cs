@@ -8,6 +8,9 @@ public class InputManager : MonoBehaviour
 {
     private bool isMove = false;
     private bool isJump = true;
+
+    public Transform playerBody;
+    public Transform cameraArm;
     
 
     private void Start()
@@ -26,11 +29,9 @@ public class InputManager : MonoBehaviour
 
         keyCode |= KeyEventCode.MOVE;
         
-        float power = 10.0f * Time.deltaTime;
-        
         Vector3 moveVector = Vector3.zero;
         
-        if (Input.GetKey(KeyCode.W))
+        /*if (Input.GetKey(KeyCode.W))
         {
             moveVector = new Vector3(0,0, 1);
         }
@@ -61,8 +62,15 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
             moveVector = new Vector3(1,0, -1);
-        }
+        }*/
         
+        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (moveInput.magnitude != 0)
+        {
+            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+            moveVector = lookForward * moveInput.y + lookRight * moveInput.x;
+        }
         
         //Vector3 moveVector = new Vector3(virtualStick.GetHorizontalValue(), 0, virtualStick.GetVerticalValue());
         moveVector = Vector3.Normalize(moveVector);

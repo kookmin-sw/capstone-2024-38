@@ -5,9 +5,9 @@ using UnityEngine;
 public class TPS : MonoBehaviour
 {
 
-    Transform characterBody;
+    public Transform characterBody;
 
-    Transform cameraArm;
+    public Transform cameraArm;
     // Start is called before the first frame update
     void Start()
     {
