@@ -103,6 +103,8 @@ public class MainMenuUI : MonoBehaviour
     public TMP_Text missionWinsText;
     public TMP_Text missionRPText;
     public TMP_Text missionMatchText;
+
+    public TMP_Text shopGoldText;
     
     public GameObject postPrefab;
     public GameObject postList;
@@ -179,6 +181,8 @@ public class MainMenuUI : MonoBehaviour
         {
             shop_popup.SetBool("check", true);
         }
+
+        shopGoldText.text = BackendGameData.Instance.userData.gold.ToString();
     }
 
     void myinfoAnimation()
