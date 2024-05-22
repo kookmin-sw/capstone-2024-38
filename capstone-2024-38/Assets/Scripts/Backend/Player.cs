@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
         this.isRotate = false;
         this.isJump = false;
         isGrounded = true;
+        groundLayer = LayerMask.GetMask("Default");
 
         //hp
 
@@ -254,13 +255,13 @@ public class Player : MonoBehaviour
 
         if (isMove)
         {
-            anim.SetBool("IsRun", true);
+            anim.SetBool("IsMove", true);
             Move();
         }
 
         if (!isMove)
         {
-            anim.SetBool("IsRun", false);
+            anim.SetBool("IsMove", false);
         }
 
         if (isRotate)

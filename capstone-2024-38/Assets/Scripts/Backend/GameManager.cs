@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             }
             InGame();
             AfterInGame();
-            yield return new WaitForSeconds(.1f); //1초 단위
+            yield return new WaitForSeconds(0.05f); //1초 단위
         }
     }
 

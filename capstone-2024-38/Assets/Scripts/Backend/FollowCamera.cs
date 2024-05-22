@@ -15,15 +15,16 @@ public class FollowCamera : MonoBehaviour
     public float offsetZ = 10f;
 
     private float mouseX = 0f;
+    private float mouseY = 0f;
 
-    private void Update()
+    /*private void Update()
     {
         Vector3 FixedPos = new Vector3(target.transform.position.x + offsetX, target.transform.position.y + offsetY,
             target.transform.position.z + offsetZ);
         transform.position = FixedPos;
-    }
+    }*/
 
-    /*void LateUpdate()
+    private void LateUpdate()
     {
         if (target == null)
         {
@@ -31,38 +32,18 @@ public class FollowCamera : MonoBehaviour
         }
 
         // 이동
-        var targetPos = target.position - (Vector3.forward * dist) + (Vector3.up * height);
+        Vector3 targetPos = target.position + (Vector3.up * height) - (transform.forward * dist);
         transform.position = Vector3.Lerp(transform.position, targetPos, smoothRotate * Time.deltaTime);
 
-        // 회전
-        // 수평 회전
+        // 마우스 입력에 따라 회전
         mouseX += Input.GetAxis("Mouse X") * rotateSpeed;
-        Quaternion newRotation = Quaternion.Euler(0, mouseX, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * smoothRotate);
+        mouseY -= Input.GetAxis("Mouse Y") * rotateSpeed;
+        mouseY = Mathf.Clamp(mouseY, -35, 60); // 수직 회전 각도 제한
 
-        // 수직 회전 (원하는 각도에 따라 조절 필요)
-        float mouseY = -Input.GetAxis("Mouse Y") * rotateSpeed;
-        Vector3 currentRotation = transform.eulerAngles;
-        currentRotation.x += mouseY;
-        transform.rotation = Quaternion.Euler(currentRotation);
-        
-        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        Vector3 camAngle = transform.rotation.eulerAngles;
-        float x = camAngle.x - mouseDelta.y;
+        Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, smoothRotate * Time.deltaTime);
 
-        if(x < 180f)
-        {
-            x = Mathf.Clamp(x,-1f,70f);
-
-        }
-        else
-        {
-            x = Mathf.Clamp(x, 335f, 361f);
-        }
-
-        transform.rotation = (Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z));
-        
         // 대상 쪽을 보도록 조정
-        //transform.LookAt(target);
-    }*/
+        //transform.LookAt(target.position + Vector3.up * height);
+    }
 }
