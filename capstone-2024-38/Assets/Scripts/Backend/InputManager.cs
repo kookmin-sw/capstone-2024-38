@@ -11,7 +11,13 @@ public class InputManager : MonoBehaviour
 
     public Transform playerBody;
     public Transform cameraArm;
-    
+
+    public static InputManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -71,6 +77,8 @@ public class InputManager : MonoBehaviour
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             moveVector = lookForward * moveInput.y + lookRight * moveInput.x;
         }
+
+        playerBody.forward = moveVector;
         
         //Vector3 moveVector = new Vector3(virtualStick.GetHorizontalValue(), 0, virtualStick.GetVerticalValue());
         moveVector = Vector3.Normalize(moveVector);
