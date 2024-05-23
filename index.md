@@ -8,7 +8,7 @@ DON'T FALL
 ![포스터최종-4](https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/9e76b5db-e1a3-4687-b28f-1b7673eda17f)
 **DON'T FALL**은 플레이어가 다양한 기후 변화와 AI 장애물을 견뎌내며 마지막까지 살아남는 것을 목표로 하는 서바이벌 게임입니다. 현실 지형을 재현한 맵과 경쟁적인 멀티플레이 모드로 높은 몰입감을 제공합니다.
 
-## ⭐ 특징
+## ✨ 특징
 
 - **멀티플레이어 모드**: 최대 20명이 동시에 참여하여 경쟁할 수 있습니다.
 - **AI 장애물**: 시간이 지남에 따라 점점 더 어려워지는 AI 장애물들이 게임의 난이도를 높입니다.
@@ -36,26 +36,37 @@ DON'T FALL
 
 - **프로젝트 링크**: 
 
-# 👥 팀 소개
+# 👥 팀 소개<table style="width:100%; text-align:center;">
+  <tr>
+    <th>프로필</th>
+    <th>이름</th>
+    <th>역할</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/247ac16b-e414-46f8-92e0-0d66459594d3" width="150"></td>
+    <td>임유민</td>
+    <td>팀리더</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/eff6834d-b877-4c45-b793-bc656fda382b" width="150"></td>
+    <td>송태호</td>
+    <td>프론트엔드 개발자</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/a01b5e58-8532-4253-a0eb-21d2656001f2" width="150"></td>
+    <td>김종현</td>
+    <td>프론트엔드 개발자</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/34fa7412-84d8-4bdd-b32c-9c9bed6df651" width="150"></td>
+    <td>김지환</td>
+    <td>백엔드 개발자</td>
+  </tr>
+</table>
 
-
-- **임유민**
-  - 역할: 팀리더 
-
-- **송태호**
-  - 역할: 프론트엔드 개발자
-
-- **김종현**
-  - 역할: 프론트앤드 개발자
-  
-
-- **김지환**
-  - 역할: 백앤드 개발자
-  
 
 ### 💾 기타
 
 추가적인 내용은 자유롭게 작성하세요.
 포스터 https://drive.google.com/file/d/10SyA3PjH9wEztO8yCN3AEEZFJtHcrS-3/view?usp=sharing
-
 
