@@ -10,6 +10,7 @@ public class MapManager : MonoBehaviour
     public GameObject player;
     public InGameUI inGameUi;
     public IngameBGMPlayer bgmPlayer;
+    public Spawner span;
 
     private float moveInterval = 5.0f;
     private float elapsedTime = 0.0f;
@@ -37,6 +38,7 @@ public class MapManager : MonoBehaviour
             Debug.Log("Player object not found!");
         }
         bgmPlayer = FindObjectOfType<IngameBGMPlayer> ();
+        span = FindObjectOfType<Spawner>();
 
         remainingTime = survivalTime;
         UpdateTimerText();
@@ -89,6 +91,7 @@ public class MapManager : MonoBehaviour
     public void GameOver(bool won)
     {
         isGameOver = true;
+        span.StopSpawning();
         if (won)
         {
             inGameUi.SetClearPopupTrigger();
