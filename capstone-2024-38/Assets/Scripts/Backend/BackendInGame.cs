@@ -5,6 +5,8 @@ using UnityEngine;
 using BackEnd;
 using BackEnd.Tcp;
 using UnityEngine.SceneManagement;
+using System;
+using Random = Unity.Mathematics.Random;
 
 public partial class BackendMatchManager : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public partial class BackendMatchManager : MonoBehaviour
     private bool isSetHost = false;                 // 호스트 세션 결정했는지 여부
 
     private MatchGameResult matchGameResult;
+
+    private int randNum;
+    
 
     // 게임 로그
     private string FAIL_ACCESS_INGAME = "인게임 접속 실패 : {0} - {1}";
@@ -142,11 +147,33 @@ public partial class BackendMatchManager : MonoBehaviour
                 {
                     Debug.Log("5초 후 게임 씬 전환 메시지 송신");
                     Invoke("SendChangeGameScene", 5f);
+                    SelectScene();
                 }
                 return true;
             case Protocol.Type.LoadGameScene:
-                GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
-                Debug.Log("SIUU");
+                var loadGameSceneMsg = DataParser.ReadJsonData<Protocol.LoadGameSceneMessage>(BinaryUserData);
+                if (loadGameSceneMsg != null)
+                {
+                    randNum = loadGameSceneMsg.scene;
+                    Debug.Log("Received randNum: " + randNum);
+                    switch (randNum)
+                    {
+                        case 0 :
+                            SceneManager.LoadScene("3.InGame_City");
+                            break;
+                        case 1 :
+                            SceneManager.LoadScene("4.InGame_KookminUniv");
+                            break;
+                        case 2 :
+                            SceneManager.LoadScene("5.InGame_NewYork");
+                            break;
+                        case 3 :
+                            SceneManager.LoadScene("6.InGame_Rio");
+                            break;
+                    }
+                    GameManager.GetInstance().ChangeState(GameManager.GameState.Start);
+                    return true;
+                }
                 return true;
         }
         return false;
@@ -187,7 +214,12 @@ public partial class BackendMatchManager : MonoBehaviour
     private void SendChangeGameScene()
     {
         Debug.Log("게임 씬 전환 메시지 송신");
-        SendDataToInGame(new Protocol.LoadGameSceneMessage());
+        SendDataToInGame(new Protocol.LoadGameSceneMessage(randNum));
+    }
+
+    private void SendRandomGameScene()
+    {
+        
     }
     
     // 서버로 게임 결과 전송
@@ -253,26 +285,33 @@ public partial class BackendMatchManager : MonoBehaviour
         Backend.Match.SendDataToInGameRoom(byteArray);
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public void SelectScene()
+    {
+        Random random = new Random();
+        randNum = random.NextInt(4);
+        Debug.Log(randNum);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

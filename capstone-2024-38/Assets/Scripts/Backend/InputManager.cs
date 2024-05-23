@@ -34,39 +34,6 @@ public class InputManager : MonoBehaviour
         
         Vector3 moveVector = Vector3.zero;
         
-        /*if (Input.GetKey(KeyCode.W))
-        {
-            moveVector = new Vector3(0,0, 1);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveVector = new Vector3(-1, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveVector = new Vector3(0, 0, -1);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveVector = new Vector3(1, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-        {
-            moveVector = new Vector3(-1,0, 1);
-        }
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-        {
-            moveVector = new Vector3(1,0, 1);
-        }
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-        {
-            moveVector = new Vector3(-1,0, -1);
-        }
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-        {
-            moveVector = new Vector3(1,0, -1);
-        }*/
-        
         /*Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (moveInput.magnitude != 0)
         {
@@ -76,13 +43,24 @@ public class InputManager : MonoBehaviour
         }
 
         //playerBody.forward = moveVector;*/
-        float horizontal = Input.GetAxis("Horizontal"); // A, D or Left Arrow, Right Arrow
+        /*float horizontal = Input.GetAxis("Horizontal"); // A, D or Left Arrow, Right Arrow
         float vertical = Input.GetAxis("Vertical"); // W, S or Up Arrow, Down Arrow
 
         moveVector = new Vector3(horizontal, 0, vertical);
+        
         moveVector = moveVector.normalized;
         
         //Vector3 moveVector = new Vector3(virtualStick.GetHorizontalValue(), 0, virtualStick.GetVerticalValue());
+        moveVector = Vector3.Normalize(moveVector);*/
+        
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+        cameraForward.y = 0; // 수평 방향 벡터로 만들기 위해 y 값을 0으로 설정
+        cameraRight.y = 0;
+
+        moveVector = cameraForward * vertical + cameraRight * horizontal;
         moveVector = Vector3.Normalize(moveVector);
 
 

@@ -206,9 +206,10 @@ namespace Protocol
 
     public class LoadGameSceneMessage : Message
     {
-        public LoadGameSceneMessage() : base(Type.LoadGameScene)
+        public int scene;
+        public LoadGameSceneMessage(int scene) : base(Type.LoadGameScene)
         {
-
+            this.scene = scene;
         }
     }
 

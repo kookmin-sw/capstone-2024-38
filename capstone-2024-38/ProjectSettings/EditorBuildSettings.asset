@@ -16,8 +16,17 @@ EditorBuildSettings:
     guid: 33a63a649b6ea3748a22de5d4f25a9cb
   - enabled: 1
     path: Assets/Scenes/JH_Scene/3.InGame_City.unity
-    guid: 4166772bf9558bf45928b44b47ea4fe6
+    guid: 0194e1176f085a14d995a2e54aa01329
   - enabled: 1
+    path: Assets/Scenes/JH_Scene/4.InGame_KookminUniv.unity
+    guid: 2289ae3474d149149860ed1c1a513c30
+  - enabled: 1
+    path: Assets/Scenes/JH_Scene/5.InGame_NewYork.unity
+    guid: 4d34585137263064e9b3bbab9d6c17be
+  - enabled: 1
+    path: Assets/Scenes/JH_Scene/6.InGame_Rio.unity
+    guid: a65a3ec73da9c8247a1bfb21607e4744
+  - enabled: 0
     path: Assets/Scenes/JH_Scene/4.InGame_Single.unity
     guid: 492ef39537d9f004bb8f439127b74106
   m_configObjects: {}

@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
 
         //OnGameStart();
         // 게임씬이 로드되면 Start에서 OnGameStart 호출
-        ChangeScene(INGAME);
+        //ChangeScene(INGAME);
     }
 
     private void GameOver()
@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
         return SceneManager.GetActiveScene().name == LOBBY;
     }
 
-    private void ChangeScene(string scene)
+    public void ChangeScene(string scene)
     {
         if (scene != LOGIN && scene != INGAME && scene != LOBBY && scene != READY)
         {
