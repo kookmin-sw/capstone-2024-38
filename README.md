@@ -38,23 +38,34 @@ DON'T FALL
 
 # 👥 팀 소개
 
-- **임유민**
-<img width="288" alt="스크린샷 2024-05-24 02 37 02" src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/247ac16b-e414-46f8-92e0-0d66459594d3">
-  - 역할: 팀리더 
+<table style="width:100%; text-align:center;">
+  <tr>
+    <th>이름</th>
+    <th>사진</th>
+    <th>역할</th>
+  </tr>
+  <tr>
+    <td>임유민</td>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/247ac16b-e414-46f8-92e0-0d66459594d3" width="150"></td>
+    <td>팀리더</td>
+  </tr>
+  <tr>
+    <td>송태호</td>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/eff6834d-b877-4c45-b793-bc656fda382b" width="150"></td>
+    <td>프론트엔드 개발자</td>
+  </tr>
+  <tr>
+    <td>김종현</td>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/a01b5e58-8532-4253-a0eb-21d2656001f2" width="150"></td>
+    <td>프론트엔드 개발자</td>
+  </tr>
+  <tr>
+    <td>김지환</td>
+    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/34fa7412-84d8-4bdd-b32c-9c9bed6df651" width="150"></td>
+    <td>백엔드 개발자</td>
+  </tr>
+</table>
 
-- **송태호**
-<img width="405" alt="스크린샷 2024-05-24 02 36 08" src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/eff6834d-b877-4c45-b793-bc656fda382b">
-  - 역할: 프론트엔드 개발자
-
-- **김종현**
-<img width="405" alt="스크린샷 2024-05-24 02 36 26" src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/a01b5e58-8532-4253-a0eb-21d2656001f2">
-  - 역할: 프론트앤드 개발자
-  
-
-- **김지환**
-<img width="405" alt="스크린샷 2024-05-24 02 36 42" src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/34fa7412-84d8-4bdd-b32c-9c9bed6df651">
-  - 역할: 백앤드 개발자
-  
 
 ### 💾 기타
 
