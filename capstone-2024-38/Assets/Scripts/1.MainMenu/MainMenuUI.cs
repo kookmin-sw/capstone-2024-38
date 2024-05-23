@@ -353,9 +353,24 @@ public class MainMenuUI : MonoBehaviour
         Debug.Log("���⼭ ���� ����");
     }
 
-    public void GameStartButton()
+    public void GameStartAnimation()
     {
-        Debug.Log("�ӽ� ��ư �ϴ� �ΰ��� Ȯ���� ���� �� ��ư ���� ���Ѽ� �� �̵� �ϸ� �ɵ�");
+        // if stage panel is in
+        if (stageani.GetBool("Stage"))
+        {
+            // stage selete animation start
+            stageani.SetTrigger("StageSelete");
+
+        }
+
+        // if stageSelete animatin is done
+        if (stageani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            // stage animation
+            int stage = UnityEngine.Random.Range(1, 3);
+
+            stageani.SetInteger("CurStage", stage);
+        }
     }
 
     public void ButtonClick_LanguageSetting()
