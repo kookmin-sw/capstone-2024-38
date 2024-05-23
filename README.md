@@ -65,15 +65,11 @@ GIS로 제작된 맵으로 새로운 현실감을 제공합니다.
 
 ## 🚀 시작하기
 
-로컬에서 프로젝트를 실행하려면 다음 단계를 따르세요.
+
 
 ### 📋 필요 조건
 
 - Unity 2021.1 이상
 - Git
 
-### 🔧 설치
-
-1. 저장소를 클론합니다:
-   ```sh
-   git clone https://github.com/yourusername/dont-fall.git
+### 조원소개
