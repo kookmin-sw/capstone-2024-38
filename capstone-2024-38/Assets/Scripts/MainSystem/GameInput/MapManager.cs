@@ -9,6 +9,7 @@ public class MapManager : MonoBehaviour
     public upLava lava;
     public GameObject player;
     public InGameUI inGameUi;
+    public MultiInGameUI multiInGameUI;
     public IngameBGMPlayer bgmPlayer;
     public Spawner span;
 
@@ -92,18 +93,19 @@ public class MapManager : MonoBehaviour
     public void GameOver(bool won)
     {
         isGameOver = true;
-        span.StopSpawning();
+        //span.StopSpawning();
         if (won)
         {
-            inGameUi.SetClearPopupTrigger();
+            multiInGameUI.SetClearPopupTrigger();
+            multiInGameUI.failWindow.SetActive(false);
             Debug.Log("You survived!");
-            bgmPlayer.PlayWinSound();
+            //bgmPlayer.PlayWinSound();
         }
         else
         {
-            inGameUi.SetFailPopupTrigger();
+            multiInGameUI.SetFailPopupTrigger();
             Debug.Log("Game Over! You died.");
-            bgmPlayer.PlayLoseSound();
+            //bgmPlayer.PlayLoseSound();
         }
 
         StartCoroutine(WaitForKeyPress());

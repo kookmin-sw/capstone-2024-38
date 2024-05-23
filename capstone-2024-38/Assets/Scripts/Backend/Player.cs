@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     public GameObject playerModelObject;
     private Rigidbody rigidBody;
 
+    public MapManager mapManager;
+
     public upLava lava;
 
     public Animator anim;
@@ -79,6 +81,8 @@ public class Player : MonoBehaviour
         rigidBody = this.GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         lava = FindObjectOfType<upLava>();
+
+        mapManager = FindObjectOfType<MapManager>();
         
         if (BackendMatchManager.GetInstance().nowModeType == MatchModeType.TeamOnTeam)
         {
@@ -232,6 +236,7 @@ public class Player : MonoBehaviour
         isLive = false;
         anim.SetTrigger("Dead");
         // 나머지 게임 오브젝트들 false
+        mapManager.GameOver(false);
     }
 
     
@@ -273,6 +278,11 @@ public class Player : MonoBehaviour
         if (isRotate)
         {
             Rotate();
+        }
+
+        if (WorldManager.instance.alivePlayer == 1 && isLive)
+        {
+            mapManager.GameOver(true);
         }
         
     }
