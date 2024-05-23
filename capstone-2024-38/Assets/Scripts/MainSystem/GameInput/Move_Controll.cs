@@ -20,6 +20,9 @@ public class move_Controll : MonoBehaviour
     public float pushForce = 10.0f;
 
     private bool isJumping = false;
+    private AudioSource audioSource;
+    private AudioClip jumpSound;
+    //private AudioClip moveSound;
 
     void Start()
     {
@@ -27,6 +30,9 @@ public class move_Controll : MonoBehaviour
         freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
         groundLayer = LayerMask.GetMask("Default");
         player_animation = this.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        jumpSound = Resources.Load<AudioClip>("Sound/InGame/Jump/Classic Jump 4");
+        //moveSound = Resources.Load<AudioClip>("Sound/InGame/Movement/Footsteps/Builder_Game_Footstep_Run_Dirt_2");
     }
 
     void Update()
@@ -133,6 +139,9 @@ public class move_Controll : MonoBehaviour
             player_animation.SetTrigger("Push");
             PushPlayer();
         }
+
+    
+
     }
 
     void FixedUpdate()
@@ -150,6 +159,7 @@ public class move_Controll : MonoBehaviour
     private void Jump()
     {
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        PlaySound(jumpSound);
     }
 
     private void PushPlayer()
@@ -176,4 +186,13 @@ public class move_Controll : MonoBehaviour
             player_animation.speed = 0f; 
         }
     }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
 }

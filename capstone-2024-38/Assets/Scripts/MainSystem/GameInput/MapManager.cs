@@ -9,6 +9,7 @@ public class MapManager : MonoBehaviour
     public upLava lava;
     public GameObject player;
     public InGameUI inGameUi;
+    public IngameBGMPlayer bgmPlayer;
 
     private float moveInterval = 5.0f;
     private float elapsedTime = 0.0f;
@@ -35,6 +36,7 @@ public class MapManager : MonoBehaviour
         {
             Debug.Log("Player object not found!");
         }
+        bgmPlayer = FindObjectOfType<IngameBGMPlayer> ();
 
         remainingTime = survivalTime;
         UpdateTimerText();
@@ -91,11 +93,13 @@ public class MapManager : MonoBehaviour
         {
             inGameUi.SetClearPopupTrigger();
             Debug.Log("You survived!");
+            bgmPlayer.PlayWinSound();
         }
         else
         {
             inGameUi.SetFailPopupTrigger();
             Debug.Log("Game Over! You died.");
+            bgmPlayer.PlayLoseSound();
         }
 
         StartCoroutine(WaitForKeyPress());
