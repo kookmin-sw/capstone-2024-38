@@ -181,6 +181,12 @@ public class Player : MonoBehaviour
         { 
             isGrounded = true; 
         }
+
+        if (collider.gameObject.tag == "Lava")
+        {
+            PlayerDie();
+            WorldManager.instance.dieEvent(index);
+        }
     }
 
     public void SetPosition(Vector3 pos)
@@ -269,16 +275,6 @@ public class Player : MonoBehaviour
             Rotate();
         }
         
-        if (transform.position.y < lava.targetY- 5)
-        {
-            PlayerDie();
-            WorldManager.instance.dieEvent(index);
-        }
-
-        if (isLive && WorldManager.instance.alivePlayer == 1)
-        {
-            MultiInGameUI.Instance.SetClearPopupTrigger();
-        }
     }
     
     public SessionId GetIndex()

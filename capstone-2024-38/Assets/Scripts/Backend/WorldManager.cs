@@ -99,7 +99,7 @@ public class WorldManager : MonoBehaviour
         }
     }
     
-    private void SendGameEndOrder()
+    public void SendGameEndOrder()
     {
         // 게임 종료 전환 메시지는 호스트에서만 보냄
         Debug.Log("Make GameResult & Send Game End Order");

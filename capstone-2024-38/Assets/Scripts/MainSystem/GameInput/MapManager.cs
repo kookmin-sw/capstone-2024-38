@@ -78,6 +78,7 @@ public class MapManager : MonoBehaviour
         if (remainingTime <= 0)
         {
             GameOver(true);
+            WorldManager.instance.SendGameEndOrder();
         }
     }
 
@@ -116,6 +117,6 @@ public class MapManager : MonoBehaviour
         }
 
         Time.timeScale = 1f;
-        // SceneManager.LoadScene(nextSceneName);
+        GameManager.GetInstance().ChangeState(GameManager.GameState.MatchLobby);
     }
 }
