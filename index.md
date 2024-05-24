@@ -32,10 +32,6 @@ DON'T FALL
 - **점프**: `SPACE` 키를 이용합니다.
 - **카메라 이동**: 마우스를 사용하여 시점을 조정합니다.
 
-# 📧 연락처
-
-- **프로젝트 링크**: 
-
 # 👥 팀 소개<table style="width:100%; text-align:center;">
   <tr>
     <th>프로필</th>
@@ -45,28 +41,33 @@ DON'T FALL
   <tr>
     <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/247ac16b-e414-46f8-92e0-0d66459594d3" width="150"></td>
     <td>임유민</td>
-    <td>팀리더</td>
+    <td>팀리더 프론트앤드</td>
   </tr>
   <tr>
     <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/eff6834d-b877-4c45-b793-bc656fda382b" width="150"></td>
     <td>송태호</td>
-    <td>프론트엔드 개발자</td>
+    <td>프론트엔드</td>
   </tr>
   <tr>
     <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/a01b5e58-8532-4253-a0eb-21d2656001f2" width="150"></td>
     <td>김종현</td>
-    <td>프론트엔드 개발자</td>
+    <td>프론트엔드</td>
   </tr>
   <tr>
     <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/34fa7412-84d8-4bdd-b32c-9c9bed6df651" width="150"></td>
     <td>김지환</td>
-    <td>백엔드 개발자</td>
+    <td>백엔드</td>
   </tr>
 </table>
 
 
-### 💾 기타
+# 📁 파일들
 
-추가적인 내용은 자유롭게 작성하세요.
-포스터 https://drive.google.com/file/d/10SyA3PjH9wEztO8yCN3AEEZFJtHcrS-3/view?usp=sharing
+- [최종 발표 자료](https://github.com)
+- [최종 결과 보고서](https://docs.google.com/document/d/12cL5oFks4qd1xY1SteyDI5iVSZ-ymXjH/edit?usp=sharing&ouid=103340651610127530552&rtpof=true&sd=true)
+- [시연영상](https://github.com)
+- [포스터](https://drive.google.com/file/d/10SyA3PjH9wEztO8yCN3AEEZFJtHcrS-3/view?usp=sharing)
+- [중간발표자료](https://drive.google.com/file/d/1yMy0bJEMFWWtDklUCzlCL2NcDjyKkZl2/view?usp=sharing)
+- [중간보고서](https://docs.google.com/document/d/1Wc9A3TBwPx4S59CLvqnOBOP2YqqU5OFm/edit?usp=sharing&ouid=103340651610127530552&rtpof=true&sd=true)
+
 
