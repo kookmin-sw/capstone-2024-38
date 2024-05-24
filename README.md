@@ -32,33 +32,14 @@ DON'T FALL
 - **점프**: `SPACE` 키를 이용합니다.
 - **카메라 이동**: 마우스를 사용하여 시점을 조정합니다.
 
-# 👥 팀 소개<table style="width:100%; text-align:center;">
-  <tr>
-    <th>프로필</th>
-    <th>이름</th>
-    <th>역할</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/247ac16b-e414-46f8-92e0-0d66459594d3" width="150"></td>
-    <td>임유민</td>
-    <td>팀리더 프론트앤드</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/eff6834d-b877-4c45-b793-bc656fda382b" width="150"></td>
-    <td>송태호</td>
-    <td>프론트엔드</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/a01b5e58-8532-4253-a0eb-21d2656001f2" width="150"></td>
-    <td>김종현</td>
-    <td>프론트엔드</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/34fa7412-84d8-4bdd-b32c-9c9bed6df651" width="150"></td>
-    <td>김지환</td>
-    <td>백엔드</td>
-  </tr>
-</table>
+# 👥 팀 소개
+
+| 프로필                                                                                     | 이름   | 역할               |
+|------------------------------------------------------------------------------------------|------|------------------|
+| <img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/247ac16b-e414-46f8-92e0-0d66459594d3" width="150"> | 임유민 | 팀리더 프론트앤드      |
+| <img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/eff6834d-b877-4c45-b793-bc656fda382b" width="150"> | 송태호 | 프론트엔드            |
+| <img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/a01b5e58-8532-4253-a0eb-21d2656001f2" width="150"> | 김종현 | 프론트엔드            |
+| <img src="https://github.com/kookmin-sw/capstone-2024-38/assets/97876054/34fa7412-84d8-4bdd-b32c-9c9bed6df651" width="150"> | 김지환 | 백엔드               |
 
 
 # 📁 파일들
