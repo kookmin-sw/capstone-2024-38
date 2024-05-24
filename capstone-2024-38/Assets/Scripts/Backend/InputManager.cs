@@ -8,6 +8,8 @@ public class InputManager : MonoBehaviour
 {
     private bool isMove = false;
     private bool isJump = true;
+    private bool isSpaceBarBlocked = false;
+
 
     public static InputManager instance;
 
@@ -86,12 +88,13 @@ public class InputManager : MonoBehaviour
         int keyCode = 0;
         keyCode |= KeyEventCode.JUMP;
 
-        if (!Input.GetKey(KeyCode.Space))
+        if (!Input.GetKey(KeyCode.Space) || isSpaceBarBlocked)
         {
             return;
         }
-        Debug.Log("2");
         Vector3 jumpVector = Vector3.zero;
+        StartCoroutine(BlockSpaceBarInput());
+
 
         KeyMessage msg;
         msg = new KeyMessage(keyCode, jumpVector);
@@ -103,6 +106,13 @@ public class InputManager : MonoBehaviour
         {
             BackendMatchManager.GetInstance().SendDataToInGame<KeyMessage>(msg);
         }
+    }
+    
+    IEnumerator BlockSpaceBarInput()
+    {
+        isSpaceBarBlocked = true;
+        yield return new WaitForSeconds(3f);
+        isSpaceBarBlocked = false;
     }
 
     void AttackInput()

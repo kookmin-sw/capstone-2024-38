@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,13 @@ using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
+    public static MapManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public upLava lava;
     public GameObject player;
     public InGameUI inGameUi;
@@ -19,7 +27,8 @@ public class MapManager : MonoBehaviour
 
     public float survivalTime = 100.0f;
     private float remainingTime;
-    private bool isGameOver = false;
+    public bool isGameOver = false;
+    private bool isWaitingForInput = false;
 
     public float RemainingTime => remainingTime;
 
@@ -104,15 +113,20 @@ public class MapManager : MonoBehaviour
         else
         {
             multiInGameUI.SetFailPopupTrigger();
+            multiInGameUI.clearWindow.SetActive(false);
             Debug.Log("Game Over! You died.");
             //bgmPlayer.PlayLoseSound();
         }
 
-        StartCoroutine(WaitForKeyPress());
+        if (!isWaitingForInput)
+        {
+            StartCoroutine(WaitForKeyPress());
+        }
     }
 
     IEnumerator WaitForKeyPress()
     {
+        isWaitingForInput = true;
         while (!Input.GetKeyDown(KeyCode.Return))
         {
             yield return null;

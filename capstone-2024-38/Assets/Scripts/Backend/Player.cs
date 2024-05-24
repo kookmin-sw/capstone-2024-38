@@ -170,11 +170,6 @@ public class Player : MonoBehaviour
     
     public void Jump()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
-        if (!isGrounded)
-        {
-            return;
-        }
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         anim.SetTrigger("Jump");
     }
@@ -280,10 +275,11 @@ public class Player : MonoBehaviour
             Rotate();
         }
 
-        if (WorldManager.instance.alivePlayer == 1 && isLive)
+        /*if (WorldManager.instance.alivePlayer == 1 && isLive)
         {
             mapManager.GameOver(true);
-        }
+            MapManager.instance.isGameOver = true;
+        }*/
         
     }
     

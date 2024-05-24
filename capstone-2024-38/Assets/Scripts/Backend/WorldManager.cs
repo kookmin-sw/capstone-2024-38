@@ -95,6 +95,7 @@ public class WorldManager : MonoBehaviour
         
         if (alivePlayer <= 1)
         {
+            MultiInGameUI.Instance.SetClearPopupTrigger();
             SendGameEndOrder();
         }
     }
@@ -282,7 +283,6 @@ public class WorldManager : MonoBehaviour
                 ProcessPlayerData(moveMessage);
                 break;
             case Protocol.Type.PlayerJump:
-                Debug.Log("1");
                 PlayerJumpMessage jumpMessage = DataParser.ReadJsonData<PlayerJumpMessage>(args.BinaryUserData);
                 ProcessPlayerData(jumpMessage);
                 break;
