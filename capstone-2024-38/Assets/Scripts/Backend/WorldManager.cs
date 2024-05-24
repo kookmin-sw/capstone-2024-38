@@ -263,10 +263,10 @@ public class WorldManager : MonoBehaviour
             case Protocol.Type.StartCount:
                 StartCountMessage startCount = DataParser.ReadJsonData<StartCountMessage>(args.BinaryUserData);
                 Debug.Log("wait second : " + (startCount.time));
-                //InGameUiManager.GetInstance().SetStartCount(startCount.time);
+                MultiInGameUI.Instance.SetStartCount(startCount.time);
                 break;
             case Protocol.Type.GameStart:
-                //InGameUiManager.GetInstance().SetStartCount(0, false);
+                MultiInGameUI.Instance.SetStartCount(0, false);
                 GameManager.GetInstance().ChangeState(GameManager.GameState.InGame);
                 break;
             case Protocol.Type.GameEnd:

@@ -29,11 +29,13 @@ public class MultiInGameUI : MonoBehaviour
     
     public GameObject clearWindow;
     public GameObject failWindow;
+    public GameObject startCountObject;
 
     public Animator clearAnim;
     public Animator failAnim;
 
     public TMP_Text timeText;
+    public TMP_Text startCountText;
 
     public MapManager mapManager;
     
@@ -50,6 +52,21 @@ public class MultiInGameUI : MonoBehaviour
         UpdateTimeText();
     }
     
+    public void SetStartCount(int time, bool isEnable = true)
+    {
+        startCountObject.SetActive(isEnable);
+        if (isEnable)
+        {
+            if (time == 0)
+            {
+                startCountText.text = "Game Start!";
+            }
+            else
+            {
+                startCountText.text = string.Format("{0}", time);
+            }
+        }
+    }
     private void UpdateTimeText()
     {
         if (mapManager != null)

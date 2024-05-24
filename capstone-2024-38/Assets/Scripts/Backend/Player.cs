@@ -231,7 +231,10 @@ public class Player : MonoBehaviour
         isLive = false;
         anim.SetTrigger("Dead");
         // 나머지 게임 오브젝트들 false
-        mapManager.GameOver(false);
+        if (isMe)
+        {
+            mapManager.GameOver(false);
+        }
     }
 
     
@@ -275,11 +278,14 @@ public class Player : MonoBehaviour
             Rotate();
         }
 
-        /*if (WorldManager.instance.alivePlayer == 1 && isLive)
+        if (MapManager.instance.isGameOver)
+        {
+            return;
+        }
+        if (WorldManager.instance.alivePlayer == 1 && isLive && isMe)
         {
             mapManager.GameOver(true);
-            MapManager.instance.isGameOver = true;
-        }*/
+        }
         
     }
     
