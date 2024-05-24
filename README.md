@@ -70,3 +70,12 @@ DON'T FALL
 추가적인 내용은 자유롭게 작성하세요.
 포스터 https://drive.google.com/file/d/10SyA3PjH9wEztO8yCN3AEEZFJtHcrS-3/view?usp=sharing
 
+
+# 📁 파일들
+
+- [발표자료](https://github.com)
+- [시연영상](https://github.com)
+- [최종 결과 보고서](https://github.com)
+- [중간보고서](https://github.com)
+- [중간발표자료](https://github.com)
+
