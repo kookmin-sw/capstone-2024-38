@@ -32,10 +32,6 @@ DON'T FALL
 - **점프**: `SPACE` 키를 이용합니다.
 - **카메라 이동**: 마우스를 사용하여 시점을 조정합니다.
 
-# 📧 연락처
-
-- **프로젝트 링크**: 
-
 # 👥 팀 소개<table style="width:100%; text-align:center;">
   <tr>
     <th>프로필</th>
