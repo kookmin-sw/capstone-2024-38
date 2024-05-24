@@ -75,7 +75,7 @@ DON'T FALL
 
 - [발표자료](https://github.com)
 - [시연영상](https://github.com)
-- [최종 결과 보고서](https://github.com)
+- [최종 결과 보고서]([https://github.com](https://docs.google.com/document/d/12cL5oFks4qd1xY1SteyDI5iVSZ-ymXjH/edit?usp=sharing&ouid=103340651610127530552&rtpof=true&sd=true))
 - [중간보고서](https://github.com)
 - [중간발표자료](https://github.com)
 
