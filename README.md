@@ -45,7 +45,7 @@ DON'T FALL
 # 📁 파일들
 
 - [최종 발표 자료](https://drive.google.com/file/d/1MXXgf7eyUPCpplI36rEqgliU7srypVvB/view?usp=sharing)
-- [최종 결과 보고서](https://docs.google.com/document/d/12cL5oFks4qd1xY1SteyDI5iVSZ-ymXjH/edit?usp=sharing&ouid=103340651610127530552&rtpof=true&sd=true)
+- [수행 결과 보고서](https://docs.google.com/document/d/12cL5oFks4qd1xY1SteyDI5iVSZ-ymXjH/edit?usp=sharing&ouid=103340651610127530552&rtpof=true&sd=true)
 - [시연영상](https://drive.google.com/file/d/1J3HYsvLuQjg2Cit12CY9k_vHYPI6Uift/view?usp=sharing)
 - [포스터](https://drive.google.com/file/d/10SyA3PjH9wEztO8yCN3AEEZFJtHcrS-3/view?usp=sharing)
 - [중간발표자료](https://drive.google.com/file/d/1yMy0bJEMFWWtDklUCzlCL2NcDjyKkZl2/view?usp=sharing)
