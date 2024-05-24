@@ -24,7 +24,7 @@ DON'T FALL
 
 ### 🎥 소개 영상
 
-[프로젝트 소개하는 영상을 추가하세요
+[시연영상 - 유튜브
 ](https://www.youtube.com/watch?v=t9oakdLmzYA)
 # 🕹️ 사용법
 
