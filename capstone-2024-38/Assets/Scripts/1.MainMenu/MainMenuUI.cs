@@ -351,6 +351,7 @@ public class MainMenuUI : MonoBehaviour
         titleAnimation();
         stageAnimation();
         Debug.Log("���⼭ ���� ����");
+        BackendMatchManager.GetInstance().CancelRegistMatchMaking();
     }
 
     public void GameStartAnimation()

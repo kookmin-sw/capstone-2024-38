@@ -86,7 +86,7 @@ public partial class BackendMatchManager : MonoBehaviour
     // 매칭 신청하기
     // MatchType (1:1 / 개인전 / 팀전)
     // MatchModeType (랜덤 / 포인트 / MMR)
-
+    
     public void RequestMatchMaking()
     {
         // 매칭 서버에 연결되어 있지 않으면 매칭 서버 먼저 접속
